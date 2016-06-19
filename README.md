@@ -14,7 +14,7 @@ The user name and password is prompted on stdin if it is not set.
 
 For example:
 
-    $ vpsadmin-mail-templates https://api.vpsfree.cz
+    $ vpsadmin-mail-templates https://api.vpsfree.cz install
 
 or
 

@@ -23,6 +23,5 @@ or
 Rake task accepts several variables:
 
  - `API` - the URL of the API to upload templates to
- - `VERSION` - version of the API to use
  - `USERNAME`
  - `PASSWORD`

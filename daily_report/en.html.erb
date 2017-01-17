@@ -83,8 +83,8 @@ END
 	<td><a href="#{url("adminm", "action=edit&id=#{u.id}")}">#{u.id}</a></td>
 	<td>#{u.login}</td>
 	<td><a href="#{url("adminvps", "user=#{u.id}")}">#{u.vpses.count}</a></td>
-	<td>#{u.m_name}</td>
-	<td><a href="mailto:#{u.m_mail}">#{u.m_mail}</a></td>
+	<td>#{u.full_name}</td>
+	<td><a href="mailto:#{u.email}">#{u.email}</a></td>
 	<td>#{u.current_state.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')}</td>
      </tr>
 END

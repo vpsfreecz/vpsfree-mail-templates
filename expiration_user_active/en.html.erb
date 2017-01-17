@@ -26,9 +26,9 @@ this is an automated reminder for payment of the membership fee.
     <tr>
         <td>Sum:</td>
         <td>
-            <%= @user.m_monthly_payment %> Kč
+            <%= @user.monthly_payment %> Kč
             or
-            <%= @user.m_monthly_payment  / 25 %> € per month
+            <%= @user.monthly_payment  / 25 %> € per month
         </td>
     </tr>
 </table>
@@ -49,7 +49,7 @@ Payment arrival can be checked here:<br>
 </p>
 
 <p>
-<% three_months_payment = @user.m_monthly_payment * 3 %>
+<% three_months_payment = @user.monthly_payment * 3 %>
 QR code for payment for 3 months (always verify that the information is correct):
 </p>
 

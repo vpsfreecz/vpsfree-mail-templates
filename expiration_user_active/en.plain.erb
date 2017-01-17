@@ -6,7 +6,7 @@ Expiration date: <%= t ? t.strftime('%Y-%m-%d') : '---' %>
 
 Variable symbol: <%= @user.id %>
 
-Sum: <%= @user.m_monthly_payment %> CZK or <%= @user.m_monthly_payment  / 25 %> EUR per month
+Sum: <%= @user.monthly_payment %> CZK or <%= @user.monthly_payment  / 25 %> EUR per month
 
 Payments for at least 3 months ahead are preferred. Unless the membership fee
 is paid to <%= (@user.expiration_date + 14 * 24 * 60 * 60).strftime('%Y-%m-%d') %>, your membership will be suspended
@@ -18,7 +18,7 @@ Payment arrival can be checked here:
 
   https://www.fio.cz/ib2/transparent?a=2200041594
 
-<% three_months_payment = @user.m_monthly_payment * 3 %>
+<% three_months_payment = @user.monthly_payment * 3 %>
 QR code for payment for 3 months (always verify that the information is correct):
 - CZ: https://api.paylibo.com/paylibo/generator/czech/image?compress=false&size=440&accountNumber=2200041594&bankCode=2010&amount=<%= three_months_payment %>&currency=CZK&vs=<%= @user.id %>
 - SK: https://api.paylibo.com/paylibo/generator/image?compress=false&size=440&iban=SK1583300000002200041594&amount=<%= three_months_payment / 25 %>&currency=EUR&vs=<%= @user.id %>

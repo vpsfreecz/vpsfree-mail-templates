@@ -26,9 +26,9 @@ toto je automatická připomínka platby členského příspěvku.
     <tr>
         <td>Částka:</td>
         <td>
-            <%= @user.m_monthly_payment %> Kč
+            <%= @user.monthly_payment %> Kč
             nebo
-            <%= @user.m_monthly_payment  / 25 %> € na měsíc
+            <%= @user.monthly_payment  / 25 %> € na měsíc
         </td>
     </tr>
 </table>
@@ -48,7 +48,7 @@ Příchod platby lze zkontrolovat zde:<br>
 </p>
 
 <p>
-<% three_months_payment = @user.m_monthly_payment * 3 %>
+<% three_months_payment = @user.monthly_payment * 3 %>
 QR kód pro platbu na 3 měsíce dopředu (vždy ověř správnost údajů): 
 </p>
 

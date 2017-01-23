@@ -1,0 +1,28 @@
+Request Info
+------------
+ Created: <%= @r.created_at %>
+ Changed: <%= @r.updated_at %>
+ Request: #<%= @r.id %> 
+    Type: <%= @r.type_name %>
+   State: <%= @r.state %>
+    User: <%= @r.user_id %> <%= @r.user_id && @r.user.login %>
+   Admin: <%= @r.admin_id %> <%= @r.admin_id && @r.admin.login %>
+Response: <%= @r.admin_response %>
+      IP: <%= @r.ip_addr %>
+     PTR: <%= @r.ip_addr_ptr %>
+
+Registration
+------------
+Login:           <%= @r.login %>
+Full name:       <%= @r.full_name %>
+Organization:    <%= @r.org_name %>
+Organization ID: <%= @r.org_id %>
+Address:         <%= @r.address %>
+E-mail:          <%= @r.email %>
+Year of birth:   <%= @r.year_of_birth %>
+How:             <%= @r.how %>
+Notes:           <%= @r.note %>
+Distribution:    <%= @r.os_template.label %>
+Location:        <%= @r.location.label %>
+Currency:        <%= @r.currency %>
+Language:        <%= @r.language.label %>

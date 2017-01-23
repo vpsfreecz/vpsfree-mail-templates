@@ -1,0 +1,9 @@
+Ahoj <%= @r.user.login %>,
+
+stav požadavku #<%= @r.id %> se změnil na: <%= @r.state %>
+
+<% if @r.admin_response %>Důvod: <%= @r.admin_response %><% end %>
+
+S pozdravem
+
+vpsAdmin @ vpsFree.cz

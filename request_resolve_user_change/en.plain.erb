@@ -1,0 +1,11 @@
+Hi <%= @r.user.login %>,
+
+the state of request #<%= @r.id %> has changed to: <%= @r.state %>
+<% if @r.admin_response -%>
+
+Reason: <%= @r.admin_response %>
+<% end -%>
+
+Best regards,
+
+vpsAdmin @ vpsFree.cz

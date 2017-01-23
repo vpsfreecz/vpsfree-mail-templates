@@ -26,3 +26,14 @@ Distribution:    <%= @r.os_template.label %>
 Location:        <%= @r.location.label %>
 Currency:        <%= @r.currency %>
 Language:        <%= @r.language.label %>
+
+Take action
+-----------
+
+  - See details: <%= @webui_url %>/?page=adminm&action=request_details&id=<%= @r.id %>&type=<%= @r.type_name %>
+
+  - Approve:     <%= @webui_url %>/?page=adminm&action=request_process&id=<%= @r.id %>&type=<%= @r.type_name %>&rule=approve
+
+  - Deny:        <%= @webui_url %>/?page=adminm&action=request_process&id=<%= @r.id %>&type=<%= @r.type_name %>&rule=deny
+
+  - Ignore:      <%= @webui_url %>/?page=adminm&action=request_process&id=<%= @r.id %>&type=<%= @r.type_name %>&rule=ignore

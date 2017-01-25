@@ -1,15 +1,17 @@
 Request Info
 ------------
- Created: <%= @r.created_at %>
- Changed: <%= @r.updated_at %>
- Request: #<%= @r.id %> 
-    Type: <%= @r.type_name %>
-   State: <%= @r.state %>
-    User: <%= @r.user_id %> <%= @r.user_id && @r.user.login %>
-   Admin: <%= @r.admin_id %> <%= @r.admin_id && @r.admin.login %>
-Response: <%= @r.admin_response %>
-      IP: <%= @r.ip_addr %>
-     PTR: <%= @r.ip_addr_ptr %>
+   Created: <%= @r.created_at %>
+   Changed: <%= @r.updated_at %>
+   Request: #<%= @r.id %> 
+      Type: <%= @r.type_name %>
+     State: <%= @r.state %>
+      User: <%= @r.user_id %> <%= @r.user_id && @r.user.login %>
+     Admin: <%= @r.admin_id %> <%= @r.admin_id && @r.admin.login %>
+  Response: <%= @r.admin_response %>
+    API IP: <%= @r.api_ip_addr %>
+   API PTR: <%= @r.api_ip_ptr %>
+ Client IP: <%= @r.client_ip_addr %>
+Client PTR: <%= @r.client_ip_ptr %>
 
 Requested changes
 -----------------

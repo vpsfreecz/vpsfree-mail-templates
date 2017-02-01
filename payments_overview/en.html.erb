@@ -69,11 +69,16 @@ end
 <h2>Incoming payments</h2>
 <table class="overview">
   <tr>
-    <th>QUEUED</th>
-    <th>UNMATCHED</th>
-    <th>PROCESSED</th>
-    <th>IGNORED</th>
+    <th rowspan="2">QUEUED</th>
+    <th rowspan="2">UNMATCHED</th>
+    <th rowspan="2">PROCESSED</th>
+    <th rowspan="2">IGNORED</th>
+    <th rowspan="2">ACCEPTED</th>
+    <th colspan="2">INCOME</th>
+  </tr>
+  <tr>
     <th>ACCEPTED</th>
+    <th>TOTAL</th>
   </tr>
   <tr>
     <td><%= @queued.count %></td>
@@ -81,6 +86,8 @@ end
     <td><%= @processed.count %></td>
     <td><%= @ignored.count %></td>
     <td><%= @accepted.count %></td>
+    <td><%= @accepted.sum('amount') %></td>
+    <td><%= @incoming.sum('amount') %></td>
   </tr>
 </table>
 

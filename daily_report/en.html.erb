@@ -412,16 +412,25 @@ end
 <h2>Payments</h2>
 <table class="overview">
   <tr>
-    <th>UNMATCHED</th>
-    <th>PROCESSED</th>
-    <th>IGNORED</th>
-    <th>ACCEPTED</th>
+    <th rowspan="2">QUEUED</th>
+    <th rowspan="2">UNMATCHED</th>
+    <th rowspan="2">PROCESSED</th>
+    <th rowspan="2">IGNORED</th>
+    <th rowspan="2">ACCEPTED</th>
+    <th colspan="2">INCOME</th>
   </tr>
   <tr>
+    <th>ACCEPTED</th>
+    <th>TOTAL</th>
+  </tr>
+  <tr>
+    <td><%= @payments[:queued].count %></td>
     <td><%= @payments[:unmatched].count %></td>
     <td><%= @payments[:processed].count %></td>
     <td><%= @payments[:ignored].count %></td>
     <td><%= @payments[:accepted].count %></td>
+    <td><%= @payments[:accepted].sum('amount') %></td>
+    <td><%= @payments[:incoming].sum('amount') %></td>
   </tr>
 </table>
 

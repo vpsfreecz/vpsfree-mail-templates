@@ -408,6 +408,81 @@ end
     <% end %>
   </table>
 <% end %>
+
+<h2>Payments</h2>
+<table class="overview">
+  <tr>
+    <th>UNMATCHED</th>
+    <th>PROCESSED</th>
+    <th>IGNORED</th>
+    <th>ACCEPTED</th>
+  </tr>
+  <tr>
+    <td><%= @payments[:unmatched].count %></td>
+    <td><%= @payments[:processed].count %></td>
+    <td><%= @payments[:ignored].count %></td>
+    <td><%= @payments[:accepted].count %></td>
+  </tr>
+</table>
+
+<% if @payments[:unmatched].count > 0 %>
+  <h3>Unmatched</h3>
+  <table>
+    <tr>
+      <th>FETCHED AT</th>
+      <th>AMOUNT</th>
+      <th>TYPE</th>
+      <th>FROM</th>
+      <th>VS</th>
+      <th>COMMENT</th>
+    </tr>
+    <% @payments[:unmatched].each do |p| %>
+      <tr>
+        <td><%= p.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        <td><%= p.amount %></td>
+        <td><%= p.transaction_type %></td>
+        <td><%= p.account_name %></td>
+        <td><%= p.vs %></td>
+        <td><%= p.comment %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<% if @payments[:accepted].count > 0 %>
+  <h3>Accepted</h3>
+  <table>
+    <tr>
+      <th>ACCEPTED AT</th>
+      <th>USER</th>
+      <th>ACCOUNTED BY</th>
+      <th>AMOUNT</th>
+      <th>FROM</th>
+      <th>TO</th>
+    </tr>
+    <% @payments[:accepted].each do |p| %>
+      <tr>
+        <td><%= p.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        <td>
+          <% if p.user_id %>
+            <a href="<%= url("adminm", "action=edit&id=#{p.user_id}") %>"><%= "#{p.user_id} #{p.user.login}" %></a>
+          <% else %>
+            ---
+          <% end %>
+        </td>
+        <td>
+          <% if p.accounted_by_id %>
+            <a href="<%= url("adminm", "action=edit&id=#{p.accounted_by_id}") %>"><%= "#{p.accounted_by_id} #{p.accounted_by.login}" %></a>
+          <% else %>
+            ---
+          <% end %>
+        </td>
+        <td><%= p.amount %></td>
+        <td><%= p.from_date.localtime.strftime('%Y-%m-%d') %></td>
+        <td><%= p.to_date.localtime.strftime('%Y-%m-%d') %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
 </body>
 </html>
-

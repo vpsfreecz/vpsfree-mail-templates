@@ -1,0 +1,147 @@
+<%
+
+def url(page, params = nil)
+  @base_url + "?page=" + page + (params ? "&#{params}" : "")
+end
+%>
+<html>
+<head>
+  <style>
+    h1, h2, h3, h4, h5, h6 {
+      margin: 15px 0 10px 0;
+    }
+
+    p, table, ul, ol, dl, fieldset {
+      margin: 15px 0;
+    }
+
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+      font-size: 100%;
+    }
+
+    table.overview td {
+      text-align: right;
+    }
+
+    th {
+      text-align: center;
+      font-weight: bold;
+    }
+
+    th, td {
+      padding: 3px 7px;
+    }
+
+    td.title {
+      font-weight: bold;
+    }
+
+    dt {
+      font-weight: bold;
+    }
+
+    dd {
+      margin-left: 30px;
+    }
+
+    table th {
+      background: #5EAFFF;
+      color: #FFF;
+    }
+
+    table th, table td {
+      border: 1px solid #B2DAFF;
+    }
+  </style>
+</head>
+<body>
+<h1>Payments overview</h1>
+<dl>
+  <dt>From:</dt>
+  <dd><%= @start.localtime.strftime("%Y-%m-%d %H:%M") %></dd>
+
+  <dt>To:</dt>
+  <dd><%= @end.localtime.strftime("%Y-%m-%d %H:%M") %></dd>
+</dl>
+
+<h2>Incoming payments</h2>
+<table class="overview">
+  <tr>
+    <th>QUEUED</th>
+    <th>UNMATCHED</th>
+    <th>PROCESSED</th>
+    <th>IGNORED</th>
+    <th>ACCEPTED</th>
+  </tr>
+  <tr>
+    <td><%= @queued.count %></td>
+    <td><%= @unmatched.count %></td>
+    <td><%= @processed.count %></td>
+    <td><%= @ignored.count %></td>
+    <td><%= @accepted.count %></td>
+  </tr>
+</table>
+
+<% if @unmatched.count > 0 %>
+  <h3>Unmatched</h3>
+  <table>
+    <tr>
+      <th>FETCHED AT</th>
+      <th>AMOUNT</th>
+      <th>TYPE</th>
+      <th>FROM</th>
+      <th>VS</th>
+      <th>COMMENT</th>
+    </tr>
+    <% @unmatched.each do |p| %>
+      <tr>
+        <td><%= p.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        <td><%= p.amount %></td>
+        <td><%= p.transaction_type %></td>
+        <td><%= p.account_name %></td>
+        <td><%= p.vs %></td>
+        <td><%= p.comment %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<% if @accepted.count > 0 %>
+  <h3>Accepted</h3>
+  <table>
+    <tr>
+      <th>ACCEPTED AT</th>
+      <th>USER</th>
+      <th>ACCOUNTED BY</th>
+      <th>AMOUNT</th>
+      <th>FROM</th>
+      <th>TO</th>
+    </tr>
+    <% @accepted.each do |p| %>
+      <tr>
+        <td><%= p.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        <td>
+          <% if p.user_id %>
+            <a href="<%= url("adminm", "action=edit&id=#{p.user_id}") %>"><%= "#{p.user_id} #{p.user.login}" %></a>
+          <% else %>
+            ---
+          <% end %>
+        </td>
+        <td>
+          <% if p.accounted_by_id %>
+            <a href="<%= url("adminm", "action=edit&id=#{p.accounted_by_id}") %>"><%= "#{p.accounted_by_id} #{p.accounted_by.login}" %></a>
+          <% else %>
+            ---
+          <% end %>
+        </td>
+        <td><%= p.amount %></td>
+        <td><%= p.from_date.localtime.strftime('%Y-%m-%d') %></td>
+        <td><%= p.to_date.localtime.strftime('%Y-%m-%d') %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+</body>
+</html>

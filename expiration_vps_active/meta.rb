@@ -1,4 +1,4 @@
-template do
+template :expiration_warning do
   label        'VPS expiration notification'
   from         'podpora@vpsfree.cz'
   reply_to     'podpora@vpsfree.cz'

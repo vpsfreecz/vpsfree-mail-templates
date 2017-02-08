@@ -43,7 +43,7 @@ def concern_class(o)
 
   when 'User'
     "#{o[0]} <a href=\"#{url('adminm', "action=edit&id=#{o[1]}")}\">#{o[1]}</a>"
-  
+
   else
     "#{o[0]} #{o[1]}"
   end
@@ -109,13 +109,13 @@ def list_vpses(vpses, col)
 END
 
   vpses[:changed].includes(:user, :node).each do |vps|
-	user = ::User.unscoped.find(vps.m_id)
+	user = ::User.unscoped.find(vps.user_id)
     ret += <<END
       <tr>
 	<td><a href="#{url("adminvps", "action=edit&veid=#{vps.id}")}">#{vps.id}</a></td>
 	<td>#{vps.hostname}</td>
-	<td><a href="#{url("adminm", "action=edit&id=#{vps.m_id}")}">#{user.login}</a></td>
-	<td>#{vps.vps_server} #{vps.node.domain_name}</td>
+	<td><a href="#{url("adminm", "action=edit&id=#{vps.user_id}")}">#{user.login}</a></td>
+	<td>#{vps.node_id} #{vps.node.domain_name}</td>
 	<td>#{vps.cpu} cores</td>
 	<td>#{vps.memory / 1024} GiB</td>
 	<td>#{vps.current_state.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')}</td>

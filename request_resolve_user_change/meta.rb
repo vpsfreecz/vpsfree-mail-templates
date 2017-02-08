@@ -1,4 +1,4 @@
-template :request_resolve_user_type do
+template :request_action_role_type do
   label        'Request change resolve (user)'
   from         'podpora@vpsfree.cz'
   reply_to     'podpora@vpsfree.cz'

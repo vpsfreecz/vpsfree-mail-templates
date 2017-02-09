@@ -1,6 +1,6 @@
 Ahoj <%= @user.login %>,
 
-právě jsme přijali platbu pro účet <%= @user.id %> ve výši <%= @payment.received_amount %> <%= @payment.received_currency %>.
+právě jsme přijali platbu pro účet <%= @user.id %> ve výši <%= @payment.received_amount %> <%= @payment.received_currency.to_s.upcase %>.
 
 Členství je nyní uhrazeno do <%= @account.paid_until.strftime('%Y-%m-%d') %>.
 

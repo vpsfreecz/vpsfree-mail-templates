@@ -5,10 +5,10 @@ template do
   return_path  'podpora@vpsfree.cz'
 
   lang :cs do
-    subject    '[vpsFree.cz] Přijata platba <%= @user.login %> - <%= @payment.received_amount %> <%= @payment.received_currency %>'
+    subject    '[vpsFree.cz] Přijata platba <%= @user.login %> - <%= @payment.received_amount %> <%= @payment.received_currency.to_s.upcase %>'
   end
 
   lang :en do
-    subject    '[vpsFree.cz] Accepted payment <%= @user.login %> - <%= @payment.received_amount %> <%= @payment.received_currency %>'
+    subject    '[vpsFree.cz] Accepted payment <%= @user.login %> - <%= @payment.received_amount %> <%= @payment.received_currency.to_s.upcase %>'
   end
 end

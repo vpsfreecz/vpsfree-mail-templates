@@ -1,6 +1,6 @@
 Hi <%= @user.login %>,
 
-we have just accepted payment of <%= @payment.received_amount %> <%= @payment.received_currency %> for account <%= @user.id %>.
+we have just accepted payment of <%= @payment.received_amount %> <%= @payment.received_currency.to_s.upcase %> for account <%= @user.id %>.
 
 The membership is now valid until <%= @account.paid_until.strftime('%Y-%m-%d') %>.
 

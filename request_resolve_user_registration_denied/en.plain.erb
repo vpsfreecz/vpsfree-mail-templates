@@ -1,0 +1,9 @@
+Hi <%= @r.login %>,
+
+your registration request was denied.
+
+<% if @r.admin_response %>Reason for this decision: <%= @r.admin_response %><% end %>
+
+Best regards,
+
+vpsAdmin @ vpsFree.cz

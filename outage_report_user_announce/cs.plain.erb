@@ -1,0 +1,24 @@
+Ahoj <%= @user.login %>,
+
+byl ohlášen <%= @o.planned ? 'plánovaný' : 'neplánovaný' %> výpadek, který postihuje <%= @vpses.count %> <%= @vpses.count > 1 ? (@vpses.count > 4 ? 'Tvých' : 'Tvé') : 'Tvou' %> VPS.
+
+Postihnuté VPS:
+
+<% @vpses.each do |vps| -%>
+  - VPS #<%= vps.vps_id %> - <%= vps.vps.hostname %> (<%= vps.node.domain_name %>)
+<% end -%>
+
+Datum a čas: <%= @o.begins_at.localtime.strftime('%Y-%m-%d %H:%M %Z') %>
+Očekávaná délka: <%= @o.duration %> minut
+Výpadek se týka serverů: <%= @o.outage_entities.map { |e| e.real_name }.join(', ') %>
+Typ výpadku: <%= @o.outage_type %>
+Důvod: <%= @o.en_summary %>
+Výpadek řeší: <%= @o.outage_handlers.map { |h| h.user.full_name }.join(', ') %>
+<% if @o.cs_description && !@o.cs_description.empty? -%>
+
+<%= @o.cs_description %>
+<% end -%>
+
+S pozdravem
+
+vpsAdmin @ vpsFree.cz

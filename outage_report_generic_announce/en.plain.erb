@@ -1,0 +1,26 @@
+Datum a čas výpadku: <%= @o.begins_at.localtime.strftime('%Y-%m-%d %H:%M %Z') %>
+Očekavaná délka: <%= @o.duration %> minut
+Výpadek se týká serverů: <%= @o.outage_entities.map { |e| e.real_name }.join(', ') %>
+Typ výpadku: <%= @o.outage_type %>
+Důvod: <%= @o.cs_summary %>
+Výpadek řeší: <%= @o.outage_handlers.map { |h| h.user.full_name }.join(', ') %>
+<% if @o.cs_description && !@o.cs_description.empty? -%>
+
+<%= @o.cs_description %>
+<% end -%>
+
+ENGLISH:
+Date and time: <%= @o.begins_at.localtime.strftime('%Y-%m-%d %H:%M %Z') %>
+Expected duration: <%= @o.duration %> minutes
+Affected systems: <%= @o.outage_entities.map { |e| e.real_name }.join(', ') %>
+Outage type: <%= @o.outage_type %>
+Reason: <%= @o.en_summary %>
+Handled by: <%= @o.outage_handlers.map { |h| h.user.full_name }.join(', ') %>
+<% if @o.en_description && !@o.en_description.empty? -%>
+
+<%= @o.en_description %>
+<% end -%>
+
+-----BEGIN BASE64 ENCODED PARSEABLE JSON-----
+<%= Base64.encode64(@o.to_hash.to_json).scan(/.{1,76}/).join("\n") %>
+-----END BASE64 ENCODED PARSEABLE JSON-----

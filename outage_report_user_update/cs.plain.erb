@@ -8,7 +8,7 @@ máme pro tebe zprávu ohledně tohoto výpadku.
       "Datum a čas: přesunuto z #{old.localtime.strftime('%Y-%m-%d %H:%M %Z')} na #{new.localtime.strftime('%Y-%m-%d %H:%M %Z')}"
 
     when :finished_at
-      "Vyřešeno v: #{new}"
+      "Vyřešeno v: #{new.localtime.strftime('%Y-%m-%d %H:%M %Z')}"
 
     when :duration
       "Očekávaná délka: #{old} -> #{new} minut"

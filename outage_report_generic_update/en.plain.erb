@@ -4,7 +4,7 @@
       "Datum a čas: přesunuto z #{old.localtime.strftime('%Y-%m-%d %H:%M %Z')} na #{new.localtime.strftime('%Y-%m-%d %H:%M %Z')}"
 
     when :finished_at
-      "Vyřešeno v: #{new}"
+      "Vyřešeno v: #{new.localtime.strftime('%Y-%m-%d %H:%M %Z')}"
 
     when :duration
       "Očekávaná délka: #{old} -> #{new} minut"
@@ -35,7 +35,7 @@ ENGLISH:
       "Begins at: moved from #{old.localtime.strftime('%Y-%m-%d %H:%M %Z')} to #{new.localtime.strftime('%Y-%m-%d %H:%M %Z')}"
 
     when :finished_at
-      "Finished at: #{new}"
+      "Finished at: #{new.localtime.strftime('%Y-%m-%d %H:%M %Z')}"
 
     when :duration
       "Duration: #{old} -> #{new} minutes"

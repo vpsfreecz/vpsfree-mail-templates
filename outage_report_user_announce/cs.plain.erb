@@ -2,12 +2,25 @@ Ahoj <%= @user.login %>,
 
 byl ohlášen <%= @o.planned ? 'plánovaný' : 'neplánovaný' %> výpadek, který postihuje <%= @vpses.count %> <%= @vpses.count > 1 ? (@vpses.count > 4 ? 'Tvých' : 'Tvé') : 'Tvou' %> VPS.
 
-Postihnuté VPS:
+<% if @direct_vpses.count > 0 -%>
+Přímo zasažené VPS:
 
-<% @vpses.each do |vps| -%>
-  - VPS #<%= vps.vps_id %> - <%= vps.vps.hostname %> (<%= vps.node.domain_name %>)
+<% @direct_vpses.each do |vps| -%>
+  - VPS #<%= vps.vps_id %> - <%= vps.vps.hostname %> (na <%= vps.node.domain_name %>)
 <% end -%>
 
+<% end -%>
+<% if @indirect_vpses.count > 0 -%>
+Nepřímo zasažené VPS:
+
+<% @indirect_vpses.each do |vps| -%>
+  - VPS #<%= vps.vps_id %> - <%= vps.vps.hostname %> (on <%= vps.node.domain_name %>)
+    <% vps.outage_vps_mounts.order('mountpoint').each do |mnt| -%>
+    Mount <%= mnt.mountpoint %> <%= mnt.snapshot_name ? 'snapshotu' : 'datasetu' %> <%= mnt.dataset_name %><%= mnt.snapshot_name ? "@#{mnt.snapshot_name}" : '' %> (z <%= mnt.src_node.domain_name %>)
+    <% end -%>
+<% end -%>
+
+<% end -%>
 Datum a čas: <%= @o.begins_at.localtime.strftime('%Y-%m-%d %H:%M %Z') %>
 Očekávaná délka: <%= @o.duration %> minut
 Výpadek se týka serverů: <%= @o.outage_entities.map { |e| e.real_name }.join(', ') %>

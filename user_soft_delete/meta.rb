@@ -1,5 +1,5 @@
 template do
-  label 'User account enters soft_delete'
+  label 'Membership terminated'
 
   lang :cs do
     from        'podpora@vpsfree.cz'

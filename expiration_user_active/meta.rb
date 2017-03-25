@@ -1,14 +1,17 @@
 template :expiration_warning do
-  label        'Payment notification'
-  from         'podpora@vpsfree.cz'
-  reply_to     'podpora@vpsfree.cz'
-  return_path  'podpora@vpsfree.cz'
+  label 'Payment notification'
 
   lang :cs do
-    subject    '[vpsFree.cz] Platba členského příspěvku - <%= @object.login %>'
+    from        'podpora@vpsfree.cz'
+    reply_to    'podpora@vpsfree.cz'
+    return_path 'podpora@vpsfree.cz'
+    subject     '[vpsFree.cz] Platba členského příspěvku - <%= @object.login %>'
   end
 
   lang :en do
-    subject    '[vpsFree.cz] Payment of membership fee - <%= @object.login %>'
+    from        'support@vpsfree.org'
+    reply_to    'support@vpsfree.org'
+    return_path 'support@vpsfree.org'
+    subject     '[vpsFree.cz] Payment of membership fee - <%= @object.login %>'
   end
 end

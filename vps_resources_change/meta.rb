@@ -1,14 +1,17 @@
 template do
-  label        'VPS resources changed'
-  from         'podpora@vpsfree.cz'
-  reply_to     'podpora@vpsfree.cz'
-  return_path  'podpora@vpsfree.cz'
+  label 'VPS resources changed'
 
   lang :cs do
-    subject    '[vpsFree.cz] Změna parametrů VPS <%= @vps.id %>'
+    from        'podpora@vpsfree.cz'
+    reply_to    'podpora@vpsfree.cz'
+    return_path 'podpora@vpsfree.cz'
+    subject     '[vpsFree.cz] Změna parametrů VPS <%= @vps.id %>'
   end
 
   lang :en do
-    subject    '[vpsFree.cz] Change of limits for VPS <%= @vps.id %>'
+    from        'support@vpsfree.org'
+    reply_to    'support@vpsfree.org'
+    return_path 'support@vpsfree.org'
+    subject     '[vpsFree.cz] Change of limits for VPS <%= @vps.id %>'
   end
 end

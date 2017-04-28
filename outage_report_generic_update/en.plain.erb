@@ -49,10 +49,10 @@ ENGLISH:
 %>
 <% end -%>
 
-Summary: <%= @update.summary %>
-<% if @update.description && !@update.description.empty? -%>
+Summary: <%= @update.en_summary %>
+<% if @update.en_description && !@update.en_description.empty? -%>
 
-<%= @update.description %>
+<%= @update.en_description %>
 <% end -%>
 <% if @update.reporter_name -%>
 

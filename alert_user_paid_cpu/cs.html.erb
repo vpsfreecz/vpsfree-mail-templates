@@ -1,0 +1,110 @@
+<%
+def url(page, params = nil)
+  @base_url + "?page=" + page + (params ? "&#{params}" : "")
+end
+
+def duration(interval)
+  d = interval / 86400
+  h = interval / 3600 % 24
+  m = interval / 60 % 60
+  s = interval % 60
+
+  if d > 0
+    "%d dní, %02d:%02d:%02d" % [d, h, m, s]
+  else
+    "%02d:%02d:%02d" % [h, m, s]
+  end
+end
+
+def time(t)
+  return '---' unless t
+  t.localtime.strftime("%Y-%m-%d %H:%M:%S")
+end
+%>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+      h1, h2, h3, h4, h5, h6 {
+        margin: 15px 0 10px 0;
+      }
+
+      h3 {
+        font-size: 18px;
+      }
+
+      p, table, ul, ol, dl, fieldset {
+        margin: 15px 0;
+      }
+
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        font-size: 100%;
+      }
+
+      th {
+        text-align: center;
+        font-weight: bold;
+      }
+
+      th, td {
+        padding: 3px 7px;
+      }
+
+      table th {
+        background: #5EAFFF;
+        color: #FFF;
+      }
+
+      table th, table td {
+        border: 1px solid #B2DAFF;
+      }
+
+      table.log tr td:nth-child(2) {
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <p>Ahoj <%= @user.login %>,</p>
+    <p>
+      zaznamenali jsme nadměrné využívání CPU ve VPS
+      #<a href="<%= url('adminvps', "action=info&veid=#{@object.id}") %>"><%= @object.id %></a>
+      <%= @object.hostname %> na <%= @object.node.domain_name %>. VPS by dlouhodobé nemělo
+      využívat více než
+      <a href="https://kb.vpsfree.cz/informace/parametry_vps">2 jádra</a>.
+    </p>
+    <table>
+      <tr>
+        <th>Sledováno od:</th>
+        <td><%= time(@event.created_at) %></td>
+      </tr>
+      <tr>
+        <th>Doba:</th>
+        <td><%= duration(@event.closed_at - v.created_at) %></td>
+      </tr>
+    </table>
+    <h3>Log</h3>
+    <table class="log">
+      <tr>
+        <th>Datum</th>
+        <th>Zatížení CPU [%]</th>
+      </tr>
+      <% @event.monitored_event_logs.to_a.each do |log| %>
+        <tr>
+          <td><%= time(log.created_at) %></td>
+          <td><%= (100 - log.value).round(2) %></td>
+        </tr>
+      <% end %>
+    </table>
+    <p>
+      Tento e-mail je pouze informativní, ale v případě potřeby můžeš dostat limit.
+    </p>
+    <p>
+      S pozdravem<br>
+
+      vpsAdmin @ vpsFree.cz
+    </p>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+Hi <%= @user.login %>,
+
+<% if @vps.id.to_s == @ds.full_name -%>
+VPS #<%= @vps.id %> has <%= @event.monitored_event_logs.last.value.round(2) %> % of free space left.
+<% else -%>
+dataset <%= @ds.full_name %> in VPS #<%= @vps.id %> has <%= @event.monitored_event_logs.last.value.round(2) %> % of free space left.
+<% end -%>
+
+Disk size:
+  <%= (@ds.refquota / 1024).round(2) %> GiB
+
+Used space:
+  Of dataset <%= @ds.full_name %>: <%= (@ds.referenced / 1024.0).round(2) %> GiB
+  Including subdatasets and snapshots: <%= (@ds.used / 1024.0).round(2) %> GiB
+
+Free space:
+  <%= (@ds.avail / 1024.0).round(2) %> GiB
+
+<% if @vps.id.to_s == @ds.full_name -%>
+When you'll run out of disk space completely, the VPS might be inaccessible.
+In case you're unable to connect, please contact our support, we'll temporarily
+expand your disk.
+
+<% end -%>
+Should you need more diskspace, see KB:
+
+  https://kb.vpsfree.org/information/membership_fees#what_the_membership_fee_is_composed_of
+
+Best regards,
+
+vpsAdmin @ vpsFree.cz

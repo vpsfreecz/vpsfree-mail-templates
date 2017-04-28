@@ -1,0 +1,21 @@
+Ahoj <%= @user.login %>,
+
+v NAS datasetu <%= @ds.full_name %> Ti zbývá <%= @event.monitored_event_logs.last.value.round(2) %> % volného místa.
+
+Velikost disku:
+  <%= (@ds.refquota / 1024).round(2) %> GiB
+
+Zabrané místo:
+  Jen datasetu <%= @ds.full_name %>: <%= (@ds.referenced / 1024.0).round(2) %> GiB
+  Včetně subdatasetů a snapshotů: <%= (@ds.used / 1024.0).round(2) %> GiB
+
+Volné místo:
+  <%= (@ds.avail / 1024.0).round(2) %> GiB
+
+Pokud bys potřeboval diskový prostor navýšit dlouhodobě, viz KB:
+
+  https://kb.vpsfree.cz/informace/platby#z_ceho_se_sklada_clensky_poplatek
+
+S pozdravem
+
+vpsAdmin @ vpsFree.cz

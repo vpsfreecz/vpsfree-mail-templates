@@ -20,6 +20,12 @@ def time(t)
   return '---' unless t
   t.localtime.strftime("%Y-%m-%d %H:%M:%S")
 end
+
+def truncate(arr, cnt = 10)
+  return arr if arr.size <= cnt
+  n = arr.size / cnt
+  (n - 1).step(arr.size - 1, n).map { |i| arr[i] }[0..(cnt - 1)]
+end
 %>
 <html>
   <head>
@@ -82,7 +88,7 @@ end
       </tr>
       <tr>
         <th>Doba:</th>
-        <td><%= duration(@event.closed_at - v.created_at) %></td>
+        <td><%= duration(@event.closed_at - @event.created_at) %></td>
       </tr>
     </table>
     <h3>Log</h3>
@@ -91,10 +97,10 @@ end
         <th>Datum</th>
         <th>Zatížení CPU [%]</th>
       </tr>
-      <% @event.monitored_event_logs.to_a.each do |log| %>
+      <% truncate(@event.monitored_event_logs.to_a).each do |log| %>
         <tr>
           <td><%= time(log.created_at) %></td>
-          <td><%= (100 - log.value).round(2) %></td>
+          <td><%= log.value.round(2) %></td>
         </tr>
       <% end %>
     </table>

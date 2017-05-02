@@ -3,7 +3,7 @@ Ahoj <%= @user.login %>,
 v NAS datasetu <%= @ds.full_name %> Ti zbývá <%= @event.monitored_event_logs.last.value.round(2) %> % volného místa.
 
 Velikost disku:
-  <%= (@ds.refquota / 1024).round(2) %> GiB
+  <%= (@ds.quota / 1024).round(2) %> GiB
 
 Zabrané místo:
   Jen datasetu <%= @ds.full_name %>: <%= (@ds.referenced / 1024.0).round(2) %> GiB

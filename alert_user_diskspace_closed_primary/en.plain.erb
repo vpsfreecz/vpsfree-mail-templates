@@ -1,0 +1,18 @@
+Hi <%= @user.login %>,
+
+the problem with insufficient free space has been resolved. You now have <%= @event.monitored_event_logs.last.value.round(2) %> %
+free space left.
+
+Disk size:
+  <%= (@ds.quota / 1024).round(2) %> GiB
+
+Used space:
+  Of dataset <%= @ds.full_name %>: <%= (@ds.referenced / 1024.0).round(2) %> GiB
+  Including subdatasets and snapshots: <%= (@ds.used / 1024.0).round(2) %> GiB
+
+Free space:
+  <%= (@ds.avail / 1024.0).round(2) %> GiB
+
+Best regards,
+
+vpsAdmin @ vpsFree.cz

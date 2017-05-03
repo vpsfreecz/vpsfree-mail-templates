@@ -1,0 +1,134 @@
+<%
+def url(page, params = nil)
+  @base_url + "?page=" + page + (params ? "&#{params}" : "")
+end
+
+def duration(interval)
+  d = interval / 86400
+  h = interval / 3600 % 24
+  m = interval / 60 % 60
+  s = interval % 60
+
+  if d > 0
+    "%d days, %02d:%02d:%02d" % [d, h, m, s]
+  else
+    "%02d:%02d:%02d" % [h, m, s]
+  end
+end
+
+def time(t)
+  return '---' unless t
+  t.localtime.strftime("%Y-%m-%d %H:%M:%S")
+end
+%>
+<html>
+  <head>
+    <style>
+      h1, h2, h3, h4, h5, h6 {
+        margin: 15px 0 10px 0;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      h3 {
+        font-size: 18px;
+      }
+
+      p, table, ul, ol, dl, fieldset {
+        margin: 15px 0;
+      }
+
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        font-size: 100%;
+      }
+
+      th {
+        text-align: center;
+        font-weight: bold;
+      }
+
+      th, td {
+        padding: 3px 7px;
+      }
+
+      td.title {
+        font-weight: bold;
+      }
+
+      dt {
+        font-weight: bold;
+      }
+
+      dd {
+        margin-left: 30px;
+      }
+
+      table th {
+        background: #5EAFFF;
+        color: #FFF;
+      }
+
+      table th, table td {
+        border: 1px solid #B2DAFF;
+      }
+
+      table.log tr td:nth-child(2) {
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>
+      <%= @event.class_name %>
+      #<a href="<%= url('adminvps', "action=info&veid=#{@event.object.id}") %>">
+        <%= @event.object.id %>
+      </a>:
+      <%= @event.monitor.label %> (resolved)
+    </h1>
+
+    <p>
+      The data flow has returned to acceptable values.
+    </p>
+
+    <table>
+      <tr>
+        <th>Issue:</th>
+        <td><%= @event.monitor.desc %></td>
+      </tr>
+      <tr>
+        <th>Monitored from:</th>
+        <td><%= time(@event.created_at) %></td>
+      </tr>
+      <tr>
+        <th>Confirmed at:</th>
+        <td><%= time(@event.closed_at) %></td>
+      </tr>
+      <tr>
+        <th>Monitored period:</th>
+        <td><%= duration(@event.closed_at - @event.created_at) %></td>
+      </tr>
+    </table>
+
+    <h2>Log</h2>
+    <table class="log">
+      <tr>
+        <th>Date</th>
+        <th>Data rate [Mbps]</th>
+      </tr>
+      <% @event.monitored_event_logs.each do |log| %>
+        <tr>
+          <td><%= time(log.created_at) %></td>
+          <td><%= (log.value / 1024 / 1024).round(2) %></td>
+        </tr>
+      <% end %>
+    </table>
+  </body>
+</html>

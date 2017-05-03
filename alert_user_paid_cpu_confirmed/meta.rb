@@ -1,4 +1,4 @@
-template :alert_role_event do
+template :alert_role_event_state do
   label 'Alert on CPU overuse'
   user_visibility true
 

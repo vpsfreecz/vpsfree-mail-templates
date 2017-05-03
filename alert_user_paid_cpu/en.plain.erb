@@ -22,7 +22,7 @@ def truncate(arr, cnt = 10)
   n = arr.size / cnt
   (n - 1).step(arr.size - 1, n).map { |i| arr[i] }[0..(cnt - 1)]
 end
-%>
+-%>
 Hi <%= @user.login %>,
 
 we've detected that VPS #<%= @object.id %> <%= @object.hostname %> on <%= @object.node.domain_name %>

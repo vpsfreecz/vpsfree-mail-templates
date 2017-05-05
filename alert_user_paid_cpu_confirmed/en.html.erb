@@ -70,6 +70,18 @@ end
       table.log tr td:nth-child(2) {
         text-align: right;
       }
+
+      .action {
+        margin-left: 10%;
+      }
+
+      .action a {
+        text-decoration: none;
+        border: 1px solid #000;
+        background: #969678;
+        color: #FFF;
+        padding: 3px;
+      }
     </style>
   </head>
   <body>
@@ -107,6 +119,16 @@ end
     </table>
     <p>
       This e-mail is just informative, but if needed, you can get a limit.
+    </p>
+    <p>
+      If you acknowledge this issue, you will not receive any more alerts until
+      it's resolved. However, it will not make the issue go away, merely silence
+      it.
+    </p>
+    <p class="action">
+      <a href="<%= url('monitoring', "action=ack&id=#{@event.id}") %>">
+        Acknowledge
+      </a>
     </p>
     <p>
       Best regards,<br>

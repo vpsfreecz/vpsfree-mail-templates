@@ -70,6 +70,18 @@ end
       table.log tr td:nth-child(2) {
         text-align: right;
       }
+
+      .action {
+        margin-left: 10%;
+      }
+
+      .action a {
+        text-decoration: none;
+        border: 1px solid #000;
+        background: #969678;
+        color: #FFF;
+        padding: 3px;
+      }
     </style>
   </head>
   <body>
@@ -106,6 +118,16 @@ end
     </table>
     <p>
       Tento e-mail je pouze informativní, ale v případě potřeby můžeš dostat limit.
+    </p>
+    <p>
+      Pokud tuto událost potvrdíš na následujícím odkazu, až do vyřešení o ní
+      nebudeš informován. Samotné potvrzení však původní problém nevyřeší,
+      pouze vypne oznamovací e-maily.
+    </p>
+    <p class="action">
+      <a href="<%= url('monitoring', "action=ack&id=#{@event.id}") %>">
+        Beru na vědomí
+      </a>
     </p>
     <p>
       S pozdravem<br>

@@ -1,3 +1,8 @@
+<%
+def url(page, params = nil)
+  @base_url + "?page=" + page + (params ? "&#{params}" : "")
+end
+-%>
 Ahoj <%= @user.login %>,
 
 <% if @vps.id.to_s == @ds.full_name -%>
@@ -24,6 +29,12 @@ do VPS nepůjde připojit, napiš prosím na podporu, dočasně Ti disk zvětš�
 Pokud bys potřeboval diskový prostor navýšit dlouhodobě, viz KB:
 
   https://kb.vpsfree.cz/informace/platby#z_ceho_se_sklada_clensky_poplatek
+
+Pokud tuto událost potvrdíš na následujícím odkazu, až do vyřešení o ní
+nebudeš dále informován. Samotné potvrzení však původní problém nevyřeší, pouze
+vypne oznamovací e-maily:
+
+  <%= url('monitoring', "action=ack&id=#{@event.id}") %>
 
 S pozdravem
 

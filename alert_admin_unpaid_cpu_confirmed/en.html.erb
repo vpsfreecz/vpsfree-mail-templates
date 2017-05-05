@@ -67,6 +67,18 @@ end
       table.log tr td:nth-child(2) {
         text-align: right;
       }
+
+      .action {
+        margin-left: 10%;
+      }
+
+      .action a {
+        text-decoration: none;
+        border: 1px solid #000;
+        background: #969678;
+        color: #FFF;
+        padding: 3px;
+      }
     </style>
   </head>
   <body>
@@ -110,5 +122,22 @@ end
         </tr>
       <% end %>
     </table>
+    <p>
+      Acknowledge the issue to silence alerts until it is resolved.
+    </p>
+    <p class="action">
+      <a href="<%= url('monitoring', "action=ack&id=#{@event.id}") %>">
+        Acknowledge
+      </a>
+    </p>
+    <p>
+      Ignore this issue to silence alerts about this issue for good, whether
+      it is ever resolved or not.
+    </p>
+    <p class="action">
+      <a href="<%= url('monitoring', "action=ignore&id=#{@event.id}") %>">
+        Ignore
+      </a>
+    </p>
   </body>
 </html>

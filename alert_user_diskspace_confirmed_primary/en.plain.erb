@@ -1,3 +1,8 @@
+<%
+def url(page, params = nil)
+  @base_url + "?page=" + page + (params ? "&#{params}" : "")
+end
+-%>
 Hi <%= @user.login %>,
 
 NAS dataset <%= @ds.full_name %> has <%= @event.monitored_event_logs.last.value.round(2) %> % free space left.
@@ -15,6 +20,11 @@ Free space:
 Should you need more diskspace, see KB:
 
   https://kb.vpsfree.org/information/membership_fees#what_the_membership_fee_is_composed_of
+
+If you acknowledge this issue, you will not receive any more alerts until it's
+resolved. However, it will not make the issue go away, merely silence it:
+
+  <%= url('monitoring', "action=ack&id=#{@event.id}") %>
 
 Best regards,
 

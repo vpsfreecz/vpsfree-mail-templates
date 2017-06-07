@@ -22,10 +22,10 @@ máme pro tebe zprávu ohledně tohoto výpadku.
 %>
 <% end -%>
 
-<%= @update.cs_summary %>
-<% if @update.cs_description && !@update.cs_description.empty? -%>
+<%= @update.summary %>
+<% if @update.description && !@update.description.empty? -%>
 
-<%= @update.cs_description %>
+<%= @update.description %>
 <% end -%>
 <% if @update.reporter_name -%>
 

@@ -25,7 +25,7 @@ Datum a čas: <%= @o.begins_at.localtime.strftime('%Y-%m-%d %H:%M %Z') %>
 Očekávaná délka: <%= @o.duration %> minut
 Výpadek se týka serverů: <%= @o.outage_entities.map { |e| e.real_name }.join(', ') %>
 Typ výpadku: <%= @o.outage_type %>
-Důvod: <%= @o.en_summary %>
+Důvod: <%= @o.cs_summary %>
 Výpadek řeší: <%= @o.outage_handlers.map { |h| h.user.full_name }.join(', ') %>
 <% if @o.cs_description && !@o.cs_description.empty? -%>
 

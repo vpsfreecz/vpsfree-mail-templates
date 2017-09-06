@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html>	
+<html>
 <head>
 <meta charset="utf-8">
 </head>
-  
+
 <body>
 <p>
 Ahoj <%= @user.login %>,
-</p> 
+</p>
 
 <p>
 toto je automatická připomínka platby členského příspěvku.
@@ -39,7 +39,8 @@ do <strong><%= (@user.expiration_date + 14 * 24 * 60 * 60).strftime('%Y-%m-%d') 
 </p>
 
 <p>
-Číslo účtu: <em>2200041594/2010</em> (ČR) nebo <em>SK15 8330 0000 0022 0004 1594</em> (SR)
+Číslo účtu: <em>2200041594/2010</em> (ČR) nebo <em>SK15 8330 0000 0022 0004 1594</em> (SR)<br>
+IBAN: <em>CZ0420100000002200041594</em> BIC: <em>FIOBCZPPXXX</em>
 </p>
 
 <p>
@@ -49,7 +50,7 @@ Příchod platby lze zkontrolovat zde:<br>
 
 <p>
 <% three_months_payment = @user.monthly_payment * 3 %>
-QR kód pro platbu na 3 měsíce dopředu (vždy ověř správnost údajů): 
+QR kód pro platbu na 3 měsíce dopředu (vždy ověř správnost údajů):
 </p>
 
 <table cellspacing="27">
@@ -79,13 +80,13 @@ Pokud potřebuješ probrat detaily ohledně této platby, jednoduše použij fun
 </p>
 
 <p>
-Zasílání těchto e-mailů lze vypnout ve vpsAdminu v nastavení profilu, položka "vpsAdmin mailer". 
+Zasílání těchto e-mailů lze vypnout ve vpsAdminu v nastavení profilu, položka "vpsAdmin mailer".
 </p>
 
 <p>
 S pozdravem<br>
 
-vpsAdmin @ vpsFree.cz 
+vpsAdmin @ vpsFree.cz
 </p>
 
 </body>

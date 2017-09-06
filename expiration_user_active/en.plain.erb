@@ -8,6 +8,8 @@ Variable symbol: <%= @user.id %>
 
 Sum: <%= @user.monthly_payment %> CZK or <%= @user.monthly_payment  / 25 %> EUR per month
 
+Invoice: on request, see below
+
 Payments for at least 3 months ahead are preferred. Unless the membership fee
 is paid to <%= (@user.expiration_date + 14 * 24 * 60 * 60).strftime('%Y-%m-%d') %>, your membership will be suspended
 and later terminated.
@@ -23,6 +25,10 @@ Payment arrival can be checked here:
 QR code for payment for 3 months (always verify that the information is correct):
 - CZ: https://api.paylibo.com/paylibo/generator/czech/image?compress=false&size=440&accountNumber=2200041594&bankCode=2010&amount=<%= three_months_payment %>&currency=CZK&vs=<%= @user.id %>
 - SK: https://api.paylibo.com/paylibo/generator/image?compress=false&size=440&iban=SK1583300000002200041594&amount=<%= three_months_payment / 25 %>&currency=EUR&vs=<%= @user.id %>
+
+If you require an invoice, please reply to this e-mail and ask for it. We do not
+issue invoices automatically. Do not forget to include your billing information,
+if you're asking for your first invoice.
 
 Should you have any questions, please reply to this e-mail.
 

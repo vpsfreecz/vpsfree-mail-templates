@@ -31,6 +31,10 @@ this is an automated reminder for payment of the membership fee.
             <%= @user.monthly_payment  / 25 %> € per month
         </td>
     </tr>
+    <tr>
+      <td>Invoice:</td>
+      <td>on request, see <a href="#invoice">below</a></td>
+    </tr>
 </table>
 
 <p>
@@ -75,12 +79,18 @@ QR code for payment for 3 months (always verify that the information is correct)
     </tr>
 </table>
 
+<p id="invoice">
+If you require an invoice, please reply to this e-mail and ask for it. We do not
+issue invoices automatically. Do not forget to include your billing information,
+if you're asking for your first invoice.
+</p>
+
 <p>
 Should you have any questions, please reply to this e-mail.
 </p>
 
 <p>
-Sending of these automated reminders can be disabled in vpsAdmin -> Edit profile,
+Sending of these automated reminders can be disabled in vpsAdmin -&gt; Edit profile,
 check box "vpsAdmin mailer".
 </p>
 

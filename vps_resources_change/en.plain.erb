@@ -3,8 +3,8 @@ Hi <%= @vps.user.login %>,
 configuration of VPS <%= @vps.id %> has changed.
 
 Current limits:
-    CPU: <%= @vps.cpu * 100 %> %
-  Paměť: <%= @vps.memory %> MB
+    CPU: <%= @vps.cpu %> cores, limit <%= @vps.cpu_limit || (@vps.cpu * 100) %> %
+ Memory: <%= @vps.memory %> MB
    Swap: <%= @vps.swap %> MB
 
 Reason for change: <%= @reason %>

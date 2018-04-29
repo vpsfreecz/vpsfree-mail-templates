@@ -1,6 +1,6 @@
 Hi <%= @user.login %>,
 
-<%= @o.planned ? 'a planned' : 'an unplanned' %> outage has been reported and <%= @vpses.count %> of your VPS <%= @vpses.count > 1 ? 'are' : 'is' %> affected.
+<%= @vpses.count %> of your VPS <%= @vpses.count > 1 ? 'are' : 'is' %> affected by <%= @o.planned ? 'a scheduled maintenance' : 'an outage' %>.
 
 <% if @direct_vpses.count > 0 -%>
 Directly affected VPS:
@@ -24,7 +24,7 @@ Indirectly affected VPS:
 Date and time: <%= @o.begins_at.localtime.strftime('%Y-%m-%d %H:%M %Z') %>
 Expected duration: <%= @o.duration %> minutes
 Affected systems: <%= @o.outage_entities.map { |e| e.real_name }.join(', ') %>
-Outage type: <%= @o.outage_type %>
+<%= @o.planned ? 'Maintenance' : 'Outage' %> type: <%= @o.outage_type %>
 Reason: <%= @o.en_summary %>
 Handled by: <%= @o.outage_handlers.map { |h| h.user.full_name }.join(', ') %>
 <% if @o.en_description && !@o.en_description.empty? -%>

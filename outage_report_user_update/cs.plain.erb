@@ -1,6 +1,6 @@
 Ahoj <%= @user.login %>,
 
-máme pro tebe zprávu ohledně tohoto výpadku.
+máme pro tebe zprávu ohledně <%= @o.planned ? 'této odstávky' : 'tohoto výpadku' %>.
 
 <% @update.each_change do |attr, old, new| -%>
 <%= case attr
@@ -17,7 +17,7 @@ máme pro tebe zprávu ohledně tohoto výpadku.
       "Stav: #{old} -> #{new}"
 
     when :outage_type
-      "Typ výpadku: #{old} -> #{new}"
+      "Typ: #{old} -> #{new}"
     end
 %>
 <% end -%>

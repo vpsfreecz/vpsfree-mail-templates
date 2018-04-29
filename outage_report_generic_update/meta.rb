@@ -6,6 +6,6 @@ template :outage_report_role_event do
   user_visibility false
 
   lang :en do
-    subject    "Re: <%= @o.planned ? 'Plánovaný výpadek / Planned outage' : 'Neplánovaný výpadek / Unplanned outage' %> - <%= @o.outage_entities.map { |e| e.real_name }.join(', ') %> - <%= @o.begins_at.localtime.strftime('%Y-%m-%d %H:%M %Z') %>"
+    subject    "Re: <%= @o.planned ? 'Odstávka / Maintenance' : 'Výpadek / Outage' %> - <%= @o.outage_entities.map { |e| e.real_name }.join(', ') %> - <%= @o.begins_at.localtime.strftime('%Y-%m-%d %H:%M %Z') %>"
   end
 end

@@ -5,29 +5,9 @@ Request Info
    Request: #<%= @r.id %>
       Type: <%= @r.type_name %>
      State: <%= @r.state %>
-      User: <%= @r.user_id %> <%= @r.user_id && @r.user.login %>
-     Admin: <%= @r.admin_id %> <%= @r.admin_id && @r.admin.login %>
+      User: <%= @r.user_id %>
+     Admin: <%= @r.admin_id %>
   Response: <%= @r.admin_response %>
-    API IP: <%= @r.api_ip_addr %>
-   API PTR: <%= @r.api_ip_ptr %>
- Client IP: <%= @r.client_ip_addr %>
-Client PTR: <%= @r.client_ip_ptr %>
-
-Registration
-------------
-Login:           <%= @r.login %>
-Full name:       <%= @r.full_name %>
-Organization:    <%= @r.org_name %>
-Organization ID: <%= @r.org_id %>
-Address:         <%= @r.address %>
-E-mail:          <%= @r.email %>
-Year of birth:   <%= @r.year_of_birth %>
-How:             <%= @r.how %>
-Notes:           <%= @r.note %>
-Distribution:    <%= @r.os_template.label %>
-Location:        <%= @r.location.label %>
-Currency:        <%= @r.currency %>
-Language:        <%= @r.language.label %>
 
 Take action
 -----------

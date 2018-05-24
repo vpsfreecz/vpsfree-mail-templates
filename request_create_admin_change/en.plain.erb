@@ -2,26 +2,12 @@ Request Info
 ------------
    Created: <%= @r.created_at %>
    Changed: <%= @r.updated_at %>
-   Request: #<%= @r.id %> 
+   Request: #<%= @r.id %>
       Type: <%= @r.type_name %>
      State: <%= @r.state %>
-      User: <%= @r.user_id %> <%= @r.user_id && @r.user.login %>
-     Admin: <%= @r.admin_id %> <%= @r.admin_id && @r.admin.login %>
+      User: <%= @r.user_id %>
+     Admin: <%= @r.admin_id %>
   Response: <%= @r.admin_response %>
-    API IP: <%= @r.api_ip_addr %>
-   API PTR: <%= @r.api_ip_ptr %>
- Client IP: <%= @r.client_ip_addr %>
-Client PTR: <%= @r.client_ip_ptr %>
-
-Requested changes
------------------
-<% @r.each_change do |attr, new_v, cur_v| %>
-<%= attr.to_s.gsub(/_/, ' ').capitalize %>
-  From: <%= cur_v %>
-  To:   <%= new_v %> 
-<% end %>
-
-Reason for change: <%= @r.change_reason %>
 
 Take action
 -----------

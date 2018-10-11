@@ -43,16 +43,29 @@ is paid to <%= (@user.expiration_date + 14 * 24 * 60 * 60).strftime('%Y-%m-%d') 
 and later terminated.
 </p>
 
+<h3>Payment in CZK</h3>
 <p>
-Bank account: <em>2200041594/2010</em> (CZ) or <em>SK15 8330 0000 0022 0004 1594</em> (SK)<br>
+Back account for CZK (CZ): <em>2200041594/2010</em><br>
 IBAN: <em>CZ0420100000002200041594</em> BIC: <em>FIOBCZPPXXX</em>
 </p>
 
 <p>
 Payment arrival can be checked here:<br>
-<a href ="https://www.fio.cz/ib2/transparent?a=2200041594">https://www.fio.cz/ib2/transparent?a=2200041594</a>
+<a href="https://www.fio.cz/ib2/transparent?a=2200041594">https://www.fio.cz/ib2/transparent?a=2200041594</a>
 </p>
 
+<h3>Payment in EUR</h3>
+<p>
+Back account for EUR (SK): <em>SK20 8330 0000 0026 0150 2873</em><br>
+BIC: <em>FIOZSKBA</em>
+</p>
+
+<p>
+Payment arrival can be checked here:<br>
+<a href="https://ib.fio.cz/ib/transparent?a=2601502873">https://ib.fio.cz/ib/transparent?a=2601502873</a>
+</p>
+
+<h3>QR codes</h3>
 <p>
 <% three_months_payment = @user.monthly_payment * 3 %>
 QR code for payment for 3 months (always verify that the information is correct):

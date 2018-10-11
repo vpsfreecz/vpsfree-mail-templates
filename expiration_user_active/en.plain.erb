@@ -14,17 +14,23 @@ Payments for at least 3 months ahead are preferred. Unless the membership fee
 is paid to <%= (@user.expiration_date + 14 * 24 * 60 * 60).strftime('%Y-%m-%d') %>, your membership will be suspended
 and later terminated.
 
-Bank account: 2200041594/2010 (CZ) or SK15 8330 0000 0022 0004 1594 (SK)
-IBAN: CZ0420100000002200041594 BIC: FIOBCZPPXXX
+Bank account for CZK (CZ):  2200041594/2010
+                            IBAN: CZ0420100000002200041594
+                            BIC: FIOBCZPPXXX
 
 Payment arrival can be checked here:
-
   https://www.fio.cz/ib2/transparent?a=2200041594
+
+Back account for EUR (SK):  SK20 8330 0000 0026 0150 2873
+                            BIC: FIOZSKBA
+
+Payment arrival can be checked here:
+  https://ib.fio.cz/ib/transparent?a=2601502873
 
 <% three_months_payment = @user.monthly_payment * 3 %>
 QR code for payment for 3 months (always verify that the information is correct):
 - CZ: https://api.paylibo.com/paylibo/generator/czech/image?compress=false&size=440&accountNumber=2200041594&bankCode=2010&amount=<%= three_months_payment %>&currency=CZK&vs=<%= @user.id %>
-- SK: https://api.paylibo.com/paylibo/generator/image?compress=false&size=440&iban=SK1583300000002200041594&amount=<%= three_months_payment / 25 %>&currency=EUR&vs=<%= @user.id %>
+- SR: https://api.paylibo.com/paylibo/generator/image?compress=false&size=440&iban=SK2083300000002601502873&amount=<%= three_months_payment / 25 %>&currency=EUR&vs=<%= @user.id %>
 
 If you require an invoice, please reply to this e-mail and ask for it. We do not
 issue invoices automatically. Do not forget to include your billing information,

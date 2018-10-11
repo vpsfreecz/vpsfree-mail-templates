@@ -42,16 +42,29 @@ Preferujeme platby minimálně na 3 měsíce dopředu. Neuhradíš-li členský 
 do <strong><%= (@user.expiration_date + 14 * 24 * 60 * 60).strftime('%Y-%m-%d') %></strong>, Tvé členství bude pozastaveno a následně ukončeno.
 </p>
 
+<h3>Platba v CZK</h3>
 <p>
-Číslo účtu: <em>2200041594/2010</em> (ČR) nebo <em>SK15 8330 0000 0022 0004 1594</em> (SR)<br>
+Číslo účtu pro CZK (ČR): <em>2200041594/2010</em><br>
 IBAN: <em>CZ0420100000002200041594</em> BIC: <em>FIOBCZPPXXX</em>
 </p>
 
 <p>
 Příchod platby lze zkontrolovat zde:<br>
-<a href ="https://www.fio.cz/ib2/transparent?a=2200041594">https://www.fio.cz/ib2/transparent?a=2200041594</a>
+<a href="https://www.fio.cz/ib2/transparent?a=2200041594">https://www.fio.cz/ib2/transparent?a=2200041594</a>
 </p>
 
+<h3>Platba v EUR</h3>
+<p>
+Číslo účtu pro EUR (SR): <em>SK20 8330 0000 0026 0150 2873</em><br>
+BIC: <em>FIOZSKBA</em>
+</p>
+
+<p>
+Příchod platby lze zkontrolovat zde:<br>
+<a href="https://ib.fio.cz/ib/transparent?a=2601502873">https://ib.fio.cz/ib/transparent?a=2601502873</a>
+</p>
+
+<h3>QR kódy</h3>
 <p>
 <% three_months_payment = @user.monthly_payment * 3 %>
 QR kód pro platbu na 3 měsíce dopředu (vždy ověř správnost údajů):
@@ -59,8 +72,8 @@ QR kód pro platbu na 3 měsíce dopředu (vždy ověř správnost údajů):
 
 <table cellspacing="27">
     <tr>
-        <td>Pro Českou republiku</td>
-        <td>Pro Slovenskou republiku</td>
+        <td>Pro Českou republiku (CZK)</td>
+        <td>Pro Slovenskou republiku (EUR)</td>
     </tr>
     <tr>
         <td>
@@ -71,7 +84,7 @@ QR kód pro platbu na 3 měsíce dopředu (vždy ověř správnost údajů):
         </td>
         <td>
             <img alt="SR QR kód"
-                src="https://api.paylibo.com/paylibo/generator/image?compress=false&size=40&iban=SK1583300000002200041594&amount=<%= three_months_payment / 25 %>&currency=EUR&vs=<%= @user.id %>"
+                src="https://api.paylibo.com/paylibo/generator/image?compress=false&size=40&iban=SK2083300000002601502873&amount=<%= three_months_payment / 25 %>&currency=EUR&vs=<%= @user.id %>"
                 width="170"
                 height="169">
         </td>

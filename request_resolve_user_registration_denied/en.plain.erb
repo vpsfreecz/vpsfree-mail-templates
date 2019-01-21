@@ -1,6 +1,6 @@
 Hi <%= @r.login %>,
 
-your registration request was denied.
+your registration request #<%= @r.id %> was denied.
 
 <% if @r.admin_response %>Reason for this decision: <%= @r.admin_response %><% end %>
 

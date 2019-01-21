@@ -6,6 +6,13 @@ konce :)
 
 Ve vpsAdminu můžeš ovládat svoje VPS, NAS, playground, kontrolovat platbu
 a další.
+<% if @user.object_state == 'suspended' -%>
+
+Tvůj účet bude aktivován až po zaplacení členského příspěvku. Do té doby nebudeš
+moct VPS používat, ale můžeš prozkoumat naše administrační rozhraní. Pokud bys
+chtěl VPS před zaplacením vyzkoušet, kontaktuj prosím naši podporu a požádej
+o zkušební období.
+<% end -%>
 
 Než se ale poprvé přihlásíš na VPS, vezmi prosím na vědomí, že tvůj VPS je
 dostupný z veřejného Internetu, bude se na něj od prvního momentu existence

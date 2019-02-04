@@ -2,7 +2,7 @@ Ahoj <%= @r.login %>,
 
 tvá přihláška #<%= @r.id %> byla zamítnuta.
 
-<% if @r.admin_response %>Důvod tohoto rozhodnutí: <%= @r.admin_response %><% end %>
+<% if @r.admin_response && !@r.admin_response.empty? %>Důvod tohoto rozhodnutí: <%= @r.admin_response %><% end %>
 
 S pozdravem
 

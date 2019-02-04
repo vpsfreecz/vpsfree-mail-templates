@@ -2,7 +2,7 @@ Hi <%= @r.login %>,
 
 your registration request #<%= @r.id %> was denied.
 
-<% if @r.admin_response %>Reason for this decision: <%= @r.admin_response %><% end %>
+<% if @r.admin_response && !@r.admin_response.empty? %>Reason for this decision: <%= @r.admin_response %><% end %>
 
 Best regards,
 

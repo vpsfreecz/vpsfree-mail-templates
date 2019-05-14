@@ -5,12 +5,17 @@ blíží se expirace VPS #<%= @vps.id %> <%= @vps.hostname %>.
 Prostředí:       <%= @vps.node.location.environment.label %>
 Datum vytvoření: <%= @vps.created_at.strftime('%Y-%m-%d') %>
 Datum expirace:  <%= @vps.expiration_date.strftime('%Y-%m-%d') %>
-<% if @vps.node.location.environment.label == 'Playground' %>
+
+<% if @vps.node.location.environment.label == 'Playground' -%>
 Pokud chceš prodloužit životnost playground VPS, nebo máš jiný dotaz,
 můžeš se obrátit na podpora@vpsfree.cz
-<% else %>
+<% elsif @vps.node.location.environment.label == 'Staging' -%>
+Pokud chceš tuto VPS provozovat až do spuštění vpsAdminOS v produkci, odepiš
+prosím na tento e-mail a požádej o zrušení expirace.
+<% else -%>
 V případě nejasností se obrať na podpora@vpsfree.cz.
-<% end %>
+<% end -%>
+
 S pozdravem
 
 vpsAdmin @ vpsFree.cz

@@ -1,6 +1,6 @@
 Hi <%= @vps.user.login %>,
 
-VPS #<%= @vps.id %> was stopped and suspended.
+VPS #<%= @vps.id %> <%= @vps.hostname %> was stopped and suspended.
 
 Reason: <%= @state.reason %>
 

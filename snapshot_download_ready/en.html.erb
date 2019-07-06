@@ -4,7 +4,7 @@
 
 <p>link to download a backup of <%= "#{@dl.snapshot.dataset.name}@#{@dl.snapshot.name}" %></p>
 
-<p><a href="<%= @dl.url %>"><%= @dl.url %></a></p>
+<p><a href="<%= @base_url %>?page=backup&action=download_link&id=<%= @dl.id %>"><%= @base_url %>?page=backup&action=download_link&id=<%= @dl.id %></a></p>
 
 <p>Should you have any questions, please contact podpora@vpsfree.cz.</p>
 

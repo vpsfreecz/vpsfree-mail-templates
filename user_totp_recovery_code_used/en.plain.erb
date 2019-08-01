@@ -1,0 +1,19 @@
+Hi <%= @user.login %>,
+
+We have detected the use of a recovery code for TOTP authentication when logging
+into your vpsAdmin account (https://vpsadmin.vpsfree.cz). Recovery code can be
+used for emergency login to your account when no authentication device is
+available.
+
+  Date and time:         <%= @time.strftime('%Y-%m-%d %H:%M:%S') %>
+  Authentication device: <%= @totp_device.label %>
+  IP address:            <%= @request.env['HTTP_CLIENT_IP'] || @request.ip %>
+  User agent:            <%= @request.user_agent %>
+
+The authentication device was disabled.
+
+Should you have any questions, please contact podpora@vpsfree.cz.
+
+Best regards,
+
+vpsAdmin @ vpsFree.cz

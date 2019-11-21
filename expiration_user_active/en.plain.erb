@@ -29,8 +29,8 @@ Payment arrival can be checked here:
 
 <% three_months_payment = @user.monthly_payment * 3 %>
 QR code for payment for 3 months (always verify that the information is correct):
-- CZ: https://api.paylibo.com/paylibo/generator/czech/image?compress=false&size=440&accountNumber=2200041594&bankCode=2010&amount=<%= three_months_payment %>&currency=CZK&vs=<%= @user.id %>
-- SR: https://api.paylibo.com/paylibo/generator/image?compress=false&size=440&iban=SK2083300000002601502873&amount=<%= three_months_payment / 25 %>&currency=EUR&vs=<%= @user.id %>
+- CZ: https://api.paylibo.com/paylibo/generator/czech/image?compress=false&size=440&accountNumber=2200041594&bankCode=2010&amount=<%= three_months_payment %>&currency=CZK&vs=<%= @user.id %>&branding=false
+- SR: https://vpsfree.cz/nastroje/qrcodesk.php?iban=SK2083300000002601502873&amount=<%= three_months_payment / 25 %>&vs=<%= @user.id %>
 
 If you require an invoice, please reply to this e-mail and ask for it. We do not
 issue invoices automatically. Do not forget to include your billing information,

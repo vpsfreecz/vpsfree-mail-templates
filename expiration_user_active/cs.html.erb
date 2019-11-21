@@ -78,13 +78,14 @@ QR kód pro platbu na 3 měsíce dopředu (vždy ověř správnost údajů):
     <tr>
         <td>
             <img alt="ČR QR kód"
-                src="https://api.paylibo.com/paylibo/generator/czech/image?compress=false&size=40&accountNumber=2200041594&bankCode=2010&amount=<%= three_months_payment %>&currency=CZK&vs=<%= @user.id %>"
+                                src="https://api.paylibo.com/paylibo/generator/czech/image?compress=false&size=40&accountNumber=2200041594&bankCode=2010&amount=<%= three_months_payment %>&currency=CZK&vs=<%= @user.id %>&branding=false"
+                
                 width="170"
                 height="169">
         </td>
         <td>
             <img alt="SR QR kód"
-                src="https://api.paylibo.com/paylibo/generator/image?compress=false&size=40&iban=SK2083300000002601502873&amount=<%= three_months_payment / 25 %>&currency=EUR&vs=<%= @user.id %>"
+                src="https://vpsfree.cz/nastroje/qrcodesk.php?iban=SK2083300000002601502873&amount=<%= three_months_payment / 25 %>&vs=<%= @user.id %>"                
                 width="170"
                 height="169">
         </td>

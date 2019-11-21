@@ -80,14 +80,14 @@ QR code for payment for 3 months (always verify that the information is correct)
         <td>
             <img alt="CZ QR code"
                 src="https://api.paylibo.com/paylibo/generator/czech/image?compress=false&size=40&accountNumber=2200041594&bankCode=2010&amount=<%= three_months_payment %>&currency=CZK&vs=<%= @user.id %>&branding=false"
-                width="170"
-                height="169">
+                width="200"
+                height="200">
         </td>
         <td>
             <img alt="SK QR code"
                                 src="https://vpsfree.cz/nastroje/qrcodesk.php?iban=SK2083300000002601502873&amount=<%= three_months_payment / 25 %>&vs=<%= @user.id %>" 
-                width="170"
-                height="169">
+                width="146"
+                height="144">
         </td>
     </tr>
 </table>

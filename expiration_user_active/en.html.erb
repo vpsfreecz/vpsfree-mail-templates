@@ -78,16 +78,17 @@ QR code for payment for 3 months (always verify that the information is correct)
     </tr>
     <tr>
         <td>
-            <img alt="CZ QR code"
-                src="https://api.paylibo.com/paylibo/generator/czech/image?compress=false&size=40&accountNumber=2200041594&bankCode=2010&amount=<%= three_months_payment %>&currency=CZK&vs=<%= @user.id %>&branding=false"
-                width="200"
-                height="200">
+            <img alt="CZ QR kód"
+
+                                src="https://vpsfree.cz/nastroje/qr.php?country=cz&amount=<%= three_months_payment %>vs=<%= @user.id %>"    
+                width="145"
+                height="145">
         </td>
         <td>
-            <img alt="SK QR code"
-                                src="https://vpsfree.cz/nastroje/qrcodesk.php?iban=SK2083300000002601502873&amount=<%= three_months_payment / 25 %>&vs=<%= @user.id %>" 
-                width="146"
-                height="144">
+            <img alt="SK QR kód"
+                src="https://vpsfree.cz/nastroje/qr.php?country=sk&amount=<%= three_months_payment / 25 %>vs=<%= @user.id %>"                 
+                width="145"
+                height="145">
         </td>
     </tr>
 </table>

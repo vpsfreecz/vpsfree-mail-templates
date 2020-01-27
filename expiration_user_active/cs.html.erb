@@ -79,13 +79,13 @@ QR kód pro platbu na 3 měsíce dopředu (vždy ověř správnost údajů):
         <td>
             <img alt="ČR QR kód"
 
-                                src="https://vpsfree.cz/nastroje/qr.php?country=cz&amount=<%= three_months_payment %>vs=<%= @user.id %>"    
+                                src="https://vpsfree.cz/nastroje/qr.php?country=cz&amount=<%= three_months_payment %>&vs=<%= @user.id %>"    
                 width="145"
                 height="145">
         </td>
         <td>
             <img alt="SR QR kód"
-                src="https://vpsfree.cz/nastroje/qr.php?country=sk&amount=<%= three_months_payment / 25 %>vs=<%= @user.id %>"                 
+                src="https://vpsfree.cz/nastroje/qr.php?country=sk&amount=<%= three_months_payment / 25 %>&vs=<%= @user.id %>"                 
                 width="145"
                 height="145">
         </td>

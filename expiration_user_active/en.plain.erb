@@ -29,8 +29,8 @@ Payment arrival can be checked here:
 
 <% three_months_payment = @user.monthly_payment * 3 %>
 QR code for payment for 3 months (always verify that the information is correct):
-- CZ: https://vpsfree.cz/nastroje/qr.php?country=cz&amount=<%= three_months_payment %>vs=<%= @user.id %>
-- SK: https://vpsfree.cz/nastroje/qr.php?country=sk&amount=<%= three_months_payment / 25 %>vs=<%= @user.id %>
+- CZ: https://vpsfree.cz/nastroje/qr.php?country=cz&amount=<%= three_months_payment %>&vs=<%= @user.id %>
+- SK: https://vpsfree.cz/nastroje/qr.php?country=sk&amount=<%= three_months_payment / 25 %>&vs=<%= @user.id %>
 
 If you require an invoice, please reply to this e-mail and ask for it. We do not
 issue invoices automatically. Do not forget to include your billing information,

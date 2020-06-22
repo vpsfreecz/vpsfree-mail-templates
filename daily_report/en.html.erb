@@ -127,6 +127,10 @@ END
   ret
 end
 
+def fmt_or_nil(v)
+  v ? yield : '-'
+end
+
 %>
 <html>
 <head>
@@ -404,6 +408,91 @@ end
         <td><%= c.state %></td>
         <td><%= c.size %></td>
         <td><%= c.progress %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<h2>Backups</h2>
+<% if @backups[:old_latest_any_snapshot].any? %>
+  <h3>Latest snapshot too old</h3>
+  <table class="overview">
+    <tr>
+      <th>ID</th>
+      <th>NAME</th>
+      <th>LAST SNAPSHOT</th>
+    </tr>
+    <% @backups[:old_latest_any_snapshot].each do |ds| %>
+      <tr>
+        <td><%= ds.id %></td>
+        <td><%= ds.full_name %></td>
+        <td><%= fmt_or_nil(ds.snapshots.order('created_at DESC').take) { |s| s.name } %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<% if @backups[:old_latest_backup_snapshot].any? %>
+  <h3>Latest backed up snapshot too old</h3>
+  <table class="overview">
+    <tr>
+      <th>NODE</th>
+      <th>POOL</th>
+      <th>ID</th>
+      <th>NAME</th>
+      <th>LAST SNAPSHOT</th>
+    </tr>
+    <% @backups[:old_latest_backup_snapshot].each do |dip| %>
+      <tr>
+        <td><%= dip.pool.node.domain_name %></td>
+        <td><%= dip.pool.filesystem %></td>
+        <td><%= dip.dataset_id %></td>
+        <td><%= dip.dataset.full_name %></td>
+        <td><%= fmt_or_nil(dip.snapshot_in_pools.order('id DESC').take) { |sip| sip.snapshot.name } %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<% if @backups[:too_many_in_hypervisor].any? %>
+  <h3>Too many snapshots on hypervisor</h3>
+  <table class="overview">
+    <tr>
+      <th>NODE</th>
+      <th>POOL</th>
+      <th>ID</th>
+      <th>NAME</th>
+      <th>SNAPSHOTS</th>
+    </tr>
+    <% @backups[:too_many_in_hypervisor].each do |dip| %>
+      <tr>
+        <td><%= dip.pool.node.domain_name %></td>
+        <td><%= dip.pool.filesystem %></td>
+        <td><%= dip.dataset_id %></td>
+        <td><%= dip.dataset.full_name %></td>
+        <td><%= dip.snapshot_count %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<% if @backups[:too_many_in_backup].any? %>
+  <h3>Too many snapshots in backup</h3>
+  <table class="overview">
+    <tr>
+      <th>NODE</th>
+      <th>POOL</th>
+      <th>ID</th>
+      <th>NAME</th>
+      <th>SNAPSHOTS</th>
+    </tr>
+    <% @backups[:too_many_in_backup].each do |dip| %>
+      <tr>
+        <td><%= dip.pool.node.domain_name %></td>
+        <td><%= dip.pool.filesystem %></td>
+        <td><%= dip.dataset_id %></td>
+        <td><%= dip.dataset.full_name %></td>
+        <td><%= dip.snapshot_count %></td>
       </tr>
     <% end %>
   </table>

@@ -128,7 +128,7 @@ END
 end
 
 def fmt_or_nil(v)
-  v ? yield : '-'
+  v ? yield(v) : '-'
 end
 
 %>

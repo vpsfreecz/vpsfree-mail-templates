@@ -1,0 +1,71 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <style>
+      h1, h2, h3, h4, h5, h6 {
+        margin: 15px 0 10px 0;
+      }
+
+      h3 {
+        font-size: 18px;
+      }
+
+      p, table, ul, ol, dl, fieldset {
+        margin: 15px 0;
+      }
+
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        font-size: 100%;
+      }
+
+      th {
+        text-align: center;
+        font-weight: bold;
+      }
+
+      th, td {
+        padding: 3px 7px;
+      }
+
+      table th {
+        background: #5EAFFF;
+        color: #FFF;
+      }
+
+      table th, table td {
+        border: 1px solid #B2DAFF;
+      }
+    </style>
+  </head>
+  <body>
+    <p>Hi <%= @vps.user.login %>,</p>
+    <p>
+      VPS <%= @vps.id %> <%= @vps.hostname %> is running out of memory
+      and the kernel is terminating processes.
+    </p>
+    <p>
+      Detected <%= @oom_reports.count %> OOM kills:
+    </p>
+    <table>
+      <tr>
+        <th>Time</th>
+        <th>Process</th>
+        <th>More information</th>
+      </tr>
+      <% @oom_reports.each do |r| -%>
+        <tr>
+          <td><%= r.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+          <td><%= r.killed_name %></td>
+          <td><a href="<%= @base_url %>?page=oom_reports&show=<%= r.id %>">See details</a></td>
+        </tr>
+      <% end -%>
+    </table>
+    <p>
+      Best regards,<br>
+
+      vpsAdmin @ vpsFree.cz
+    </p>
+  </body>
+</html>

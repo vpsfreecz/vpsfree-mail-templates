@@ -1,0 +1,18 @@
+Ahoj <%= @vps.user.login %>,
+
+ve VPS <%= @vps.id %> <%= @vps.hostname %> dochází paměť a kernel
+proto ukončuje procesy.
+
+Bylo zaznamenáno <%= @oom_reports.count %> zabítí procesů:
+
+<% @oom_reports.each do |r| -%>
+  <%= r.created_at.strftime('%Y-%m-%d %H:%M:%S') %>  <%= r.killed_name %>
+<% end -%>
+
+Pro více informací viz
+
+  <%= @base_url %>?page=oom_reports&vps=<%= @vps.id %>&list=1
+
+S pozdravem,
+
+vpsAdmin @ vpsFree.cz

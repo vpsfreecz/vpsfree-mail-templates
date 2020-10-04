@@ -1,0 +1,20 @@
+Hi <%= @vps.user.login %>,
+
+VPS <%= @vps.id %> <%= @vps.hostname %> is running out of memory and the kernel
+is terminating processes.
+
+Detected <%= @oom_reports.count %> OOM kills:
+
+<% @oom_reports.each do |r| -%>
+  <%= r.created_at.strftime('%Y-%m-%d %H:%M:%S') %>  <%= r.killed_name %>
+<% end -%>
+
+Please see
+
+  <%= @base_url %>?page=oom_reports&vps=<%= @vps.id %>&list=1
+
+for more information.
+
+Best regards,
+
+vpsAdmin @ vpsFree.cz

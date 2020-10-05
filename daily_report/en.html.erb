@@ -498,6 +498,43 @@ end
   </table>
 <% end %>
 
+<h2>OOM reports</h2>
+<% if @oom_reports[:by_vps].any? %>
+  <h3>Top 10 VPS running out of memory</h3>
+  <table class="overview">
+    <tr>
+      <th>NODE</th>
+      <th>USER</th>
+      <th>VPS</th>
+      <th>OOM COUNT</th>
+    </tr>
+    <% @oom_reports[:by_vps].limit(10).each do |vps| %>
+      <tr>
+        <td><%= vps.node.domain_name %></td>
+	      <td><a href="<%= url("adminm", "action=edit&id=#{vps.user_id}") %>"><%= "#{vps.user_id} #{vps.user.login}" %></a></td>
+	      <td><a href="<%= url("adminvps", "action=edit&veid=#{vps.id}") %>"><%= vps.id %></a></td>
+        <td><a href="<%= url("oom_reports", "action=list&list=1&vps=#{vps.id}") %>"><%= vps.oom_count %></a></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<% if @oom_reports[:by_node].any? %>
+  <h3>OOM reports by node</h3>
+  <table class="overview">
+    <tr>
+      <th>NODE</th>
+      <th>OOM COUNT</th>
+    </tr>
+    <% @oom_reports[:by_node].each do |node| %>
+      <tr>
+        <td><%= node.domain_name %></td>
+        <td><a href="<%= url("oom_reports", "action=list&list=1&node=#{node.id}") %>"><%= node.oom_count %></a></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
 <h2>Payments</h2>
 <table class="overview">
   <tr>

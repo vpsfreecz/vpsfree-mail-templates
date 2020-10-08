@@ -535,6 +535,22 @@ end
   </table>
 <% end %>
 
+<% if @oom_reports[:by_killed_name].any? %>
+  <h3>Killed processes</h3>
+  <table class="overview">
+    <tr>
+      <th>NAME</th>
+      <th>KILL COUNT</th>
+    </tr>
+    <% @oom_reports[:by_killed_name].each do |name, cnt| %>
+      <tr>
+        <td><%= name %></td>
+        <td><%= cnt %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
 <h2>Payments</h2>
 <table class="overview">
   <tr>

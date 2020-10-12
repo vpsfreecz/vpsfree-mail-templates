@@ -58,7 +58,7 @@
         <tr>
           <td><%= r.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
           <td><%= r.killed_name %></td>
-          <td><a href="<%= @base_url %>?page=oom_reports&show=<%= r.id %>">See details</a></td>
+          <td><a href="<%= @base_url %>?page=oom_reports&action=show&id=<%= r.id %>">See details</a></td>
         </tr>
       <% end -%>
     </table>

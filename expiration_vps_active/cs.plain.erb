@@ -1,17 +1,29 @@
 Ahoj <%= @vps.user.login %>,
 
-blíží se expirace VPS #<%= @vps.id %> <%= @vps.hostname %>.
+blíží se konec životnosti VPS #<%= @vps.id %> <%= @vps.hostname %>.
+
+<% if @vps.node.location.environment.label == 'Playground' -%>
+Za toto VPS se *neplatí*. Jedná se o playground VPS, viz KB:
+
+  https://kb.vpsfree.cz/navody/vps/playgroundvps
+
+Pokud chceš prodloužit životnost této VPS, nebo máš jiný dotaz,
+můžeš se obrátit na podpora@vpsfree.cz
+<% elsif @vps.node.location.environment.label == 'Staging' -%>
+Za toto VPS se *neplatí*. Jedná se o staging VPS, viz KB:
+
+  https://kb.vpsfree.cz/navody/vps/vpsadminos#testovaci_prostredi
+
+Pokud chceš prodloužit životnost této VPS, nebo máš jiný dotaz,
+můžeš se obrátit na podpora@vpsfree.cz
+<% else -%>
+V případě nejasností se obrať na podpora@vpsfree.cz.
+<% end -%>
 
 Prostředí:       <%= @vps.node.location.environment.label %>
 Datum vytvoření: <%= @vps.created_at.strftime('%Y-%m-%d') %>
 Datum expirace:  <%= @vps.expiration_date.strftime('%Y-%m-%d') %>
 
-<% if @vps.node.location.environment.label == 'Playground' %>
-Pokud chceš prodloužit životnost playground VPS, nebo máš jiný dotaz,
-můžeš se obrátit na podpora@vpsfree.cz
-<% else %>
-V případě nejasností se obrať na podpora@vpsfree.cz.
-<% end %>
 S pozdravem
 
 vpsAdmin @ vpsFree.cz

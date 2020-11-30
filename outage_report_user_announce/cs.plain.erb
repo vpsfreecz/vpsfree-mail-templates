@@ -1,10 +1,6 @@
 Ahoj <%= @user.login %>,
 
-<% if @o.planned -%>
-byla ohlášena odstávka, která postihuje <%= @vpses.count %> <%= @vpses.count > 1 ? (@vpses.count > 4 ? 'Tvých' : 'Tvé') : 'Tvou' %> VPS.
-<% else -%>
-byl ohlášen výpadek, který postihuje <%= @vpses.count %> <%= @vpses.count > 1 ? (@vpses.count > 4 ? 'Tvých' : 'Tvé') : 'Tvou' %> VPS.
-<% end -%>
+chtěli bychom Tě upozornit na <%= @o.planned? ? 'odstávku' : 'výpadek' %> na infrastruktuře vpsFree.cz.
 
 <% if @direct_vpses.count > 0 -%>
 Přímo zasažené VPS:
@@ -22,6 +18,14 @@ Nepřímo zasažené VPS:
     <% vps.outage_vps_mounts.order('mountpoint').each do |mnt| -%>
     Mount <%= mnt.mountpoint %> <%= mnt.snapshot_name ? 'snapshotu' : 'datasetu' %> <%= mnt.dataset_name %><%= mnt.snapshot_name ? "@#{mnt.snapshot_name}" : '' %> (z <%= mnt.src_node.domain_name %>)
     <% end -%>
+<% end -%>
+
+<% end -%>
+<% if @exports.count > 0 -%>
+Zasažené NFS exporty:
+
+<% @exports.each do |ex| -%>
+  - Export #<%= ex.export_id %> - <%= ex.export.host_ip_address.ip_addr %>:<%= ex.export.path %> datasetu <%= ex.export.dataset.full_name %> z <%= ex.export.dataset_in_pool.pool.node.domain_name %>
 <% end -%>
 
 <% end -%>

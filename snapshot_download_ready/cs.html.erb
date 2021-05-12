@@ -6,6 +6,8 @@
 
 <p><a href="<%= @base_url %>?page=backup&action=download_link&id=<%= @dl.id %>"><%= @base_url %>?page=backup&action=download_link&id=<%= @dl.id %></a></p>
 
+<p>Odkaz bude funkční do <%= @dl.expiration_date.localtime.strftime('%Y-%m-%d %H:%M %Z') %>.</p>
+
 <p>S dotazy se můžes obrátit na podpora@vpsfree.cz.</p>
 
 <p>S pozdravem</p>

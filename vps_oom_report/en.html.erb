@@ -42,11 +42,10 @@
   <body>
     <p>Hi <%= @vps.user.login %>,</p>
     <p>
-      VPS <%= @vps.id %> <%= @vps.hostname %> is running out of memory
-      and the kernel is terminating processes.
+      VPS <%= @vps.id %> <%= @vps.hostname %> is running out of memory.
     </p>
     <p>
-      Detected <%= @oom_reports.count %> OOM kills:
+      Detected <%= @oom_reports.count %> out of memory situations:
     </p>
     <table>
       <tr>
@@ -57,7 +56,7 @@
       <% @oom_reports.each do |r| -%>
         <tr>
           <td><%= r.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %></td>
-          <td><%= r.killed_name %></td>
+          <td><%= r.killed_name ? "Killed #{r.killed_name}" : "Nothing killed" %></td>
           <td><a href="<%= @base_url %>?page=oom_reports&action=show&id=<%= r.id %>">See details</a></td>
         </tr>
       <% end -%>

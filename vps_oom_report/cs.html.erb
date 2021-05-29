@@ -42,11 +42,10 @@
   <body>
     <p>Ahoj <%= @vps.user.login %>,</p>
     <p>
-      ve VPS <%= @vps.id %> <%= @vps.hostname %> dochází paměť
-      a kernel proto ukončuje procesy.
+      ve VPS <%= @vps.id %> <%= @vps.hostname %> dochází paměť.
     </p>
     <p>
-      Bylo zaznamenáno <%= @oom_reports.count %> zabití procesů:
+      Bylo zaznamenáno <%= @oom_reports.count %> případů vyčerpání paměti:
     </p>
     <table>
       <tr>
@@ -57,7 +56,7 @@
       <% @oom_reports.each do |r| -%>
         <tr>
           <td><%= r.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %></td>
-          <td><%= r.killed_name %></td>
+          <td><%= r.killed_name ? "Ukončen #{r.killed_name}" : 'Nic neukončeno' %></td>
           <td><a href="<%= @base_url %>?page=oom_reports&action=show&id=<%= r.id %>">Podrobnosti</a></td>
         </tr>
       <% end -%>

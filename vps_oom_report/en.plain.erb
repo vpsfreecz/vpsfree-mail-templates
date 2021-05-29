@@ -1,12 +1,11 @@
 Hi <%= @vps.user.login %>,
 
-VPS <%= @vps.id %> <%= @vps.hostname %> is running out of memory and the kernel
-is terminating processes.
+VPS <%= @vps.id %> <%= @vps.hostname %> is running out of memory.
 
-Detected <%= @oom_reports.count %> OOM kills:
+Detected <%= @oom_reports.count %> out of memory situations:
 
 <% @oom_reports.each do |r| -%>
-  <%= r.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>  <%= r.killed_name %>
+  <%= r.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>  <%= r.killed_name ? "Killed #{r.killed_name}" : "Nothing killed" %>
 <% end -%>
 
 Please see

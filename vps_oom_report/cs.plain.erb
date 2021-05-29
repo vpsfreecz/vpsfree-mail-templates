@@ -1,12 +1,11 @@
 Ahoj <%= @vps.user.login %>,
 
-ve VPS <%= @vps.id %> <%= @vps.hostname %> dochází paměť a kernel
-proto ukončuje procesy.
+ve VPS <%= @vps.id %> <%= @vps.hostname %> dochází paměť.
 
-Bylo zaznamenáno <%= @oom_reports.count %> zabítí procesů:
+Bylo zaznamenáno <%= @oom_reports.count %> případů vyčerpání paměti:
 
 <% @oom_reports.each do |r| -%>
-  <%= r.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>  <%= r.killed_name %>
+  <%= r.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>  <%= r.killed_name ? "Ukončen #{r.killed_name}" : 'Nic neukončeno' %>
 <% end -%>
 
 Pro více informací viz

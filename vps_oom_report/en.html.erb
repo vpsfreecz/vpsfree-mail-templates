@@ -45,7 +45,7 @@
       VPS <%= @vps.id %> <%= @vps.hostname %> is running out of memory.
     </p>
     <p>
-      Detected <%= @oom_reports.count %> out of memory situations:
+      Detected <%= @all_oom_reports.count %> out of memory situations:
     </p>
     <table>
       <tr>
@@ -53,7 +53,7 @@
         <th>Process</th>
         <th>More information</th>
       </tr>
-      <% @oom_reports.each do |r| -%>
+      <% @selected_oom_reports.each do |r| -%>
         <tr>
           <td><%= r.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %></td>
           <td><%= r.killed_name ? "Killed #{r.killed_name}" : "Nothing killed" %></td>
@@ -61,6 +61,14 @@
         </tr>
       <% end -%>
     </table>
+<% if @all_oom_reports.count != @selected_oom_reports.count -%>
+    <p>
+      Followed by
+      <a href="<%= @base_url %>?page=oom_reports&vps=<%= @vps.id %>&list=1">
+      <%= @all_oom_reports.count - @selected_oom_reports.count %> more
+      </a>.
+    </p>
+<% end -%>
     <p>
       Best regards,<br>
 

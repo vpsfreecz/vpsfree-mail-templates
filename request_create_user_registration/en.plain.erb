@@ -1,12 +1,13 @@
 Hi <%= @r.login %>,
 
-Your registration form has been accepted and it will be delivered to the board
-for validation. We will contact you within 24 hours.
+Your registration form number #<%= @r.id %> has been accepted and will be
+delivered to the board for validation. We will contact you within 24 hours.
 
-Sometimes, e-mail with your login credentials to vpsAdmin can end up in your
+Sometimes, the e-mail with your login credentials to vpsAdmin can end up in your
 spam folder, so please check it. If you'll receive only notification about
 paying the membership fee, the e-mail with your credentials was lost somewhere,
-please contact our support team at support@vpsfree.org.
+please contact our support team at support@vpsfree.org with your registration
+number #<%= @r.id %>.
 
 In the meantime we recommend for you to carefully read our website https://www.vpsfree.org.
 You can find more info at https://kb.vpsfree.org/information/new_members.

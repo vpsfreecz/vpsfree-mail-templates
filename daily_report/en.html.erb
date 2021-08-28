@@ -85,7 +85,7 @@ END
 	<td><a href="#{url("adminvps", "user=#{u.id}")}">#{u.vpses.count}</a></td>
 	<td>#{u.full_name}</td>
 	<td><a href="mailto:#{u.email}">#{u.email}</a></td>
-	<td>#{u.current_state.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')}</td>
+	<td>#{u.current_object_state.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')}</td>
      </tr>
 END
   end
@@ -118,7 +118,7 @@ END
 	<td>#{vps.node_id} #{vps.node.domain_name}</td>
 	<td>#{vps.cpu} cores</td>
 	<td>#{vps.memory / 1024} GiB</td>
-	<td>#{vps.current_state.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')}</td>
+	<td>#{vps.current_object_state.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')}</td>
       </tr>
 END
    end

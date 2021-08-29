@@ -454,7 +454,7 @@ end
   </table>
 <% end %>
 
-<% if @backups[:too_many_in_hypervisor].any? %>
+<% if @backups[:too_many_in_hypervisor].load.any? %>
   <h3>Too many snapshots on hypervisor</h3>
   <table class="overview">
     <tr>
@@ -476,7 +476,7 @@ end
   </table>
 <% end %>
 
-<% if @backups[:too_many_in_backup].any? %>
+<% if @backups[:too_many_in_backup].load.any? %>
   <h3>Too many snapshots in backup</h3>
   <table class="overview">
     <tr>
@@ -499,7 +499,7 @@ end
 <% end %>
 
 <h2>OOM reports</h2>
-<% if @oom_reports[:by_vps].any? %>
+<% if @oom_reports[:by_vps].load.any? %>
   <h3>Top 10 VPS running out of memory</h3>
   <table class="overview">
     <tr>
@@ -519,7 +519,7 @@ end
   </table>
 <% end %>
 
-<% if @oom_reports[:by_node].any? %>
+<% if @oom_reports[:by_node].load.any? %>
   <h3>OOM reports by node</h3>
   <table class="overview">
     <tr>

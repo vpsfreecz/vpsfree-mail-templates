@@ -22,8 +22,10 @@ Volné místo:
   <%= (@ds.avail / 1024.0).round(2) %> GiB
 
 <% if @vps.id.to_s == @ds.full_name -%>
-Jestliže volné místo dojde úplně, VPS může být nedostupný. V případě, že se
-do VPS nepůjde připojit, napiš prosím na podporu, dočasně Ti disk zvětšíme.
+Jestliže volné místo dojde úplně, VPS může být nedostupný. VPS s plným diskem
+z provozních důvodů po upozornění vypínáme, pokud problém nebudeš řešit.
+V případě, že se do VPS nepůjde připojit, napiš prosím na podporu, dočasně Ti
+disk zvětšíme.
 
 <% end -%>
 Pokud bys potřeboval diskový prostor navýšit dlouhodobě, viz KB:

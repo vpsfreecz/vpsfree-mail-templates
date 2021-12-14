@@ -79,16 +79,15 @@ QR code for payment for 3 months (always verify that the information is correct)
     <tr>
         <td>
             <img alt="CZ QR kód"
-
-                                src="https://vpsfree.cz/nastroje/qr.php?country=cz&amount=<%= three_months_payment %>&vs=<%= @user.id %>"    
-                width="145"
-                height="145">
+                 src="https://vpsfree.cz/nastroje/qr.php?country=cz&amount=<%= three_months_payment %>&vs=<%= @user.id %>"
+                 width="145"
+                 height="145">
         </td>
         <td>
             <img alt="SK QR kód"
-                src="https://vpsfree.cz/nastroje/qr.php?country=sk&amount=<%= three_months_payment / 25 %>&vs=<%= @user.id %>"                 
-                width="145"
-                height="145">
+                 src="https://vpsfree.cz/nastroje/qr.php?country=sk&amount=<%= three_months_payment / 25 %>&vs=<%= @user.id %>"
+                 width="145"
+                 height="145">
         </td>
     </tr>
 </table>

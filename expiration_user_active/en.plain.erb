@@ -38,8 +38,10 @@ if you're asking for your first invoice.
 
 Should you have any questions, please reply to this e-mail.
 
-Sending of these automated reminders can be disabled in vpsAdmin -> Edit profile,
-check box "vpsAdmin mailer".
+Further notifications about this payment can be disabled in vpsAdmin
+on the link below:
+
+  <%= @base_url %>?page=reminder&resource=user&id=<%= @user.id %>
 
 Best regards,
 

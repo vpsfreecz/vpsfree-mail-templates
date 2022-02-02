@@ -38,8 +38,10 @@ a požádej o ni. Faktury automaticky nevystavujeme. Nezapomeň uvést fakturač
 Máš-li nějaký dotaz, jednoduše odpověz na tento e-mail, zašle se na naši
 podporu.
 
-Zasílání těchto e-mailů lze vypnout ve vpsAdminu v nastavení profilu, položka
-"vpsAdmin mailer".
+Zasílání dalších upozornění ohledně této platby je možné vypnout ve vpsAdminu
+na následujícím odkazu:
+
+  <%= @base_url %>?page=reminder&resource=user&id=<%= @user.id %>
 
 S pozdravem
 

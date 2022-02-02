@@ -25,6 +25,11 @@ Environment:     <%= @vps.node.location.environment.label %>
 Creation date:   <%= @vps.created_at.strftime('%Y-%m-%d') %>
 Expiration date: <%= @vps.expiration_date.strftime('%Y-%m-%d') %>
 
+Further notifications about the end-of-life of this VPS can be disabled
+on the link below:
+
+  <%= @base_url %>?page=reminder&resource=vps&id=<%= @vps.id %>
+
 Best regards,
 
 vpsAdmin @ vpsFree.cz

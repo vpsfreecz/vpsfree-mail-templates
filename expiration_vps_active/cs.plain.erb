@@ -24,6 +24,11 @@ Prostředí:       <%= @vps.node.location.environment.label %>
 Datum vytvoření: <%= @vps.created_at.strftime('%Y-%m-%d') %>
 Datum expirace:  <%= @vps.expiration_date.strftime('%Y-%m-%d') %>
 
+Zasílání dalších upozornění o konci životnosti této VPS můžeš vypnout
+na následujícím odkazu:
+
+  <%= @base_url %>?page=reminder&resource=vps&id=<%= @vps.id %>
+
 S pozdravem
 
 vpsAdmin @ vpsFree.cz

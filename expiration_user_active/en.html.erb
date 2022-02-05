@@ -9,9 +9,18 @@
 Hi <%= @user.login %>,
 </p>
 
+<% if @expired_days_ago.between?(13, 14) -%>
+<p>
+your membership at vpsFree.cz is going to be suspended, because we have not
+received the membership fee. If you wish to renew the membership, please let
+us know and pay the membership fee as soon as possible. If you need more time
+to make the payment, we will be happy to wait a bit longer.
+</p>
+<% else -%>
 <p>
 this is an automated reminder for payment of the membership fee.
 </p>
+<% end -%>
 
 <table>
     <tr>

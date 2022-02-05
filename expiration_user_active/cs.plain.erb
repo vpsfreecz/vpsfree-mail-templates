@@ -1,7 +1,14 @@
 Ahoj <%= @user.login %>,
 
+<% if @expired_days_ago.between?(13, 14) -%>
+Tvé členství u spolku vpsFree.cz bude brzy pozastaveno. Jestliže máš o členství
+stále zájem, prosím odepiš na tento e-mail a zaplať členský příspěvek. Pokud
+potřebuješ více času k provedení platby, rádi počkáme.
+<% else -%>
 toto je automatická připomínka platby členského příspěvku.
-<% t = @user.paid_until %>
+<% end %>
+
+<% t = @user.paid_until -%>
 Zaplaceno máš do: <%= t ? t.strftime('%Y-%m-%d') : '---' %>
 
 Variabilní symbol: <%= @user.id %>

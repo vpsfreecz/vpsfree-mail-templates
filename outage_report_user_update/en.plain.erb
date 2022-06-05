@@ -22,10 +22,10 @@ we have an update for you regarding this <%= @o.planned ? 'maintenance' : 'outag
 %>
 <% end -%>
 
-<%= @update.summary %>
-<% if @update.description && !@update.description.empty? -%>
+<%= @update.en_summary %>
+<% if @update.en_description && !@update.en_description.empty? -%>
 
-<%= @update.description %>
+<%= @update.en_description %>
 <% end -%>
 <% if @update.reporter_name -%>
 

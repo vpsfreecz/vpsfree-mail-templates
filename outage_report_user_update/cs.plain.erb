@@ -22,10 +22,10 @@ máme pro tebe zprávu ohledně <%= @o.planned ? 'této odstávky' : 'tohoto vý
 %>
 <% end -%>
 
-<%= @update.summary %>
-<% if @update.description && !@update.description.empty? -%>
+<%= @update.cs_summary %>
+<% if @update.cs_description && !@update.cs_description.empty? -%>
 
-<%= @update.description %>
+<%= @update.cs_description %>
 <% end -%>
 <% if @update.reporter_name -%>
 

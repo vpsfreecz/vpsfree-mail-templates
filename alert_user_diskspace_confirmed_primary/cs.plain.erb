@@ -21,6 +21,16 @@ Pokud bys potřeboval diskový prostor navýšit dlouhodobě, viz KB:
 
   https://kb.vpsfree.cz/informace/platby#z_ceho_se_sklada_clensky_poplatek
 
+<% if @dip.snapshot_in_pools.any? -%>
+Tento dataset obsahuje snapshoty a ani smazání dat tak neuvolní místo, dokud
+budou snapshoty existovat. Snapshoty můžeš smazat ve vpsAdminu:
+
+  <%= url('backup', 'action=nas') %>
+
+Pro více informací o této funkci, viz KB:
+
+  https://kb.vpsfree.cz/navody/vps/datasety#velikost_datasetu_a_zabrane_misto
+<% end -%>
 Pokud tuto událost potvrdíš na následujícím odkazu, až do vyřešení o ní
 nebudeš dále informován. Samotné potvrzení však původní problém nevyřeší, pouze
 vypne oznamovací e-maily:

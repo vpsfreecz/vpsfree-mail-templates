@@ -21,6 +21,16 @@ Should you need more diskspace, see KB:
 
   https://kb.vpsfree.org/information/membership_fees#what_the_membership_fee_is_composed_of
 
+<% if @dip.snapshot_in_pools.any? -%>
+Since this dataset has snapshots, deleting data will not free any space as long
+as the snapshots exist. You can delete the snapshots in vpsAdmin:
+
+  <%= url('backup', 'action=nas') %>
+
+For more information about this feature, see the KB:
+
+  https://kb.vpsfree.org/manuals/vps/datasets#dataset_quotas
+<% end -%>
 If you acknowledge this issue, you will not receive any more alerts until it's
 resolved. However, it will not make the issue go away, merely silence it:
 

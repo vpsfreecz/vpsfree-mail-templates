@@ -2,9 +2,9 @@ Hi <%= @user.login %>,
 
 we have just accepted payment of <%= @payment.received_amount %> <%= @payment.received_currency.to_s.upcase %> for account <%= @user.id %>.
 
-If you require an invoice for this payment, please reply to this e-mail and ask
-for it. We do not issue invoices automatically. Do not forget to include your
-billing information, if you're asking for your first invoice.
+If you require an invoice for this payment, please reply to this e-mail and let
+us know. We do not issue invoices automatically. Please include your billing
+information if this is going to be the first invoice to be issued.
 
 The membership is now valid until <%= @account.paid_until.strftime('%Y-%m-%d') %>.
 

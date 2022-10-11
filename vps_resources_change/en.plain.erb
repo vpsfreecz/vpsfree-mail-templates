@@ -1,6 +1,6 @@
 Hi <%= @vps.user.login %>,
 
-configuration of VPS <%= @vps.id %> has changed.
+configuration of VPS <%= @vps.id %> <%= @vps.hostname %> has changed.
 
 Current limits:
     CPU: <%= @vps.cpu %> cores, limit <%= @vps.cpu_limit || (@vps.cpu * 100) %> %

@@ -1,12 +1,25 @@
 Ahoj <%= @vps.user.login %>,
 
 začala migrace VPS #<%= @vps.id %> <%= @vps.hostname %> z <%= @src_node.domain_name %> na <%= @dst_node.domain_name %>.
-<% if @maintenance_window %><% days = %i(Ne Po Út St Čt Pá So) %>
-Migrace bude dokončena v nejbližším možném nastaveném oknu pro odstávky:
-<% @vps.vps_maintenance_windows.where(is_open: true).order('weekday').each do |w| %>  - <%= days[w.weekday] %> od <%= sprintf('%02d:%02d', w.opens_at / 60, w.opens_at % 60) %> do <%= sprintf('%02d:%02d', w.closes_at / 60, w.closes_at % 60) %>
-<% end %><% end %>
-<% if @reason %>Důvod přesunu: <%= @reason %><% end %>
 
+<% if @maintenance_window -%>
+<% days = %i(Ne Po Út St Čt Pá So) -%>
+Migrace bude dokončena v nejbližším možném nastaveném oknu pro odstávky:
+
+<% @maintenance_windows.each do |w| -%>
+  - <%= days[w.weekday] %> od <%= sprintf('%02d:%02d', w.opens_at / 60, w.opens_at % 60) %> do <%= sprintf('%02d:%02d', w.closes_at / 60, w.closes_at % 60) %>
+<% end -%>
+
+<% elsif @custom_window -%>
+<% prep = %i(v      v       v     ve     ve      v) -%>
+<% days = %i(neděli pondělí úterý středu čtvrtek pátek) -%>
+Migrace bude dokončena <%= prep[@finish_weekday] %> <%= days[@finish_weekday] %> od <%= sprintf('%02d:%02d', @finish_minutes / 60, @finish_minutes % 60) %>.
+
+<% end -%>
+<% if @reason -%>
+Důvod přesunu: <%= @reason %>
+
+<% end -%>
 Během migrace dojde ke krátkému výpadku VPS, když se VPS vypne na původním nodu
 a zapne na novém. Ve VPS se toto projeví jako restart systému.
 

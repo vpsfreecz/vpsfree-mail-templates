@@ -1,12 +1,24 @@
 Hi <%= @vps.user.login %>,
 
 migration of VPS #<%= @vps.id %> <%= @vps.hostname %> from <%= @src_node.domain_name %> to <%= @dst_node.domain_name %> has begun.
-<% if @maintenance_window %><% days = %i(Sun Mon Tue Wed Thu Fri Sat) %>
-The migration will be finished within the closest possible maintenance window:
-<% @vps.vps_maintenance_windows.where(is_open: true).order('weekday').each do |w| %>  - <%= days[w.weekday] %> from <%= sprintf('%02d:%02d', w.opens_at / 60, w.opens_at % 60) %> to <%= sprintf('%02d:%02d', w.closes_at / 60, w.closes_at % 60) %>
-<% end %><% end %>
-<% if @reason %>Reason: <%= @reason %><% end %>
 
+<% if @maintenance_window -%>
+<% days = %i(Sun Mon Tue Wed Thu Fri Sat) -%>
+The migration will be finished within the closest possible maintenance window:
+
+<% @maintenance_windows.each do |w| -%>
+  - <%= days[w.weekday] %> from <%= sprintf('%02d:%02d', w.opens_at / 60, w.opens_at % 60) %> to <%= sprintf('%02d:%02d', w.closes_at / 60, w.closes_at % 60) %>
+<% end -%>
+
+<% elsif @custom_window -%>
+<% days = %i(Sunday Monday Tuesday Wednesday Thursday Friday Saturday) -%>
+The migration will be finished on <%= days[@finish_weekday] %> from <%= sprintf('%02d:%02d', @finish_minutes / 60, @finish_minutes % 60) %>.
+
+<% end -%>
+<% if @reason -%>
+Reason: <%= @reason %>
+
+<% end -%>
 The VPS will have a short outage during the migration, as the VPS is stopped
 on the source node and started on the destination node. The VPS will see this
 as a system restart.

@@ -11,8 +11,8 @@ Migrace bude dokončena v nejbližším možném nastaveném oknu pro odstávky:
 <% end -%>
 
 <% elsif @custom_window -%>
-<% prep = %i(v      v       v     ve     ve      v) -%>
-<% days = %i(neděli pondělí úterý středu čtvrtek pátek) -%>
+<% prep = %i(v      v       v     ve     ve      v     v) -%>
+<% days = %i(neděli pondělí úterý středu čtvrtek pátek sobotu) -%>
 Migrace bude dokončena <%= prep[@finish_weekday] %> <%= days[@finish_weekday] %> od <%= sprintf('%02d:%02d', @finish_minutes / 60, @finish_minutes % 60) %>.
 
 <% end -%>

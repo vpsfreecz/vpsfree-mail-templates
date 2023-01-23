@@ -1,0 +1,22 @@
+<%
+def url(page, params = nil)
+  @base_url + "?page=" + page + (params ? "&#{params}" : "")
+end
+-%>
+Hi <%= @user.login %>,
+
+VPS <%= @vps.id %> <%= @vps.hostname %> has too many zombie processes: <%= @zombie_process_count %>.
+
+Zombie processes accumulate inside the VPS either because the parent process
+is not waiting on them, or the init system itself has malfunctioned. If the number
+of zombie processes will exceed <%= @threshold %>, an automated restart of this
+VPS will be planned for operational reasons.
+
+If you acknowledge this issue, you will not receive any more alerts until it's
+resolved. However, it will not make the issue go away, merely silence it:
+
+  <%= url('monitoring', "action=ack&id=#{@event.id}") %>
+
+Best regards,
+
+vpsFree.cz team

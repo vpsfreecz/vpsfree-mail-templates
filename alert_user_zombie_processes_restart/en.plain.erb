@@ -1,0 +1,20 @@
+<%
+def url(page, params = nil)
+  @base_url + "?page=" + page + (params ? "&#{params}" : "")
+end
+-%>
+Hi <%= @user.login %>,
+
+<% days = %i(Sunday Monday Tuesday Wednesday Thursday Friday Saturday) -%>
+VPS <%= @vps.id %> <%= @vps.hostname %> has a large amount of zombie processes
+(> <%= @threshold %>) and we're going to restart it on <%= days[@finish_weekday] %> <%= sprintf('%02d:%02d', @finish_minutes / 60, @finish_minutes % 60) %> for operational reasons.
+
+Zombie processes accumulate inside the VPS either because the parent process
+is not waiting on them, or the init system itself has malfunctioned.
+
+In case the date and time wouldn't be convenient for you, please reply to this
+e-mail.
+
+Best regards,
+
+vpsFree.cz team

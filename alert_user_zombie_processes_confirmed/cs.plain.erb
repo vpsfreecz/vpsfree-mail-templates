@@ -1,0 +1,21 @@
+<%
+def url(page, params = nil)
+  @base_url + "?page=" + page + (params ? "&#{params}" : "")
+end
+-%>
+Ahoj <%= @user.login %>,
+
+VPS <%= @vps.id %> <%= @vps.hostname %> obsahuje vysoký počet zombie procesů: <%= @zombie_process_count %>.
+
+Zombie procesy se VPS hromadí buď protože je nevyzvedává rodičovský proces,
+nebo nepracuje správně init systém. Překročí-li počet zombie procesů <%= @threshold %>,
+bude z provozních důvodů automaticky naplánován restart VPS.
+
+Pokud tuto událost potvrdíš na následujícím odkazu, až do vyřešení o ní
+nebudeš dále informován. Samotné potvrzení však původní problém nevyřeší, pouze
+vypne oznamovací e-maily:
+
+  <%= url('monitoring', "action=ack&id=#{@event.id}") %>
+
+S pozdravem,
+tým vpsFree.cz

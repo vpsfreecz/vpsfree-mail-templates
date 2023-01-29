@@ -1,0 +1,26 @@
+<%
+def url(page, params = nil)
+  @base_url + "?page=" + page + (params ? "&#{params}" : "")
+end
+-%>
+Ahoj <%= @user.login %>,
+
+pro jistotu bychom Tě rádí upozornili, že VPS <%= @vps.id %> <%= @vps.hostname %> běží v nouzovém režimu
+už déle než 24 hodin. Pro opuštění nouzového režimu stačí VPS restartovat.
+
+Disk VPS v nouzovém režimu je dočasný a při restartu VPS dojde k jeho smazání.
+Dočasný disk není zálohovaný, máš-li na něm tedy konfiguraci nebo data, které
+si přeješ zachovat, před restartem VPS si udělej jejich kopii.
+
+Více informací o nouzovém režimu viz KB:
+
+  https://kb.vpsfree.cz/navody/vps/vpsadminos/oprava#nouzovy_rezim
+
+Pokud tuto událost potvrdíš na následujícím odkazu, až do vyřešení o ní
+nebudeš dále informován. Samotné potvrzení však původní problém nevyřeší, pouze
+vypne oznamovací e-maily:
+
+  <%= url('monitoring', "action=ack&id=#{@event.id}") %>
+
+S pozdravem,
+tým vpsFree.cz

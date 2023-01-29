@@ -1,0 +1,26 @@
+<%
+def url(page, params = nil)
+  @base_url + "?page=" + page + (params ? "&#{params}" : "")
+end
+-%>
+Hi <%= @user.login %>,
+
+we'd like remind you that VPS <%= @vps.id %> <%= @vps.hostname %> is running in rescue mode
+for more than 24 hours. Restart the VPS to exit the rescue mode.
+
+The rescue system is temporary and is deleted when the VPS is restarted. It is
+also not backed up, so should you have any configuration or data on it that you
+wish to preserve, please make your own copy before restarting the VPS.
+
+For more information about the rescue mode, see KB:
+
+  https://kb.vpsfree.org/manuals/vps/vpsadminos/recovery#rescue_mode
+
+If you acknowledge this issue, you will not receive any more alerts until it's
+resolved. However, it will not make the issue go away, merely silence it:
+
+  <%= url('monitoring', "action=ack&id=#{@event.id}") %>
+
+Best regards,
+
+vpsFree.cz team

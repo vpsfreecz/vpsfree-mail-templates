@@ -7,7 +7,7 @@ installed (sent to the API) using
 
 ## Installation
 
-Templates can be installed by ivoking `vpsadmin-mail-templates` directly
+Templates can be installed by invoking `vpsadmin-mail-templates` directly
 or by using `rake`.
 
 The user name and password is prompted on stdin if it is not set.

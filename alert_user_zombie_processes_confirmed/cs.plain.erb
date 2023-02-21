@@ -7,7 +7,7 @@ Ahoj <%= @user.login %>,
 
 VPS <%= @vps.id %> <%= @vps.hostname %> obsahuje vysoký počet zombie procesů: <%= @zombie_process_count %>.
 
-Zombie procesy se VPS hromadí buď protože je nevyzvedává rodičovský proces,
+Zombie procesy se ve VPS hromadí buď protože je nevyzvedává rodičovský proces,
 nebo nepracuje správně init systém. Překročí-li počet zombie procesů <%= @threshold %>,
 bude z provozních důvodů automaticky naplánován restart VPS.
 

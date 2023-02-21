@@ -33,6 +33,10 @@ this is an automated reminder for payment of the membership fee.
         <td><%= @user.id %></td>
     </tr>
     <tr>
+        <td>Message (<a href="#message">more info</a>):</td>
+        <td><pre>/VS/<%= @user.id %></pre></td>
+    </tr>
+    <tr>
         <td>Sum:</td>
         <td>
             <%= @user.monthly_payment %> Kč
@@ -100,6 +104,12 @@ QR code for payment for 3 months (always verify that the information is correct)
         </td>
     </tr>
 </table>
+
+<p id="message">
+If your bank does not recognize variable symbols, you can send your member ID
+in a message to the recipient as <pre>/VS/<%= @user.id %></pre>, the wording
+will depend on your bank.
+</p>
 
 <p>
 In case a bank transfer is not practical for you, please see

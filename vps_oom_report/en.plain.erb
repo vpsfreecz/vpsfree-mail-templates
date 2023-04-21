@@ -2,14 +2,14 @@ Hi <%= @vps.user.login %>,
 
 VPS <%= @vps.id %> <%= @vps.hostname %> is running out of memory.
 
-Detected <%= @all_oom_reports.count %> out of memory situations:
+Detected <%= @all_oom_count %> out of memory situations:
 
 <% @selected_oom_reports.each do |r| -%>
-  <%= r.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>  <%= r.killed_name ? "Killed #{r.killed_name}" : "Nothing killed" %>
+  <%= r.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>  <%= r.killed_name ? "Killed #{r.killed_name}" : "Nothing killed" %> <%= r.count %> <%= r.count == 1 ? 'time' : 'times' %>
 <% end -%>
-<% if @all_oom_reports.count != @selected_oom_reports.count -%>
+<% if @all_oom_count != @selected_oom_count -%>
 
-Followed by <%= @all_oom_reports.count - @selected_oom_reports.count %> more.
+Followed by <%= @all_oom_count - @selected_oom_count %> more.
 <% end -%>
 
 Please see

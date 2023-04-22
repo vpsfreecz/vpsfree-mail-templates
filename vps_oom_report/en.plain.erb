@@ -2,7 +2,11 @@ Hi <%= @vps.user.login %>,
 
 VPS <%= @vps.id %> <%= @vps.hostname %> is running out of memory.
 
+<% if @all_oom_count == 1 -%>
+Detected <%= @all_oom_count %> out of memory situation:
+<% else -%>
 Detected <%= @all_oom_count %> out of memory situations:
+<% end -%>
 
 <% @selected_oom_reports.each do |r| -%>
   <%= r.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>  <%= r.killed_name ? "Killed #{r.killed_name}" : "Nothing killed" %> <%= r.count %> <%= r.count == 1 ? 'time' : 'times' %>

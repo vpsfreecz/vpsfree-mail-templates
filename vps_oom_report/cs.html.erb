@@ -45,7 +45,14 @@
       ve VPS <%= @vps.id %> <%= @vps.hostname %> dochází paměť.
     </p>
     <p>
-      Bylo zaznamenáno <%= @all_oom_count %> případů vyčerpání paměti:
+      <% if @all_oom_count == 1 -%>
+      Byl zaznamenán <%= @all_oom_count %> případ
+      <% elsif @all_oom_count <= 4 -%>
+      Byly zaznamenány <%= @all_oom_count %> případy
+      <% else -%>
+      Bylo zaznamenáno <%= @all_oom_count %> případů
+      <% end -%>
+      vyčerpání paměti:
     </p>
     <table>
       <tr>
@@ -65,9 +72,23 @@
     </table>
 <% if @all_oom_count != @selected_oom_count -%>
     <p>
+      <% remaining_reports = @all_oom_count - @selected_oom_count -%>
+      <% if remaining_reports == 1 -%>
+      Následoval další
+      <% elsif remaining_reports <= 4 -%>
+      Následovaly další
+      <% else -%>
       Následovalo dalších
+      <% end -%>
       <a href="<%= @base_url %>?page=oom_reports&vps=<%= @vps.id %>&list=1">
-      <%= @all_oom_count - @selected_oom_count %> případů
+      <%= @all_oom_count - @selected_oom_count %>
+      <% if remaining_reports == 1 -%>
+      případ
+      <% elsif remaining_reports <= 4 -%>
+      případy
+      <% else -%>
+      případů
+      <% end -%>
       </a>.
     </p>
 <% end -%>

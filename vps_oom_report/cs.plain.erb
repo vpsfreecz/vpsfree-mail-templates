@@ -2,14 +2,27 @@ Ahoj <%= @vps.user.login %>,
 
 ve VPS <%= @vps.id %> <%= @vps.hostname %> dochází paměť.
 
+<% if @all_oom_count == 1 -%>
+Byl zaznamenán <%= @all_oom_count %> případ vyčerpání paměti:
+<% elsif @all_oom_count <= 4 -%>
+Byly zaznamenány <%= @all_oom_count %> případy vyčerpání paměti:
+<% else -%>
 Bylo zaznamenáno <%= @all_oom_count %> případů vyčerpání paměti:
+<% end -%>
 
 <% @selected_oom_reports.each do |r| -%>
   <%= r.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>  <%= r.killed_name ? "Ukončen #{r.killed_name}" : 'Nic neukončeno' %> <%= r.count %>x
 <% end -%>
 <% if @all_oom_count != @selected_oom_count -%>
 
+<% remaining_reports = @all_oom_count - @selected_oom_count -%>
+<% if remaining_reports == 1 -%>
+Následoval další <%= @all_oom_count - @selected_oom_count %> případ.
+<% elsif remaining_reports <= 4 -%>
+Následovaly další <%= @all_oom_count - @selected_oom_count %> případy.
+<% else -%>
 Následovalo dalších <%= @all_oom_count - @selected_oom_count %> případů.
+<% end -%>
 <% end -%>
 
 Pro více informací viz

@@ -6,9 +6,9 @@ end
 Ahoj <%= @user.login %>,
 
 <% if @vps.id.to_s == @ds.full_name -%>
-ve VPS #<%= @vps.id %> Ti zbývá <%= @event.monitored_event_logs.last.value.round(2) %> % volného místa.
+ve VPS #<%= @vps.id %> <%= @vps.hostname %> Ti zbývá <%= @event.monitored_event_logs.last.value.round(2) %> % volného místa.
 <% else -%>
-v datasetu <%= @ds.full_name %> ve VPS #<%= @vps.id %> Ti zbývá <%= @event.monitored_event_logs.last.value.round(2) %> % volného místa.
+v datasetu <%= @ds.full_name %> ve VPS #<%= @vps.id %> <%= @vps.hostname %> Ti zbývá <%= @event.monitored_event_logs.last.value.round(2) %> % volného místa.
 <% end -%>
 
 Velikost disku:

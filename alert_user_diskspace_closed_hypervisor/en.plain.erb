@@ -1,7 +1,7 @@
 Hi <%= @user.login %>,
 
-the problem with insufficient free space has been resolved. You now have <%= @event.monitored_event_logs.last.value.round(2) %> %
-of free space left.
+the problem with insufficient free space in VPS #<%= @vps.id %> <%= @vps.hostname %> has been resolved.
+You now have <%= @event.monitored_event_logs.last.value.round(2) %> % of free space left.
 
 Disk size:
   <%= (@ds.refquota / 1024).round(2) %> GiB

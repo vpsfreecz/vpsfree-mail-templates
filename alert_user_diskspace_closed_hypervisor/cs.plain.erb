@@ -1,7 +1,7 @@
 Ahoj <%= @user.login %>,
 
-problém s volným místem byl vyřešen. K dispozici je nyní <%= @event.monitored_event_logs.last.value.round(2) %> % volného
-místa.
+problém s volným místem ve VPS #<%= @vps.id %> <%= @vps.hostname %> byl vyřešen.
+K dispozici je nyní <%= @event.monitored_event_logs.last.value.round(2) %> % volného místa.
 
 Velikost disku:
   <%= (@ds.refquota / 1024).round(2) %> GiB

@@ -1,0 +1,30 @@
+Hi <%= @vps.user.login %>,
+
+VPS <%= @vps.id %> <%= @vps.hostname %> was stopped, because its dataset uses too much space.
+
+Dataset:         <%= @dataset.full_name %>
+Original size:   <%= (@expansion.original_refquota / 1024.0).round %> GiB
+Current size:    <%= (@dataset.refquota / 1024.0).round %> GiB
+Used space:      <%= (@dataset.referenced / 1024.0).round(2) %> GiB
+Expansion count: <%= @expansion.dataset_expansion_histories.count %>/3
+<% if @expansion.deadline -%>
+Deadline:        <%= @expansion.deadline.localtime.strftime("%Y-%m-%d") %>
+<% end -%>
+
+Please either try to free some space so that the dataset could be returned to its
+original size, or contact us if you need to expand your disk space permanently,
+see:
+
+  https://kb.vpsfree.org/information/membership_fees#what_the_membership_fee_is_composed_of
+
+You can start the VPS, but unless you will resolve the issue, it will be stopped
+again.
+
+vpsAdmin will automatically return the dataset to its original size when there
+is at least 5 % of free space with respect to the original size. That is when
+there will be at most <%= ((@expansion.original_refquota / 1024.0 / 100) * 95).round(2) %> GiB of used space. You can also shrink the dataset
+yourself in vpsAdmin.
+
+Best regards,
+
+vpsFree.cz team

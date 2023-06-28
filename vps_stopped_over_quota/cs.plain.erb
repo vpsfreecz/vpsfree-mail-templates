@@ -1,0 +1,27 @@
+Ahoj <%= @vps.user.login %>,
+
+VPS <%= @vps.id %> <%= @vps.hostname %> bylo vypnuto, protože jeho dataset je rozšířen
+a zabírá více místa, než by měl.
+
+Dataset:           <%= @dataset.full_name %>
+Původní velikost:  <%= (@expansion.original_refquota / 1024.0).round %> GiB
+Aktuální velikost: <%= (@dataset.refquota / 1024.0).round %> GiB
+Zabrané místo:     <%= (@dataset.referenced / 1024.0).round(2) %> GiB
+Počet rozšíření:   <%= @expansion.dataset_expansion_histories.count %><% if @expansion.stop_vps -%>/3<% end %>
+<% if @expansion.deadline -%>
+Termín řešení:     <%= @expansion.deadline.localtime.strftime("%Y-%m-%d") %>
+<% end -%>
+
+Pokus se prosím uvolnit nějaké místo, aby se dataset mohl vrátit na svou původní
+velikost. V případě, že bys chtěl disk trvale rozšířit, podívej se do KB a kontaktuj
+nás:
+
+  https://kb.vpsfree.cz/informace/platby#z_ceho_se_sklada_clensky_poplatek
+
+vpsAdmin se automaticky pokusí dataset vrátit na původní velikost, když bude
+k dispozici alespoň 5 % volného místa vzhledem k původní velikosti. Tedy když
+bude využito maximálně <%= ((@expansion.original_refquota / 1024.0 / 100) * 95).round(2) %> GiB. Dataset můžeš taky ve vpsAdminu zmenšit i sám.
+
+S pozdravem
+
+tým vpsFree.cz

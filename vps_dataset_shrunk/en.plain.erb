@@ -1,0 +1,10 @@
+Hi <%= @vps.user.login %>,
+
+dataset <%= @dataset.full_name %> in VPS <%= @vps.id %> <%= @vps.hostname %> has been shrunk back
+to its original size of <%= (@expansion.original_refquota / 1024.0).round %> GiB and is no longer expanded.
+
+Thank you for resolving this issue.
+
+Best regards,
+
+vpsFree.cz team

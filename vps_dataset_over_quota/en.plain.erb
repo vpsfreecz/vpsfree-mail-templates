@@ -1,0 +1,33 @@
+Hi <%= @vps.user.login %>,
+
+VPS <%= @vps.id %> <%= @vps.hostname %> is temporarily expanded and is using
+more disk space than you have available. Please take a look at it if you can
+free some space or if you need to expand your disk permanently.
+
+Dataset:         <%= @dataset.full_name %>
+Original size:   <%= (@expansion.original_refquota / 1024.0).round %> GiB
+Current size:    <%= (@dataset.refquota / 1024.0).round %> GiB
+Used space:      <%= (@dataset.referenced / 1024.0).round(2) %> GiB
+Expansion count: <%= @expansion.dataset_expansion_histories.count %><% if @expansion.stop_vps -%>/3<% end %>
+<% if @expansion.deadline -%>
+Resolve until:   <%= @expansion.deadline.localtime.strftime("%Y-%m-%d") %>
+<% end -%>
+
+See KB for more information:
+
+  https://kb.vpsfree.org/information/membership_fees#what_the_membership_fee_is_composed_of
+<% if @expansion.stop_vps -%>
+
+Datasets can be auto-expanded at most three times and can remain expanded for
+up to 30 days. After that, the VPS is stopped for operational reasons until
+the issue is resolved.
+<% end -%>
+
+vpsAdmin will automatically return the dataset to its original size when there
+is at least 5 % of free space with respect to the original size. That is when
+there will be at most <%= ((@expansion.original_refquota / 1024.0 / 100) * 95).round(2) %> GiB of used space. You can also shrink the dataset
+yourself in vpsAdmin.
+
+Best regards,
+
+vpsFree.cz team

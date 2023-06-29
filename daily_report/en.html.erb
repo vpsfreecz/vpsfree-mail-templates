@@ -498,6 +498,38 @@ end
   </table>
 <% end %>
 
+<% if @dataset_expansions.any? %>
+  <h2>Expanded datasets</h2>
+  <table class="overview">
+    <tr>
+      <th>NODE</th>
+      <th>VPS ID</th>
+      <th>HOSTNAME</th>
+      <th>DATASET</th>
+      <th>ORIGINAL REFQUOTA</th>
+      <th>CURRENT REFQUOTA</th>
+      <th>USED SPACE</th>
+      <th>COUNT</th>
+      <th>DAYS</th>
+      <th>DEADLINE</th>
+    </tr>
+    <% @dataset_expansions.each do |exp| %>
+      <tr>
+        <td><%= exp.vps.node.domain_name %></td>
+        <td><a href="<%= url("adminvps", "action=edit&veid=#{exp.vps.id}") %>"><%= exp.vps.id %></a></td>
+        <td><%= exp.vps.hostname %></td>
+        <td><%= exp.vps.dataset.full_name %></td>
+        <td><%= (exp.original_refquota / 1024.0).round(2) %> GiB</td>
+        <td><%= (exp.dataset.refquota / 1024.0).round(2) %> GiB</td>
+        <td><%= (exp.dataset.referenced / 1024.0).round(2) %> GiB</td>
+        <td><%= exp.dataset_expansion_histories.count %></td>
+        <td><%= ((Time.now - exp.created_at) / 60.0 / 60 / 24).round(1) %></td>
+        <td><%= exp.deadline ? exp.deadline.localtime.strftime('%Y-%m-%d') : '-' %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
 <h2>OOM reports</h2>
 <% if @oom_reports[:by_vps].load.any? %>
   <h3>Top 10 VPS running out of memory</h3>

@@ -22,10 +22,12 @@ Dataset může být rozšířen nejvíce třikrát. K řešení máš 30 dnů od
 rozšíření. Po uplynutí této doby, popř. když ve VPS neustále dochází místo, bude
 VPS z provozních důvodů vypnuto.
 <% end -%>
+<% if @expansion.enable_shrink -%>
 
 vpsAdmin se automaticky pokusí dataset vrátit na původní velikost, když bude
 k dispozici alespoň 5 % volného místa vzhledem k původní velikosti. Tedy když
 bude využito maximálně <%= ((@expansion.original_refquota / 1024.0 / 100) * 95).round(2) %> GiB. Dataset můžeš taky ve vpsAdminu zmenšit i sám.
+<% end -%>
 
 S pozdravem
 

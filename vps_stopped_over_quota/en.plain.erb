@@ -19,11 +19,13 @@ see:
 
 You can start the VPS, but unless you will resolve the issue, it will be stopped
 again.
+<% if @expansion.enable_shrink -%>
 
 vpsAdmin will automatically return the dataset to its original size when there
 is at least 5 % of free space with respect to the original size. That is when
 there will be at most <%= ((@expansion.original_refquota / 1024.0 / 100) * 95).round(2) %> GiB of used space. You can also shrink the dataset
 yourself in vpsAdmin.
+<% end -%>
 
 Best regards,
 

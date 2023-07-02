@@ -422,28 +422,6 @@ end
   </table>
 <% end %>
 
-<h2>Cluster resources over limit</h2>
-<table class="overview">
-  <tr>
-    <th>USER</th>
-    <th>ENVIRONMENT</th>
-    <th>RESOURCE</th>
-    <th>VALUE</th>
-    <th>USED</th>
-    <th>OVER</th>
-  </tr>
-  <% @cluster_resources[:overused].each do |ucr| %>
-    <tr>
-      <td><a href="<%= url("adminm", "action=edit&id=#{ucr.user_id}") %>"><%= "#{ucr.user_id} #{ucr.user.login}" %></a></td>
-      <td><%= ucr.environment.label %></td>
-      <td><%= ucr.cluster_resource.label %></td>
-      <td><%= format_cluster_resource(ucr.cluster_resource.name, ucr.value) %></td>
-      <td><%= format_cluster_resource(ucr.cluster_resource.name, ucr.used_sum) %></td>
-      <td><%= format_cluster_resource(ucr.cluster_resource.name, ucr.used_sum - ucr.value) %></td>
-    </tr>
-  <% end %>
-</table>
-
 <h2>Backups</h2>
 <% if @backups[:old_latest_any_snapshot].any? %>
   <h3>Latest snapshot too old</h3>
@@ -761,5 +739,27 @@ end
     <% end %>
   </table>
 <% end %>
+
+<h2>Cluster resources over limit</h2>
+<table class="overview">
+  <tr>
+    <th>USER</th>
+    <th>ENVIRONMENT</th>
+    <th>RESOURCE</th>
+    <th>VALUE</th>
+    <th>USED</th>
+    <th>OVER</th>
+  </tr>
+  <% @cluster_resources[:overused].each do |ucr| %>
+    <tr>
+      <td><a href="<%= url("adminm", "action=edit&id=#{ucr.user_id}") %>"><%= "#{ucr.user_id} #{ucr.user.login}" %></a></td>
+      <td><%= ucr.environment.label %></td>
+      <td><%= ucr.cluster_resource.label %></td>
+      <td><%= format_cluster_resource(ucr.cluster_resource.name, ucr.value) %></td>
+      <td><%= format_cluster_resource(ucr.cluster_resource.name, ucr.used_sum) %></td>
+      <td><%= format_cluster_resource(ucr.cluster_resource.name, ucr.used_sum - ucr.value) %></td>
+    </tr>
+  <% end %>
+</table>
 </body>
 </html>

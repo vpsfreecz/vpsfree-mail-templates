@@ -6,7 +6,7 @@ Dataset:         <%= @dataset.full_name %>
 Original size:   <%= (@expansion.original_refquota / 1024.0).round %> GiB
 Current size:    <%= (@dataset.refquota / 1024.0).round %> GiB
 Used space:      <%= (@dataset.referenced / 1024.0).round(2) %> GiB
-Expansion count: <%= @expansion.dataset_expansion_histories.count %>/3
+Expansion count: <%= @expansion.expansion_count %>/3
 <% if @expansion.deadline -%>
 Deadline:        <%= @expansion.deadline.localtime.strftime("%Y-%m-%d") %>
 <% end -%>

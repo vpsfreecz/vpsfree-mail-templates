@@ -8,7 +8,7 @@ Original size:   <%= (@expansion.original_refquota / 1024.0).round %> GiB
 New size:        <%= (@dataset.refquota / 1024.0).round %> GiB
 Used space:      <%= (@dataset.referenced / 1024.0).round(2) %> GiB
 <% if @expansion.active? -%>
-Expansion count: <%= @expansion.dataset_expansion_histories.count %><% if @expansion.stop_vps -%>/3<% end %>
+Expansion count: <%= @expansion.expansion_count %><% if @expansion.stop_vps -%>/3<% end %>
 <% if @expansion.deadline -%>
 Resolve until:   <%= @expansion.deadline.localtime.strftime("%Y-%m-%d") %>
 <% end -%>

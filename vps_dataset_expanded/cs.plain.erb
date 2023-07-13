@@ -8,7 +8,7 @@ Původní velikost: <%= (@expansion.original_refquota / 1024.0).round %> GiB
 Nová velikost:    <%= (@dataset.refquota / 1024.0).round %> GiB
 Zabrané místo:    <%= (@dataset.referenced / 1024.0).round(2) %> GiB
 <% if @expansion.active? -%>
-Počet rozšíření:  <%= @expansion.dataset_expansion_histories.count %><% if @expansion.stop_vps -%>/3<% end %>
+Počet rozšíření:  <%= @expansion.expansion_count %><% if @expansion.stop_vps -%>/3<% end %>
 <% if @expansion.deadline -%>
 Termín řešení:    <%= @expansion.deadline.localtime.strftime("%Y-%m-%d") %>
 <% end -%>

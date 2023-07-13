@@ -532,7 +532,7 @@ end
         <td><%= (exp.original_refquota / 1024.0).round(2) %> GiB</td>
         <td><%= (exp.dataset.refquota / 1024.0).round(2) %> GiB</td>
         <td><%= (exp.dataset.referenced / 1024.0).round(2) %> GiB</td>
-        <td><%= exp.dataset_expansion_histories.count %></td>
+        <td><%= exp.expansion_count %></td>
         <td><%= ((Time.now - exp.created_at) / 60.0 / 60 / 24).round(1) %></td>
         <td><%= exp.deadline ? exp.deadline.localtime.strftime('%Y-%m-%d') : '-' %></td>
       </tr>
@@ -564,7 +564,7 @@ end
         <td><%= (exp.original_refquota / 1024.0).round(2) %> GiB</td>
         <td><%= (exp.dataset.refquota / 1024.0).round(2) %> GiB</td>
         <td><%= (exp.dataset.referenced / 1024.0).round(2) %> GiB</td>
-        <td><%= exp.dataset_expansion_histories.count %></td>
+        <td><%= exp.expansion_count %></td>
         <td><%= exp.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
         <td><%= exp.deadline ? exp.deadline.localtime.strftime('%Y-%m-%d') : '-' %></td>
       </tr>
@@ -593,7 +593,7 @@ end
         <td><%= exp.vps.hostname %></td>
         <td><%= exp.vps.dataset.full_name %></td>
         <td><%= (exp.added_space / 1024.0).round(2) %> GiB</td>
-        <td><%= exp.dataset_expansion_histories.count %></td>
+        <td><%= exp.expansion_count %></td>
         <td><%= exp.created_at.localtime.strftime('%Y-%m-%d') %></td>
         <td><%= ((Time.now - exp.created_at) / 60.0 / 60 / 24).round(1) %></td>
         <td><%= exp.deadline ? exp.deadline.localtime.strftime('%Y-%m-%d') : '-' %></td>

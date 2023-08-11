@@ -1,0 +1,34 @@
+Hi <%= @vps.user.login %>,
+
+<% if @incident.mailbox_id -%>
+we're forwarding you a reported incident for VPS <%= @vps.id %> <%= @vps.hostname %>
+which has been sent to us at abuse@vpsfree.cz.
+<% else -%>
+we've detected an issue with VPS <%= @vps.id %> <%= @vps.hostname %>.
+<% end -%>
+
+<% if @incident.ip_address -%>
+IP address: <%= @incident.ip_address.to_s %>
+
+<% end -%>
+Subject: <%= @incident.subject %>
+
+Message:
+
+<%= @incident.text %>
+
+--
+
+<% if @incident.codename -%>
+More information about this kind of incident can be found in KB:
+
+  https://kb.vpsfree.org/manuals/vps/incidents#<%= @incident.codename %>
+
+<% end -%>
+Please check and resolve the issue if appropriate.
+
+Best regards,
+
+vpsFree.cz team
+
+(This is an automated mail from vpsAdmin, your reply will be sent to our support)

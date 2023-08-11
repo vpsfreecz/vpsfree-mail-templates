@@ -1,0 +1,34 @@
+Ahoj <%= @vps.user.login %>,
+
+<% if @incident.mailbox_id -%>
+přeposíláme Ti nalezený incident pro VPS <%= @vps.id %> <%= @vps.hostname %>, který
+jsme obdrželi na abuse@vpsfree.cz.
+<% else -%>
+zaznamenali jsme problém s VPS <%= @vps.id %> <%= @vps.hostname %>.
+<% end -%>
+
+<% if @incident.ip_address -%>
+IP adresa: <%= @incident.ip_address.to_s %>
+
+<% end -%>
+Předmět: <%= @incident.subject %>
+
+Zpráva:
+
+<%= @incident.text %>
+
+--
+
+<% if @incident.codename -%>
+Více informací o tomto typu incidentu může být v KB:
+
+  https://kb.vpsfree.cz/navody/vps/incidenty#<%= @incident.codename %>
+
+<% end -%>
+Prosíme o kontrolu a případné řešení.
+
+S pozdravem
+
+tým vpsFree.cz
+
+(Tento mail automaticky rozesílá vpsAdmin, Tvoje odpověď se zašle na naši podporu)

@@ -602,6 +602,30 @@ end
   </table>
 <% end %>
 
+<h2>Incident reports</h2>
+<% if @incident_reports[:new].any? %>
+  <table class="overview">
+    <tr>
+      <th>ID</th>
+      <th>USER</th>
+      <th>VPS</th>
+      <th>IP</th>
+      <th>DETECTED AT</th>
+      <th>SUBJECT</th>
+    </tr>
+    <% @incident_reports[:new].each do |inc| %>
+      <tr>
+        <td><a href="<%= url("incidents", "action=show&id=#{inc.id}") %>"><%= inc.id %></a></td>
+        <td><a href="<%= url("adminm", "action=edit&id=#{inc.user_id}") %>"><%= inc.user_id %> <%= inc.user.login %></a></td>
+        <td><a href="<%= url("adminvps", "action=edit&veid=#{inc.vps.id}") %>"><%= inc.vps.id %></a></td>
+        <td><%= inc.ip_address_assignment ? inc.ip_address_assignment.ip_address : '-' %></td>
+        <td><%= inc.detected_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        <td><%= inc.subject %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
 <h2>OOM reports</h2>
 <% if @oom_reports[:by_vps].load.any? %>
   <h3>Top 10 VPS running out of memory</h3>

@@ -8,8 +8,10 @@ Aktuální limity:
    Swap: <%= @vps.swap %> MB
 
 Důvod změny: <%= @reason %>
+<% if @admin -%>
 
 Změnu provedl: <%= @admin.full_name %>
+<% end -%>
 
 S pozdravem
 

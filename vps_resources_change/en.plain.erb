@@ -8,8 +8,10 @@ Current limits:
    Swap: <%= @vps.swap %> MB
 
 Reason for change: <%= @reason %>
+<% if @admin -%>
 
 Changed by: <%= @admin.full_name %>
+<% end -%>
 
 Best regards,
 

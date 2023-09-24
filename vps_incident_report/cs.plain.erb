@@ -12,6 +12,10 @@ IP adresa: <%= @incident.ip_address.to_s %>
 
 <% end -%>
 Předmět: <%= @incident.subject %>
+<% if @incident.cpu_limit -%>
+
+CPU limit: <%= @incident.cpu_limit %> %
+<% end -%>
 
 Zpráva:
 
@@ -25,7 +29,12 @@ Více informací o tomto typu incidentu může být v KB:
   https://kb.vpsfree.cz/navody/vps/incidenty#<%= @incident.codename %>
 
 <% end -%>
+<% if @incident.cpu_limit -%>
+Podívej se na to prosím a informuj nás ohledně řešení, abychom mohli zrušit
+nastavený CPU limit.
+<% else -%>
 Prosíme o kontrolu a případné řešení.
+<% end -%>
 
 S pozdravem
 

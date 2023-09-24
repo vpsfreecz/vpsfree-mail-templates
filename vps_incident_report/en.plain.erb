@@ -12,6 +12,10 @@ IP address: <%= @incident.ip_address.to_s %>
 
 <% end -%>
 Subject: <%= @incident.subject %>
+<% if @incident.cpu_limit -%>
+
+CPU limit: <%= @incident.cpu_limit %> %
+<% end -%>
 
 Message:
 
@@ -25,7 +29,12 @@ More information about this kind of incident can be found in KB:
   https://kb.vpsfree.org/manuals/vps/incidents#<%= @incident.codename %>
 
 <% end -%>
+<% if @incident.cpu_limit -%>
+Please check and let us know when the issue is resolved. The CPU limit will remain
+in place until then.
+<% else -%>
 Please check and resolve the issue if appropriate.
+<% end -%>
 
 Best regards,
 

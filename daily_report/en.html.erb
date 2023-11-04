@@ -112,7 +112,7 @@ END
 	user = ::User.unscoped.find(vps.user_id)
     ret += <<END
       <tr>
-	<td><a href="#{url("adminvps", "action=edit&veid=#{vps.id}")}">#{vps.id}</a></td>
+	<td><a href="#{url("adminvps", "action=info&veid=#{vps.id}")}">#{vps.id}</a></td>
 	<td>#{vps.hostname}</td>
 	<td><a href="#{url("adminm", "action=edit&id=#{vps.user_id}")}">#{user.login}</a></td>
 	<td>#{vps.node_id} #{vps.node.domain_name}</td>
@@ -526,7 +526,7 @@ end
     <% @dataset_expansions[:active].each do |exp| %>
       <tr>
         <td><%= exp.vps.node.domain_name %></td>
-        <td><a href="<%= url("adminvps", "action=edit&veid=#{exp.vps.id}") %>"><%= exp.vps.id %></a></td>
+        <td><a href="<%= url("adminvps", "action=info&veid=#{exp.vps.id}") %>"><%= exp.vps.id %></a></td>
         <td><%= exp.vps.hostname %></td>
         <td><%= exp.vps.dataset.full_name %></td>
         <td><%= (exp.original_refquota / 1024.0).round(2) %> GiB</td>
@@ -558,7 +558,7 @@ end
     <% @dataset_expansions[:new].each do |exp| %>
       <tr>
         <td><%= exp.vps.node.domain_name %></td>
-        <td><a href="<%= url("adminvps", "action=edit&veid=#{exp.vps.id}") %>"><%= exp.vps.id %></a></td>
+        <td><a href="<%= url("adminvps", "action=info&veid=#{exp.vps.id}") %>"><%= exp.vps.id %></a></td>
         <td><%= exp.vps.hostname %></td>
         <td><%= exp.vps.dataset.full_name %></td>
         <td><%= (exp.original_refquota / 1024.0).round(2) %> GiB</td>
@@ -589,7 +589,7 @@ end
     <% @dataset_expansions[:resolved].each do |exp| %>
       <tr>
         <td><%= exp.vps.node.domain_name %></td>
-        <td><a href="<%= url("adminvps", "action=edit&veid=#{exp.vps.id}") %>"><%= exp.vps.id %></a></td>
+        <td><a href="<%= url("adminvps", "action=info&veid=#{exp.vps.id}") %>"><%= exp.vps.id %></a></td>
         <td><%= exp.vps.hostname %></td>
         <td><%= exp.vps.dataset.full_name %></td>
         <td><%= (exp.added_space / 1024.0).round(2) %> GiB</td>
@@ -617,7 +617,7 @@ end
       <tr>
         <td><a href="<%= url("incidents", "action=show&id=#{inc.id}") %>"><%= inc.id %></a></td>
         <td><a href="<%= url("adminm", "action=edit&id=#{inc.user_id}") %>"><%= inc.user_id %> <%= inc.user.login %></a></td>
-        <td><a href="<%= url("adminvps", "action=edit&veid=#{inc.vps.id}") %>"><%= inc.vps.id %></a></td>
+        <td><a href="<%= url("adminvps", "action=info&veid=#{inc.vps.id}") %>"><%= inc.vps.id %></a></td>
         <td><%= inc.ip_address_assignment ? inc.ip_address_assignment.ip_address : '-' %></td>
         <td><%= inc.detected_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
         <td><%= inc.subject %></td>
@@ -640,7 +640,7 @@ end
       <tr>
         <td><%= vps.node.domain_name %></td>
 	      <td><a href="<%= url("adminm", "action=edit&id=#{vps.user_id}") %>"><%= "#{vps.user_id} #{vps.user.login}" %></a></td>
-	      <td><a href="<%= url("adminvps", "action=edit&veid=#{vps.id}") %>"><%= vps.id %></a></td>
+	      <td><a href="<%= url("adminvps", "action=info&veid=#{vps.id}") %>"><%= vps.id %></a></td>
         <td><a href="<%= url("oom_reports", "action=list&list=1&vps=#{vps.id}") %>"><%= vps.oom_count %></a></td>
       </tr>
     <% end %>

@@ -521,7 +521,6 @@ end
       <th>USED SPACE</th>
       <th>COUNT</th>
       <th>DAYS</th>
-      <th>DEADLINE</th>
     </tr>
     <% @dataset_expansions[:active].each do |exp| %>
       <tr>
@@ -533,8 +532,7 @@ end
         <td><%= (exp.dataset.refquota / 1024.0).round(2) %> GiB</td>
         <td><%= (exp.dataset.referenced / 1024.0).round(2) %> GiB</td>
         <td><%= exp.expansion_count %></td>
-        <td><%= ((Time.now - exp.created_at) / 60.0 / 60 / 24).round(1) %></td>
-        <td><%= exp.deadline ? exp.deadline.localtime.strftime('%Y-%m-%d') : '-' %></td>
+        <td><%= (exp.over_refquota_seconds / 60.0 / 60 / 24).round(1) %>/<%= (exp.max_over_refquota_seconds / 60.0 / 60 / 24).round %></td>
       </tr>
     <% end %>
   </table>
@@ -553,7 +551,6 @@ end
       <th>USED SPACE</th>
       <th>COUNT</th>
       <th>CREATED AT</th>
-      <th>DEADLINE</th>
     </tr>
     <% @dataset_expansions[:new].each do |exp| %>
       <tr>
@@ -566,7 +563,6 @@ end
         <td><%= (exp.dataset.referenced / 1024.0).round(2) %> GiB</td>
         <td><%= exp.expansion_count %></td>
         <td><%= exp.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
-        <td><%= exp.deadline ? exp.deadline.localtime.strftime('%Y-%m-%d') : '-' %></td>
       </tr>
     <% end %>
   </table>
@@ -584,7 +580,6 @@ end
       <th>COUNT</th>
       <th>CREATED AT</th>
       <th>DAYS</th>
-      <th>DEADLINE</th>
     </tr>
     <% @dataset_expansions[:resolved].each do |exp| %>
       <tr>
@@ -595,8 +590,7 @@ end
         <td><%= (exp.added_space / 1024.0).round(2) %> GiB</td>
         <td><%= exp.expansion_count %></td>
         <td><%= exp.created_at.localtime.strftime('%Y-%m-%d') %></td>
-        <td><%= ((Time.now - exp.created_at) / 60.0 / 60 / 24).round(1) %></td>
-        <td><%= exp.deadline ? exp.deadline.localtime.strftime('%Y-%m-%d') : '-' %></td>
+        <td><%= (exp.over_refquota_seconds / 60.0 / 60 / 24).round(1) %>/<%= (exp.max_over_refquota_seconds / 60.0 / 60 / 24).round %></td>
       </tr>
     <% end %>
   </table>

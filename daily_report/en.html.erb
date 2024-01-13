@@ -647,6 +647,24 @@ end
   </table>
 <% end %>
 
+<% if @oom_reports[:preventions].any? %>
+  <h3>OOM preventions</h3>
+  <table class="overview">
+    <tr>
+      <th>TIME</th>
+      <th>VPS</th>
+      <th>Action</th>
+    </tr>
+    <% @oom_reports[:preventions].each do |prev| %>
+      <tr>
+        <td><%= prev.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        <td><a href="<%= url("adminvps", "action=info&veid=#{prev.vps_id}") %>"><%= prev.vps_id %></a></td>
+        <td><%= prev.action %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
 <% if @oom_reports[:by_node].load.any? %>
   <h3>OOM reports by node</h3>
   <table class="overview">

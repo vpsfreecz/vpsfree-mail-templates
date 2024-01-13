@@ -8,9 +8,7 @@ Původní velikost:  <%= (@expansion.original_refquota / 1024.0).round %> GiB
 Aktuální velikost: <%= (@dataset.refquota / 1024.0).round %> GiB
 Zabrané místo:     <%= (@dataset.referenced / 1024.0).round(2) %> GiB
 Počet rozšíření:   <%= @expansion.expansion_count %><% if @expansion.stop_vps -%>/3<% end %>
-<% if @expansion.deadline -%>
-Termín řešení:     <%= @expansion.deadline.localtime.strftime("%Y-%m-%d") %>
-<% end -%>
+Doba překročení:   <%= (@expansion.over_refquota_seconds / 60.0 / 60 / 24).round(1) %>/<%= (@expansion.max_over_refquota_seconds / 60.0 / 60 / 24).round(0) %> dní
 
 Pokus se prosím uvolnit nějaké místo, aby se dataset mohl vrátit na svou původní
 velikost. V případě, že bys chtěl disk trvale rozšířit, podívej se do KB a kontaktuj

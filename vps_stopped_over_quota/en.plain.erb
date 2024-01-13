@@ -7,9 +7,7 @@ Original size:   <%= (@expansion.original_refquota / 1024.0).round %> GiB
 Current size:    <%= (@dataset.refquota / 1024.0).round %> GiB
 Used space:      <%= (@dataset.referenced / 1024.0).round(2) %> GiB
 Expansion count: <%= @expansion.expansion_count %>/3
-<% if @expansion.deadline -%>
-Deadline:        <%= @expansion.deadline.localtime.strftime("%Y-%m-%d") %>
-<% end -%>
+Time over size:  <%= (@expansion.over_refquota_seconds / 60.0 / 60 / 24).round(1) %>/<%= (@expansion.max_over_refquota_seconds / 60.0 / 60 / 24).round(0) %> days
 
 Please either try to free some space so that the dataset could be returned to its
 original size, or contact us if you need to expand your disk space permanently,

@@ -9,9 +9,6 @@ Nová velikost:    <%= (@dataset.refquota / 1024.0).round %> GiB
 Zabrané místo:    <%= (@dataset.referenced / 1024.0).round(2) %> GiB
 <% if @expansion.active? -%>
 Počet rozšíření:  <%= @expansion.expansion_count %><% if @expansion.stop_vps -%>/3<% end %>
-<% if @expansion.deadline -%>
-Termín řešení:    <%= @expansion.deadline.localtime.strftime("%Y-%m-%d") %>
-<% end -%>
 
 Pokus se prosím uvolnit nějaké místo, aby se dataset mohl vrátit na svou původní
 velikost. V případě, že bys chtěl disk trvale rozšířit, podívej se do KB a kontaktuj

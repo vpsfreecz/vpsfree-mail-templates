@@ -9,9 +9,7 @@ Original size:   <%= (@expansion.original_refquota / 1024.0).round %> GiB
 Current size:    <%= (@dataset.refquota / 1024.0).round %> GiB
 Used space:      <%= (@dataset.referenced / 1024.0).round(2) %> GiB
 Expansion count: <%= @expansion.expansion_count %><% if @expansion.stop_vps -%>/3<% end %>
-<% if @expansion.deadline -%>
-Resolve until:   <%= @expansion.deadline.localtime.strftime("%Y-%m-%d") %>
-<% end -%>
+Time over size:  <%= (@expansion.over_refquota_seconds / 60.0 / 60 / 24).round(1) %>/<%= (@expansion.max_over_refquota_seconds / 60.0 / 60 / 24).round(0) %> days
 
 See KB for more information:
 

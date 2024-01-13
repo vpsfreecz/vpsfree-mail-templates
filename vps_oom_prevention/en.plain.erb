@@ -1,0 +1,13 @@
+Hi <%= @vps.user.login %>,
+
+VPS <%= @vps.id %> <%= @vps.hostname %> is out of memory too often:
+
+  <%= @ooms_in_period %> out-of-memory situations in the last <%= @period_seconds / 60 %> minutes, <%= (@ooms_in_period / @period_seconds.to_f).round(1) %> per second
+
+The VPS was <%= @action == :restart ? 'restarted' : 'shut down' %> for operational reasons. Please look into it.
+
+Best regards,
+
+vpsFree.cz team
+
+(This is an automated mail from vpsAdmin, your reply will be sent to our support)

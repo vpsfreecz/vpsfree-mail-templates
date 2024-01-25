@@ -1,6 +1,6 @@
 Hi <%= @user.login %>,
 
-we have an update for you regarding this <%= @o.planned ? 'maintenance' : 'outage' %>.
+we have an update for you regarding this <%= @o.maintenance? ? 'maintenance' : 'outage' %>.
 
 <% @update.each_change do |attr, old, new| -%>
 <%= case attr
@@ -16,7 +16,7 @@ we have an update for you regarding this <%= @o.planned ? 'maintenance' : 'outag
     when :state
       "State: #{old} -> #{new}"
 
-    when :outage_type
+    when :impact_type
       "Type: #{old} -> #{new}"
     end
 %>

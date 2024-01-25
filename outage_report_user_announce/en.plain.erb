@@ -1,6 +1,6 @@
 Hi <%= @user.login %>,
 
-we would like to inform you about <%= @o.planned ? 'a scheduled maintenance' : 'an outage' %> on vpsFree.cz infrastructure.
+we would like to inform you about <%= @o.maintenance? ? 'a scheduled maintenance' : 'an outage' %> on vpsFree.cz infrastructure.
 
 <% if @direct_vpses.count > 0 -%>
 Directly affected VPS:
@@ -32,7 +32,7 @@ Affected NFS exports:
 Date and time: <%= @o.begins_at.localtime.strftime('%Y-%m-%d %H:%M %Z') %>
 Expected duration: <%= @o.duration %> minutes
 Affected systems: <%= @o.outage_entities.map { |e| e.real_name }.join(', ') %>
-<%= @o.planned ? 'Maintenance' : 'Outage' %> type: <%= @o.outage_type %>
+<%= @o.maintenance? ? 'Maintenance' : 'Outage' %> type: <%= @o.impact_type %>
 Reason: <%= @o.en_summary %>
 Handled by: <%= @o.outage_handlers.map { |h| h.user.full_name }.join(', ') %>
 <% if @o.en_description && !@o.en_description.empty? -%>

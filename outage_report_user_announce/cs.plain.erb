@@ -1,6 +1,6 @@
 Ahoj <%= @user.login %>,
 
-chtěli bychom Tě upozornit na <%= @o.planned? ? 'odstávku' : 'výpadek' %> na infrastruktuře vpsFree.cz.
+chtěli bychom Tě upozornit na <%= @o.maintenance? ? 'odstávku' : 'výpadek' %> na infrastruktuře vpsFree.cz.
 
 <% if @direct_vpses.count > 0 -%>
 Přímo zasažené VPS:
@@ -32,9 +32,9 @@ Zasažené NFS exporty:
 Datum a čas: <%= @o.begins_at.localtime.strftime('%Y-%m-%d %H:%M %Z') %>
 Očekávaná délka: <%= @o.duration %> minut
 Oznámení se týka serverů: <%= @o.outage_entities.map { |e| e.real_name }.join(', ') %>
-Typ <%= @o.planned ? 'odstávky' : 'výpadku' %>: <%= @o.outage_type %>
+Typ <%= @o.maintenance? ? 'odstávky' : 'výpadku' %>: <%= @o.impact_type %>
 Důvod: <%= @o.cs_summary %>
-<%= @o.planned ? 'Odstávku' : 'Výpadek' %> řeší: <%= @o.outage_handlers.map { |h| h.user.full_name }.join(', ') %>
+<%= @o.maintenance? ? 'Odstávku' : 'Výpadek' %> řeší: <%= @o.outage_handlers.map { |h| h.user.full_name }.join(', ') %>
 <% if @o.cs_description && !@o.cs_description.empty? -%>
 
 <%= @o.cs_description %>

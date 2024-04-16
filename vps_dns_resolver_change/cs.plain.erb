@@ -1,0 +1,25 @@
+Ahoj <%= @vps.user.login %>,
+
+<% if @old_dns_resolver.id == @new_dns_resolver.id -%>
+DNS resolver "<%= @new_dns_resolver.label %>" použitý ve VPS <%= @vps.id %> <%= @vps.hostname %>
+má nové IP adresy. Soubor /etc/resolv.conf ve VPS byl upraven a pokud nemáš
+adresy původních serverů zapsány někde jinde, nemusíš nic dalšího řešit.
+<% else -%>
+ve VPS <%= @vps.id %> <%= @vps.hostname %> došlo ke změně DNS resolveru
+z "<%= @old_dns_resolver.label %>" na "<%= @new_dns_resolver.label %>" z důvodu
+změny konfigurace ze strany vpsFree.cz. Soubor /etc/resolv.conf ve VPS byl
+upraven a pokud nemáš adresy původních serverů zapsány někde jinde, nemusíš nic
+dalšího řešit.
+<% end -%>
+
+DNS resolver má nyní tyto adresy:
+
+<% @new_dns_resolver.addrs.split(',').each do |addr| -%>
+  - <%= addr %>
+<% end -%>
+
+S pozdravem
+
+tým vpsFree.cz
+
+(Tento mail automaticky rozesílá vpsAdmin, Tvoje odpověď se zašle na naši podporu)

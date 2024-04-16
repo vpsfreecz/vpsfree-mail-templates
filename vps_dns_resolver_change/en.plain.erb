@@ -1,0 +1,26 @@
+Hi <%= @vps.user.login %>,
+
+<% if @old_dns_resolver.id == @new_dns_resolver.id -%>
+DNS resolver "<%= @new_dns_resolver.label %>" used by VPS <%= @vps.id %> <%= @vps.hostname %>
+has new IP addresses. We have already updated /etc/resolv.conf file inside
+the VPS. No action is required from you unless you have its addresses
+configured somewhere else as well.
+<% else -%>
+VPS <%= @vps.id %> <%= @vps.hostname %> had its DNS resolver changed from
+"<%= @old_dns_resolver.label %>" to "<%= @new_dns_resolver.label %>" due to
+a configuration change at vpsFree.cz. /etc/resolv.conf file inside the VPS
+has already been updated. No action is required from you unless you have
+its addresses configured somewhere else as well.
+<% end -%>
+
+The DNS server now has the following IP addresses:
+
+<% @new_dns_resolver.addrs.split(',').each do |addr| -%>
+  - <%= addr %>
+<% end -%>
+
+Best regards,
+
+vpsFree.cz team
+
+(This is an automated mail from vpsAdmin, your reply will be sent to our support)

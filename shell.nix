@@ -5,9 +5,9 @@ let
 in stdenv.mkDerivation rec {
   name = "vpsfree-mail-templates";
 
-  buildInputs = [
-    pkgs.ruby
-    pkgs.git
+  buildInputs = with pkgs; [
+    git
+    ruby
   ];
 
   shellHook = ''

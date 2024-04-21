@@ -1,0 +1,18 @@
+Hi <%= @original_vps.user.login %>,
+
+VPS <%= @original_vps.id %> <%= @original_vps.hostname %> is unresponsive and we were forced to
+clone it under a new ID <%= @new_vps.id %>. Configuration and data remain the same.
+<% if @reason && !@reason.empty? -%>
+
+Reason: <%= @reason %>
+<% end -%>
+
+VPS have to be replaced when one or more processes get stuck in Linux kernel
+and cannot be killed. This is usually a bug within the kernel. Reply to this
+e-mail if you'd like more information.
+
+Best regards,
+
+vpsFree.cz team
+
+(This is an automated mail from vpsAdmin, your reply will be sent to our support)

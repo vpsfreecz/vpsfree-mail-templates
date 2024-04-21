@@ -1,0 +1,18 @@
+Ahoj <%= @original_vps.user.login %>,
+
+VPS <%= @original_vps.id %> <%= @original_vps.hostname %> nereaguje a bylo nutné jej naklonovat
+pod nové ID <%= @new_vps.id %>. Konfigurace a data zůstávají stejné.
+<% if @reason && !@reason.empty? -%>
+
+Důvod: <%= @reason %>
+<% end -%>
+
+VPS takto nahrazujeme, když jeden nebo více procesů uvízné v linuxovém kernelu
+a nejde je zabít. Většinou se jedná o bug v kernelu. Pro více informací odpověz
+na tento e-mail.
+
+S pozdravem
+
+tým vpsFree.cz
+
+(Tento mail automaticky rozesílá vpsAdmin, Tvoje odpověď se zašle na naši podporu)

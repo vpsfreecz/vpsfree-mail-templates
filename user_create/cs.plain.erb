@@ -11,6 +11,30 @@ a další.
 Tvůj účet bude aktivován až po zaplacení členského příspěvku. Do té doby nebudeš
 moct používat naše administrační rozhraní. Pokud bys chtěl VPS před zaplacením
 vyzkoušet, kontaktuj prosím naši podporu a požádej o zkušební období.
+
+Variabilní symbol: <%= @user.id %>
+
+Částka: <%= @user.monthly_payment %> Kč nebo <%= @user.monthly_payment  / 25 %> € na měsíc
+
+Preferujeme platby minimálně na 3 měsíce dopředu. Doklad je na vyžádání.
+
+Číslo účtu pro CZK (ČR):  2200041594/2010
+                          IBAN: CZ0420100000002200041594
+                          BIC: FIOBCZPPXXX
+
+Příchod platby lze zkontrolovat zde:
+  https://ib.fio.cz/ib/transparent?a=2200041594
+
+Číslo účtu pro EUR (SR):  SK20 8330 0000 0026 0150 2873
+                          BIC: FIOZSKBA
+
+Příchod platby lze zkontrolovat zde:
+  https://ib.fio.cz/ib/transparent?a=2601502873
+
+<% three_months_payment = @user.monthly_payment * 3 %>
+QR kód pro platbu na 3 měsíce dopředu (vždy ověř správnost údajů):
+- ČR: https://vpsfree.cz/nastroje/qr.php?country=cz&amount=<%= three_months_payment %>&vs=<%= @user.id %>
+- SR: https://vpsfree.cz/nastroje/qr.php?country=sk&amount=<%= three_months_payment / 25 %>&vs=<%= @user.id %>
 <% end -%>
 
 Než se ale poprvé přihlásíš na VPS, vezmi prosím na vědomí, že tvůj VPS je

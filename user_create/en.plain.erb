@@ -11,9 +11,40 @@ of the membership fee. Until then, you will not be able to use the administratio
 interface. If you'd like to test the VPS before you pay, please contact our support
 (see below), acknowledge that you intend to pay the membership fee if all will be well
 and request a tryout period.
+
+Variable symbol: <%= @user.id %>
+
+Message: /VS/<%= @user.id %> (use if you cannot send the variable symbol)
+
+Sum: <%= @user.monthly_payment %> CZK or <%= @user.monthly_payment  / 25 %> EUR per month
+
+Payments for at least 3 months ahead are preferred. Invoices are issued on request.
+
+Bank account for CZK (CZ):  2200041594/2010
+                            IBAN: CZ0420100000002200041594
+                            BIC: FIOBCZPPXXX
+
+Payment arrival can be checked here:
+  https://ib.fio.cz/ib/transparent?a=2200041594
+
+Bank account for EUR (SK):  SK20 8330 0000 0026 0150 2873
+                            BIC: FIOZSKBA
+
+Payment arrival can be checked here:
+  https://ib.fio.cz/ib/transparent?a=2601502873
+
+<% three_months_payment = @user.monthly_payment * 3 %>
+QR code for payment for 3 months (always verify that the information is correct):
+- CZ: https://vpsfree.cz/nastroje/qr.php?country=cz&amount=<%= three_months_payment %>&vs=<%= @user.id %>
+- SK: https://vpsfree.cz/nastroje/qr.php?country=sk&amount=<%= three_months_payment / 25 %>&vs=<%= @user.id %>
+
+In case a bank transfer is not practical for you, please see alternative payment
+methods in KB:
+
+  https://kb.vpsfree.org/information/membership_fees#alternative_payment_methods
 <% end -%>
 
-However, before you login, please remember that your VPS is accessible from
+Before you login, please remember that your VPS is accessible from
 the public Internet. Many bots will try to connect to your VPS, guess passwords
 and exploit vulnerabilties of frequently used software. It is important not to
 underestimate the security: use strong passwords, update your software and do not

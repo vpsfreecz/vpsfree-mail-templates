@@ -1,0 +1,31 @@
+Ahoj <%= @user.login %>,
+
+evidujeme následující pokusy o přihlášení do vpsAdminu (https://vpsadmin.vpsfree.cz).
+
+<% @attempt_groups.each do |attempts| -%>
+<% if attempts.length == 1 -%>
+  Datum a čas:         <%= attempts.first.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>
+<% else -%>
+  První pokus:         <%= attempts.first.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>
+  Poslední pokus:      <%= attempts.last.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>
+<% end -%>
+  Počet pokusů:        <%= attempts.length %>
+  Autentizační metoda: <%= attempts.first.auth_type %>
+  Důvod selhání:       <%= attempts.first.reason %>
+  User agent:          <%= attempts.first.user_agent.agent %>
+  IP adresa:           <%= attempts.first.client_ip_addr %>
+  Reverzní záznam:     <%= attempts.first.client_ip_ptr %>
+
+
+<% end -%>
+
+Pokud jsi to byl ty, můžeš tuto zprávu ignorovat. V opačném případě doporučujeme
+zapnout dvoufaktorovou autentizaci.
+
+S dotazy se můžes obrátit na podpora@vpsfree.cz.
+
+S pozdravem
+
+tým vpsFree.cz
+
+(Tento mail automaticky rozesílá vpsAdmin, Tvoje odpověď se zašle na naši podporu)

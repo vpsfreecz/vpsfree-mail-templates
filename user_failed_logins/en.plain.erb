@@ -1,0 +1,31 @@
+Hi <%= @user.login %>,
+
+We noticed failed login attempts into your vpsAdmin account (https://vpsadmin.vpsfree.cz).
+
+<% @attempt_groups.each do |attempts| -%>
+<% if attempts.length == 1 -%>
+  Date and time:         <%= attempts.first.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>
+<% else -%>
+  First attempt:         <%= attempts.first.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>
+  Last attempt:          <%= attempts.last.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>
+<% end -%>
+  Number of attempts:    <%= attempts.length %>
+  Authentication method: <%= attempts.first.auth_type %>
+  Reason for failure:    <%= attempts.first.reason %>
+  User agent:            <%= attempts.first.user_agent.agent %>
+  IP address:            <%= attempts.first.client_ip_addr %>
+  Reverse record:        <%= attempts.first.client_ip_ptr %>
+
+
+<% end -%>
+
+If this was you, you can disregard this message. Otherwise we recommend enabling
+two-factor authentication.
+
+Should you have any questions, please contact support@vpsfree.org.
+
+Best regards,
+
+vpsFree.cz team
+
+(This is an automated mail from vpsAdmin, your reply will be sent to our support)

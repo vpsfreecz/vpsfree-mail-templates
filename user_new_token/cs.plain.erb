@@ -1,0 +1,19 @@
+Ahoj <%= @user.login %>,
+
+evidujeme vytvoření nového přístupového tokenu do vpsAdminu (https://vpsadmin.vpsfree.cz).
+
+  Datum a čas:     <%= @user_session.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>
+  User agent:      <%= @user_session.user_agent.agent %>
+  IP adresa:       <%= @user_session.client_ip_addr %>
+  Reverzní záznam: <%= @user_session.client_ip_ptr %>
+
+Pokud jsi to byl ty, můžeš tuto zprávu ignorovat. V opačném případě doporučujeme
+co nejrychleji změnit heslo a zapnout dvoufaktorovou autentizaci.
+
+S dotazy se můžes obrátit na podpora@vpsfree.cz.
+
+S pozdravem
+
+tým vpsFree.cz
+
+(Tento mail automaticky rozesílá vpsAdmin, Tvoje odpověď se zašle na naši podporu)

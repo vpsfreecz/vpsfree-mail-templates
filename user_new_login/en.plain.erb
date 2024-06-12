@@ -1,0 +1,21 @@
+Hi <%= @user.login %>,
+
+We noticed a login to your vpsAdmin account (https://vpsadmin.vpsfree.cz)
+from a new device.
+
+  Service:        <%= @authorization.oauth2_client.name %>
+  Date and time:  <%= @user_session.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>
+  User agent:     <%= @user_device.user_agent.agent %>
+  IP address:     <%= @user_device.client_ip_addr %>
+  Reverse record: <%= @user_device.client_ip_ptr %>
+
+If this was you, you can disregard this message. Otherwise we recommend changing
+password as soon as possible and enabling two-factor authentication.
+
+Should you have any questions, please contact support@vpsfree.org.
+
+Best regards,
+
+vpsFree.cz team
+
+(This is an automated mail from vpsAdmin, your reply will be sent to our support)

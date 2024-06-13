@@ -5,7 +5,7 @@ from a new device.
 
   Service:        <%= @authorization.oauth2_client.name %>
   Date and time:  <%= @user_session.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>
-  User agent:     <%= @user_device.user_agent.agent %>
+  Device:         <%= @user_device.user_agent.to_user_friendly_s %>
   IP address:     <%= @user_device.client_ip_addr %>
   Reverse record: <%= @user_device.client_ip_ptr %>
 

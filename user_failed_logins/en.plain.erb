@@ -12,7 +12,7 @@ We noticed failed login attempts into your vpsAdmin account (https://vpsadmin.vp
   Number of attempts:    <%= attempts.length %>
   Authentication method: <%= attempts.first.auth_type %>
   Reason for failure:    <%= attempts.first.reason %>
-  User agent:            <%= attempts.first.user_agent.agent %>
+  Device:                <%= attempts.first.user_agent.to_user_friendly_s %>
   IP address:            <%= attempts.first.client_ip_addr %>
   Reverse record:        <%= attempts.first.client_ip_ptr %>
 

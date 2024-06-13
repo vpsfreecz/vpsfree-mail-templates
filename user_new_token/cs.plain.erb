@@ -3,7 +3,7 @@ Ahoj <%= @user.login %>,
 evidujeme vytvoření nového přístupového tokenu do vpsAdminu (https://vpsadmin.vpsfree.cz).
 
   Datum a čas:     <%= @user_session.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>
-  User agent:      <%= @user_session.user_agent.agent %>
+  Zařízení:        <%= @user_session.user_agent.to_user_friendly_s %>
   IP adresa:       <%= @user_session.client_ip_addr %>
   Reverzní záznam: <%= @user_session.client_ip_ptr %>
 

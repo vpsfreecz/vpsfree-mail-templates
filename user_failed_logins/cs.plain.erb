@@ -12,7 +12,7 @@ evidujeme následující pokusy o přihlášení do vpsAdminu (https://vpsadmin.
   Počet pokusů:        <%= attempts.length %>
   Autentizační metoda: <%= attempts.first.auth_type %>
   Důvod selhání:       <%= attempts.first.reason %>
-  User agent:          <%= attempts.first.user_agent.agent %>
+  Zařízení:            <%= attempts.first.user_agent.to_user_friendly_s %>
   IP adresa:           <%= attempts.first.client_ip_addr %>
   Reverzní záznam:     <%= attempts.first.client_ip_ptr %>
 

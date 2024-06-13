@@ -4,7 +4,7 @@ evidujeme přihlášení do vpsAdminu (https://vpsadmin.vpsfree.cz) z nového za
 
   Služba:          <%= @authorization.oauth2_client.name %>
   Datum a čas:     <%= @user_session.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>
-  User agent:      <%= @user_device.user_agent.agent %>
+  Zařízení:        <%= @user_device.user_agent.to_user_friendly_s %>
   IP adresa:       <%= @user_device.client_ip_addr %>
   Reverzní záznam: <%= @user_device.client_ip_ptr %>
 

@@ -4,7 +4,7 @@ We noticed that a new access token was issued for your vpsAdmin account
 (https://vpsadmin.vpsfree.cz).
 
   Date and time:  <%= @user_session.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>
-  User agent:     <%= @user_session.user_agent.agent %>
+  Device:         <%= @user_session.user_agent.to_user_friendly_s %>
   IP address:     <%= @user_session.client_ip_addr %>
   Reverse record: <%= @user_session.client_ip_ptr %>
 

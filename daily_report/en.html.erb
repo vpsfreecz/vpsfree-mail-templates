@@ -88,6 +88,8 @@ END
 	<td>#{u.current_object_state.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')}</td>
      </tr>
 END
+
+    ret << yield(u) if block_given?
   end
 
   ret << "</table>\n"
@@ -300,7 +302,33 @@ end
 
 <% if new_users > 0 %>
   <h3>New users</h3>
-  <%= list_users(@users[:new], 'CREATED AT') %>
+  <%=
+    list_users(@users[:new], 'CREATED AT') do |user|
+      request = ::RegistrationRequest.find_by(user_id: user.id)
+      next('') if request.nil?
+
+      <<END
+        <tr>
+          <td colspan="6">
+            <dl>
+              <dt>Address:</dt>
+              <dd>#{request.address}</dd>
+              <dt>Year:</dt>
+              <dd>#{request.year_of_birth}</dd>
+              <dt>How:</dt>
+              <dd>#{request.how}</dd>
+              <dt>Note:</dt>
+              <dd>#{request.note}</dd>
+              <dt>Distribution:</dt>
+              <dd>#{request.os_template.label}</dd>
+              <dt>Location:</dt>
+              <dd>#{request.location.label}</dd>
+            </dl>
+          </td>
+        </tr>
+END
+    end
+  %>
 <% end %>
 
 <% if active_users > 0 %>

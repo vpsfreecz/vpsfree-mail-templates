@@ -691,6 +691,78 @@ end
   </table>
 <% end %>
 
+<h2>DNS</h2>
+<% if @dns_zones[:new].any? %>
+  <h3>New zones</h3>
+  <table class="overview">
+    <tr>
+      <th>TIME</th>
+      <th>USER</th>
+      <th>NAME</th>
+      <th>SOURCE</th>
+    </tr>
+    <% @dns_zones[:new].each do |zone| %>
+      <tr>
+        <td><%= zone.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        <td>
+          <% if zone.user_id %>
+            <a href="<%= url("adminm", "action=edit&id=#{zone.user_id}") %>"><%= "#{zone.user_id} #{zone.user.login}" %></a>
+          <% else %>
+            ---
+          <% end %>
+        </td>
+        <td><%= zone.name %></td>
+        <td><%= zone.external_source? ? 'external' : 'internal' %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<% if @dns_record_logs.any? %>
+  <h3>Record logs</h3>
+  <table class="overview">
+    <tr>
+      <th>TIME</th>
+      <th>USER</th>
+      <th>OWNER</th>
+      <th>ZONE</th>
+      <th>CHANGE</th>
+      <th>CHAIN</th>
+    </tr>
+    <% @dns_record_logs.each do |log| %>
+      <tr>
+        <td><%= log.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        <td>
+          <% if log.user_id %>
+            <a href="<%= url("adminm", "action=edit&id=#{log.user_id}") %>"><%= "#{log.user_id} #{log.user.login}" %></a>
+          <% else %>
+            ---
+          <% end %>
+        </td>
+        <td>
+          <% if log.dns_zone_id && log.dns_zone.user_id %>
+            <a href="<%= url("adminm", "action=edit&id=#{log.dns_zone.user_id}") %>"><%= "#{log.dns_zone.user_id} #{log.dns_zone.user.login}" %></a>
+          <% else %>
+            ---
+          <% end %>
+        </td>
+        <td><%= log.dns_zone_name %></td>
+        <td><%= log.change_type.sub(/_record$/, '') %></td>
+        <td><a href="<%= url("transactions", "chain=#{log.transaction_chain_id}") %>"><%= log.transaction_chain_id %></a></td>
+      </tr>
+      <tr>
+        <td colspan="6" style="text-align: left;">
+<pre><code>name = <%= log.name %>
+type = <%= log.record_type %>
+<% log.attr_changes.each do |k, v| -%>
+<%= k %> = <%= v %>
+<% end -%></code></pre>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
 <h2>Payments</h2>
 <table class="overview">
   <tr>

@@ -1,10 +1,10 @@
 Hi <%= @vps.user.login %>,
 
-migration of VPS #<%= @vps.id %> <%= @vps.hostname %> from <%= @src_node.domain_name %> to <%= @dst_node.domain_name %> has begun.
+VPS #<%= @vps.id %> <%= @vps.hostname %> is being transferred from <%= @src_node.domain_name %> to <%= @dst_node.domain_name %>.
 
 <% if @maintenance_window -%>
 <% days = %i(Sun Mon Tue Wed Thu Fri Sat) -%>
-The migration will be finished within the closest possible maintenance window:
+The transfer will be finished within the closest possible maintenance window:
 
 <% @maintenance_windows.each do |w| -%>
   - <%= days[w.weekday] %> from <%= sprintf('%02d:%02d', w.opens_at / 60, w.opens_at % 60) %> to <%= sprintf('%02d:%02d', w.closes_at / 60, w.closes_at % 60) %>
@@ -12,18 +12,18 @@ The migration will be finished within the closest possible maintenance window:
 
 <% elsif @custom_window -%>
 <% days = %i(Sunday Monday Tuesday Wednesday Thursday Friday Saturday) -%>
-The migration will be finished on <%= days[@finish_weekday] %> from <%= sprintf('%02d:%02d', @finish_minutes / 60, @finish_minutes % 60) %>.
+The transfer will be finished on <%= days[@finish_weekday] %> from <%= sprintf('%02d:%02d', @finish_minutes / 60, @finish_minutes % 60) %>.
 
 <% end -%>
 <% if @reason -%>
 Reason: <%= @reason %>
 
 <% end -%>
-The VPS will have a short outage during the migration, as the VPS is stopped
+The VPS will have a short outage during the transfer, as the VPS is stopped
 on the source node and started on the destination node. The VPS will see this
 as a system restart.
 
-Until the migration is finished, you won't be able to control the VPS from
+Until the transfer is finished, you won't be able to control the VPS from
 vpsAdmin. Please contact the support in case of an emergency.
 
 Best regards,

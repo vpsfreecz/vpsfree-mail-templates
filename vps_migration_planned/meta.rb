@@ -12,6 +12,6 @@ template do
     from        'support@vpsfree.org'
     reply_to    'support@vpsfree.org'
     return_path 'support@vpsfree.org'
-    subject     '[vpsFree.cz] VPS #<%= @vps.id %> will be migrated to <%= @dst_node.domain_name %>'
+    subject     '[vpsFree.cz] VPS #<%= @vps.id %> will be moved to <%= @dst_node.domain_name %>'
   end
 end

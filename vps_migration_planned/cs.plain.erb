@@ -2,12 +2,12 @@ Ahoj <%= @vps.user.login %>,
 
 VPS #<%= @vps.id %> <%= @vps.hostname %> bude přesunuto z <%= @src_node.domain_name %> na <%= @dst_node.domain_name %>.
 <% if @m.maintenance_window %><% days = %i(Ne Po Út St Čt Pá So) %>
-Migrace proběhne v nejbližším možném nastaveném oknu pro odstávky:
+Přesun proběhne v nejbližším možném nastaveném oknu pro odstávky:
 <% @vps.vps_maintenance_windows.where(is_open: true).order('weekday').each do |w| %>  - <%= days[w.weekday] %> od <%= sprintf('%02d:%02d', w.opens_at / 60, w.opens_at % 60) %> do <%= sprintf('%02d:%02d', w.closes_at / 60, w.closes_at % 60) %>
 <% end %><% end %>
 <% if @m.migration_plan.reason %>Důvod přesunu: <%= @m.migration_plan.reason %><% end %>
 
-Během migrace dojde ke krátkému výpadku VPS, když se VPS vypne na původním nodu
+Během přesunu dojde ke krátkému výpadku VPS, když se VPS vypne na původním nodu
 a zapne na novém. Ve VPS se toto projeví jako restart systému.
 
 S pozdravem

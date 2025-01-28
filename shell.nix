@@ -7,7 +7,7 @@ in stdenv.mkDerivation rec {
 
   buildInputs = with pkgs; [
     git
-    ruby_3_2
+    ruby_3_3
   ];
 
   shellHook = ''

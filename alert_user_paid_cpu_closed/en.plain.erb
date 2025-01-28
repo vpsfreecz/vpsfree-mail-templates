@@ -18,9 +18,17 @@ def time(t)
 end
 
 def truncate(arr, cnt = 10)
-  return arr if arr.size <= cnt
-  n = arr.size / cnt
-  (n - 1).step(arr.size - 1, n).map { |i| arr[i] }[0..(cnt - 1)]
+  return arr if arr.size <= cnt || arr.size < 3
+
+  cnt -= 2
+  return [arr.first, arr.last] if cnt <= 0
+
+  ret = [arr.first]
+  body = arr[1..-2]
+  n = body.size / cnt
+  ret.concat((n - 1).step(body.size - 1, n).map { |i| body[i] }[0..(cnt - 1)])
+  ret.concat([arr.last])
+  ret
 end
 -%>
 Hi <%= @user.login %>,

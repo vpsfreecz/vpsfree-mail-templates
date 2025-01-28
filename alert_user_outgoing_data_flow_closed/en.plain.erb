@@ -1,0 +1,44 @@
+<%
+def duration(interval)
+  d = interval / 86400
+  h = interval / 3600 % 24
+  m = interval / 60 % 60
+  s = interval % 60
+
+  if d > 0
+    "%d days, %02d:%02d:%02d" % [d, h, m, s]
+  else
+    "%02d:%02d:%02d" % [h, m, s]
+  end
+end
+
+def time(t)
+  return '---' unless t
+  t.localtime.strftime("%Y-%m-%d %H:%M:%S")
+end
+
+def truncate(arr, cnt = 10)
+  return arr if arr.size <= cnt
+  n = arr.size / cnt
+  (n - 1).step(arr.size - 1, n).map { |i| arr[i] }[0..(cnt - 1)]
+end
+-%>
+Hi <%= @user.login %>,
+
+the issue with high outgoing data flow has been resolved.
+
+Monitored since: <%= time(@event.created_at) %>
+Duration: <%= duration(@event.closed_at - @event.created_at) %>
+Log:
+
+  <%= 'Date'.ljust(20) %> <%= 'Data flow [Mbps]'.rjust(18) %>
+  <%= '-' * (20 + 18 + 1) %>
+<% truncate(@event.monitored_event_logs.to_a).each do |log| -%>
+  <%= time(log.created_at).ljust(20) %> <%= (log.value / 1024 / 1024).round(2).to_s.rjust(18) %>
+<% end -%>
+
+Best regards,
+
+vpsFree.cz team
+
+(This is an automated mail from vpsAdmin, your reply will be sent to our support)

@@ -1,0 +1,16 @@
+Hi <%= @vps.user.login %>,
+
+VPS #<%= @vps.id %> <%= @vps.hostname %> had its network disabled.
+You can use remote console in vpsAdmin to log in.
+<% unless @reason.empty? -%>
+
+Reason: <%= @reason %>
+<% end -%>
+
+Please contact support by replying to this email to reenable network.
+
+Best regards,
+
+vpsFree.cz team
+
+(This is an automated mail from vpsAdmin, your reply will be sent to our support)

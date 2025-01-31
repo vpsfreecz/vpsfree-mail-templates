@@ -1,0 +1,17 @@
+Ahoj <%= @vps.user.login %>,
+
+VPS #<%= @vps.id %> <%= @vps.hostname %> bylo odpojeno od sítě. K přihlášení
+můžeš využít vzdálenou konzoli ve vpsAdminu.
+<% unless @reason.empty? -%>
+
+Důvod odpojení: <%= @reason %>
+<% end -%>
+
+Pro opětovné připojení k síti prosím kontaktuj podporu odpovědí na tento
+e-mail.
+
+S pozdravem
+
+tým vpsFree.cz
+
+(Tento mail automaticky rozesílá vpsAdmin, Tvoje odpověď se zašle na naši podporu)

@@ -29,7 +29,15 @@ Více informací o tomto typu incidentu může být v KB:
   https://kb.vpsfree.cz/navody/vps/incidenty#<%= @incident.codename %>
 
 <% end -%>
-<% if @incident.cpu_limit -%>
+<% if @incident.vps_action == 'stop' -%>
+The VPS was stopped. Please check and let us know when the issue is resolved.
+VPS byl vypnut. Prosíme o kontrolu a řešení.
+<% elsif @incident.vps_action == 'suspend' -%>
+VPS bylo vypnuto a pozastaveno. Pro opětovné spuštění prosím kontaktuj podporu.
+<% elsif @incident.vps_action == 'disable_network' -%>
+VPS bylo odpojeno od sítě. Pro opětovné připojení prosím kontaktuj podporu.
+Do VPS se můžeš přihlásit pomocí vzdálené konzole ve vpsAdminu.
+<% elsif @incident.cpu_limit -%>
 Podívej se na to prosím a informuj nás ohledně řešení, abychom mohli zrušit
 nastavený CPU limit.
 <% else -%>

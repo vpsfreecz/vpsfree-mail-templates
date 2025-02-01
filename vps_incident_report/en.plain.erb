@@ -29,7 +29,14 @@ More information about this kind of incident can be found in KB:
   https://kb.vpsfree.org/manuals/vps/incidents#<%= @incident.codename %>
 
 <% end -%>
-<% if @incident.cpu_limit -%>
+<% if @incident.vps_action == 'stop' -%>
+The VPS was stopped. Please check and let us know when the issue is resolved.
+<% elsif @incident.vps_action == 'suspend' -%>
+The VPS was stopped and suspended. Please contact support to unlock it.
+<% elsif @incident.vps_action == 'disable_network' -%>
+The VPS was disconnected from network. Please contact support to have it reconnected.
+Until then, you can log in using the remote console in vpsAdmin.
+<% elsif @incident.cpu_limit -%>
 Please check and let us know when the issue is resolved. The CPU limit will remain
 in place until then.
 <% else -%>

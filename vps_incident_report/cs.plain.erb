@@ -30,8 +30,7 @@ Více informací o tomto typu incidentu může být v KB:
 
 <% end -%>
 <% if @incident.vps_action == 'stop' -%>
-The VPS was stopped. Please check and let us know when the issue is resolved.
-VPS byl vypnut. Prosíme o kontrolu a řešení.
+VPS bylo vypnuto. Prosíme o kontrolu a řešení.
 <% elsif @incident.vps_action == 'suspend' -%>
 VPS bylo vypnuto a pozastaveno. Pro opětovné spuštění prosím kontaktuj podporu.
 <% elsif @incident.vps_action == 'disable_network' -%>

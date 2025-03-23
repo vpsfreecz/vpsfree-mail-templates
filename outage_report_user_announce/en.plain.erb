@@ -40,6 +40,10 @@ Handled by: <%= @o.outage_handlers.map { |h| h.user.full_name }.join(', ') %>
 <%= @o.en_description %>
 <% end -%>
 
+For more information about <%= @o.maintenance? ? 'maintenances' : 'outages' %>, see KB:
+
+  https://kb.vpsfree.org/manuals/vps/outages
+
 Best regards,
 
 vpsFree.cz team

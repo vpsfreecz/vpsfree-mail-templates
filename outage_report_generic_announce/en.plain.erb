@@ -21,6 +21,10 @@ Handled by: <%= @o.outage_handlers.map { |h| h.user.full_name }.join(', ') %>
 <%= @o.en_description %>
 <% end -%>
 
+For more information about <%= @o.maintenance? ? 'maintenances' : 'outages' %>, see KB:
+
+  https://kb.vpsfree.org/manuals/vps/outages
+
 -----BEGIN BASE64 ENCODED PARSEABLE JSON-----
 <%= Base64.encode64(@o.to_hash.to_json).scan(/.{1,76}/).join("\n") %>
 -----END BASE64 ENCODED PARSEABLE JSON-----

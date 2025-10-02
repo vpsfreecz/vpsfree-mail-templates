@@ -1,0 +1,42 @@
+Ahoj <%= @dataset.user.login %>,
+
+<% if @src_pool.node_id == @dst_pool.node_id -%>
+dataset <%= @dataset.full_name %> bude přesunut z poolu <%= @src_pool.name %> na pool pool <%= @dst_pool.name %> na <%= @src_pool.node.domain_name %>.
+<% else -%>
+dataset <%= @dataset.full_name %> bude přesunut z <%= @src_pool.node.domain_name %> na <%= @dst_pool.node.domain_name %>.
+<% end -%>
+<% if @exports.any? -%>
+
+Přesun se týká následujících exportů:
+
+<% @exports.each do |export| -%>
+ - <%= export.host_ip_address.ip_addr %>:<%= export.path %>
+<% end -%>
+
+Během přesunu dojde k vypnutí a zapnutí NFS serveru.
+<% end -%>
+<% if @maintenance_window -%>
+<% days = %i(Ne Po Út St Čt Pá So) -%>
+
+Přesun bude dokončen v nejbližším možném nastaveném oknu pro odstávky:
+
+<% @maintenance_windows.each do |w| -%>
+  - <%= days[w.weekday] %> od <%= sprintf('%02d:%02d', w.opens_at / 60, w.opens_at % 60) %> do <%= sprintf('%02d:%02d', w.closes_at / 60, w.closes_at % 60) %>
+<% end -%>
+
+<% elsif @custom_window -%>
+<% prep = %i(v      v       v     ve     ve      v     v) -%>
+<% days = %i(neděli pondělí úterý středu čtvrtek pátek sobotu) -%>
+
+Přesun bude dokončen <%= prep[@finish_weekday] %> <%= days[@finish_weekday] %> od <%= sprintf('%02d:%02d', @finish_minutes / 60, @finish_minutes % 60) %>.
+<% end -%>
+<% if @reason -%>
+
+Důvod přesunu: <%= @reason %>
+<% end -%>
+
+S pozdravem
+
+tým vpsFree.cz
+
+(Tento mail automaticky rozesílá vpsAdmin, Tvoje odpověď se zašle na naši podporu)

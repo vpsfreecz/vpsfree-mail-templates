@@ -1,0 +1,13 @@
+Hi <%= @dataset.user.login %>,
+
+<% if @src_pool.node_id == @dst_pool.node_id -%>
+the transfer of dataset <%= @dataset.full_name %> from pool <%= @src_pool.name %> to pool <%= @dst_pool.name %> on <%= @src_pool.node.domain_name %> was finished.
+<% else -%>
+the transfer of dataset <%= @dataset.full_name %> from <%= @src_pool.node.domain_name %> to <%= @dst_pool.node.domain_name %> was finished.
+<% end -%>
+
+Best regards,
+
+vpsFree.cz team
+
+(This is an automated mail from vpsAdmin, your reply will be sent to our support)

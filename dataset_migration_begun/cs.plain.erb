@@ -13,7 +13,15 @@ Přesun se týká následujících exportů:
  - <%= export.host_ip_address.ip_addr %>:<%= export.path %>
 <% end -%>
 
+<% if @restart_vps && @export_mounts.any? -%>
+Během přesunu dojde k restartu VPS, kde jsou exporty připojeny:
+
+<% @export_mounts.sort { |a, b| a.vps_id <=> b.vps_id }.each do |ex_m| -%>
+  - VPS #<%= ex_m.vps_id %> <%= ex_m.vps.hostname %>: <%= ex_m.mountpoint %>
+<% end -%>
+<% else -%>
 Během přesunu dojde k vypnutí a zapnutí NFS serveru.
+<% end -%>
 <% end -%>
 <% if @maintenance_window -%>
 <% days = %i(Ne Po Út St Čt Pá So) -%>

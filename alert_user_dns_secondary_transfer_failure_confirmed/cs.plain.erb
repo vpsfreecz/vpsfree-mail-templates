@@ -1,0 +1,46 @@
+<%
+def url(page, params = nil)
+  @base_url + "?page=" + page + (params ? "&#{params}" : "")
+end
+
+def time(t)
+  return '---' unless t
+
+  t.localtime.strftime('%Y-%m-%d %H:%M:%S')
+end
+
+def value(v)
+  v.nil? || v.to_s.empty? ? '---' : v
+end
+
+zone = @object.dns_zone
+server = @object.dns_server
+-%>
+Ahoj <%= @user.login %>,
+
+sekundární DNS server <%= server.name %> nemůže přenést zónu <%= zone.name %>
+z tvého primárního DNS serveru.
+
+Primární server: <%= value(@object.last_transfer_primary_addr) %>
+Čas posledního pokusu: <%= time(@object.last_transfer_at) %>
+Kód chyby: <%= value(@object.last_transfer_reason_code) %>
+Důvod: <%= value(@object.last_transfer_reason) %>
+
+Dokud se přenos nezdaří, naše DNS servery budou poskytovat poslední úspěšně
+načtenou verzi zóny. Oprav prosím konfiguraci zóny nebo povol AXFR z
+primárního serveru na náš sekundární server.
+
+Záznamy přenosů zóny najdeš ve vpsAdminu:
+
+  <%= url('dns', "action=transfer_log&dns_server_zone=#{@object.id}") %>
+
+Pokud tento problém potvrdíš, nebudeš dostávat další upozornění, dokud
+nebude po vyřešení znovu detekován:
+
+  <%= url('monitoring', "action=ack&id=#{@event.id}") %>
+
+S pozdravem
+
+tým vpsFree.cz
+
+(Tento mail automaticky rozesílá vpsAdmin, Tvoje odpověď se zašle na naši podporu)

@@ -1,0 +1,46 @@
+<%
+def url(page, params = nil)
+  @base_url + "?page=" + page + (params ? "&#{params}" : "")
+end
+
+def time(t)
+  return '---' unless t
+
+  t.localtime.strftime('%Y-%m-%d %H:%M:%S')
+end
+
+def value(v)
+  v.nil? || v.to_s.empty? ? '---' : v
+end
+
+zone = @object.dns_zone
+server = @object.dns_server
+-%>
+Hi <%= @user.login %>,
+
+secondary DNS server <%= server.name %> cannot transfer zone <%= zone.name %>
+from your primary DNS server.
+
+Primary server: <%= value(@object.last_transfer_primary_addr) %>
+Last attempt: <%= time(@object.last_transfer_at) %>
+Error code: <%= value(@object.last_transfer_reason_code) %>
+Reason: <%= value(@object.last_transfer_reason) %>
+
+Until the transfer succeeds, our DNS servers will keep serving the last
+successfully loaded version of the zone. Please fix the zone contents or allow
+AXFR from the primary server to our secondary server.
+
+You can view zone transfer logs in vpsAdmin:
+
+  <%= url('dns', "action=transfer_log&dns_server_zone=#{@object.id}") %>
+
+If you acknowledge this issue, you will not receive more alerts until it is
+detected again after being resolved:
+
+  <%= url('monitoring', "action=ack&id=#{@event.id}") %>
+
+Best regards,
+
+vpsFree.cz team
+
+(This is an automated mail from vpsAdmin, your reply will be sent to our support)

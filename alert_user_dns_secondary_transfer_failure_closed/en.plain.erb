@@ -1,0 +1,24 @@
+<%
+def url(page, params = nil)
+  @base_url + "?page=" + page + (params ? "&#{params}" : "")
+end
+
+zone = @object.dns_zone
+server = @object.dns_server
+-%>
+Hi <%= @user.login %>,
+
+secondary transfer of DNS zone <%= zone.name %> to server <%= server.name %>
+is working again.
+
+You can view zone transfer logs in vpsAdmin:
+
+  <%= url('dns', "action=transfer_log&dns_server_zone=#{@object.id}") %>
+
+Thank you.
+
+Best regards,
+
+vpsFree.cz team
+
+(This is an automated mail from vpsAdmin, your reply will be sent to our support)

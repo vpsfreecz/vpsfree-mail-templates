@@ -1,3 +1,6 @@
 source 'https://rubygems.org'
+
 gem 'rake'
-gem 'vpsadmin-mail-templates', path: '../vpsadmin/mail_templates'
+gem 'haveapi-client', '~> 0.27.0'
+gem 'highline', '~> 3.1'
+gem 'logger'

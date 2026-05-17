@@ -13,7 +13,7 @@ or asset tree.
 
 ## Build, Test, and Development Commands
 
-- `nix-shell`: enters the Ruby 3.3 shell and installs dependencies in `.gems`.
+- `nix develop`: enters the Ruby 3.4 shell and installs dependencies in `.gems`.
 - `bundle install`: installs Ruby dependencies.
 - `bundle exec rake test API=https://api.example`: checks API authentication.
 - `bundle exec rake install API=https://api.example`: uploads templates.

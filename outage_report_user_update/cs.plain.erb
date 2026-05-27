@@ -17,7 +17,7 @@ máme pro tebe zprávu ohledně <%= @o.planned_outage? ? 'této odstávky' : 'to
       "Stav: #{old} -> #{new}"
 
     when :impact_type
-      "Typ: #{old} -> #{new}"
+      "Typ: #{Outage.impact_type_label(old)} -> #{Outage.impact_type_label(new)}"
     end
 %>
 <% end -%>

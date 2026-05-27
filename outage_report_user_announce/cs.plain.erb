@@ -32,7 +32,7 @@ Zasažené NFS exporty:
 Datum a čas: <%= @o.begins_at.localtime.strftime('%Y-%m-%d %H:%M %Z') %>
 Očekávaná délka: <%= @o.duration %> minut
 Oznámení se týka serverů: <%= @o.outage_entities.map { |e| e.real_name }.join(', ') %>
-Typ <%= @o.planned_outage? ? 'odstávky' : 'výpadku' %>: <%= @o.impact_type %>
+Typ <%= @o.planned_outage? ? 'odstávky' : 'výpadku' %>: <%= @o.impact_type_label %>
 Důvod: <%= @o.cs_summary %>
 <%= @o.planned_outage? ? 'Odstávku' : 'Výpadek' %> řeší: <%= @o.outage_handlers.map { |h| h.user.full_name }.join(', ') %>
 <% if @o.cs_description && !@o.cs_description.empty? -%>

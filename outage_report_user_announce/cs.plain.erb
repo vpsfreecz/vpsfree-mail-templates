@@ -35,6 +35,15 @@ Oznámení se týka serverů: <%= @o.outage_entities.map { |e| e.real_name }.joi
 Typ <%= @o.planned_outage? ? 'odstávky' : 'výpadku' %>: <%= @o.impact_type_label %>
 Důvod: <%= @o.cs_summary %>
 <%= @o.planned_outage? ? 'Odstávku' : 'Výpadek' %> řeší: <%= @o.outage_handlers.map { |h| h.user.full_name }.join(', ') %>
+<% if @security_advisory_cves && @security_advisory_cves.any? -%>
+Související CVE:
+<% @security_advisory_cves.each do |cve| -%>
+  - <%= cve[:cve_id] %><%= cve[:advisory_name] && !cve[:advisory_name].empty? ? " - #{cve[:advisory_name]}" : '' %>
+<% end -%>
+<% end -%>
+<% if @webui_url && !@webui_url.empty? -%>
+Detail <%= @o.planned_outage? ? 'odstávky' : 'výpadku' %>: <%= @webui_url %>/?page=outage&action=show&id=<%= @o.id %>
+<% end -%>
 <% if @o.cs_description && !@o.cs_description.empty? -%>
 
 <%= @o.cs_description %>

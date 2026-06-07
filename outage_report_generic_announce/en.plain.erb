@@ -1,4 +1,4 @@
-Datum a čas: <%= @o.begins_at.localtime.strftime('%Y-%m-%d %H:%M %Z') %>
+Datum a čas: <%= local_time(@o.begins_at, '%Y-%m-%d %H:%M %Z') %>
 Očekavaná délka: <%= @o.duration %> minut
 Oznámení se týká serverů: <%= @o.outage_entities.map { |e| e.real_name }.join(', ') %>
 Typ <%= @o.planned_outage? ? 'odstávky' : 'výpadku' %>: <%= @o.impact_type_label %>
@@ -19,7 +19,7 @@ Detail <%= @o.planned_outage? ? 'odstávky' : 'výpadku' %>: <%= @webui_url %>/?
 <% end -%>
 
 ENGLISH:
-Date and time: <%= @o.begins_at.localtime.strftime('%Y-%m-%d %H:%M %Z') %>
+Date and time: <%= local_time(@o.begins_at, '%Y-%m-%d %H:%M %Z') %>
 Expected duration: <%= @o.duration %> minutes
 Affected systems: <%= @o.outage_entities.map { |e| e.real_name }.join(', ') %>
 <%= @o.planned_outage? ? 'Planned outage' : 'Unplanned outage' %> impact: <%= @o.impact_type_label %>

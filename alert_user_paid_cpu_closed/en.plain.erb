@@ -14,7 +14,7 @@ end
 
 def time(t)
   return '---' unless t
-  t.localtime.strftime("%Y-%m-%d %H:%M:%S")
+  local_time(t, "%Y-%m-%d %H:%M:%S")
 end
 
 def truncate(arr, cnt = 10)

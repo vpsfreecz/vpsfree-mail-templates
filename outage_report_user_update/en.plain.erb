@@ -5,10 +5,10 @@ we have an update for you regarding this <%= @o.planned_outage? ? 'planned outag
 <% @update.each_change do |attr, old, new| -%>
 <%= case attr
     when :begins_at
-      "Begins at: moved from #{old.localtime.strftime('%Y-%m-%d %H:%M %Z')} to #{new.localtime.strftime('%Y-%m-%d %H:%M %Z')}"
+      "Begins at: moved from #{local_time(old, '%Y-%m-%d %H:%M %Z')} to #{local_time(new, '%Y-%m-%d %H:%M %Z')}"
 
     when :finished_at
-      "Finished at: #{new.localtime.strftime('%Y-%m-%d %H:%M %Z')}"
+      "Finished at: #{local_time(new, '%Y-%m-%d %H:%M %Z')}"
 
     when :duration
       "Duration: #{old} -> #{new} minutes"

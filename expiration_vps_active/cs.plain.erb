@@ -21,8 +21,8 @@ V případě nejasností se obrať na podpora@vpsfree.cz.
 <% end -%>
 
 Prostředí:       <%= @vps.node.location.environment.label %>
-Datum vytvoření: <%= @vps.created_at.strftime('%Y-%m-%d') %>
-Datum expirace:  <%= @vps.expiration_date.strftime('%Y-%m-%d') %>
+Datum vytvoření: <%= local_date(@vps.created_at, '%Y-%m-%d') %>
+Datum expirace:  <%= local_date(@vps.expiration_date, '%Y-%m-%d') %>
 
 Zasílání dalších upozornění o konci životnosti této VPS můžeš vypnout
 na následujícím odkazu:

@@ -5,10 +5,10 @@ máme pro tebe zprávu ohledně <%= @o.planned_outage? ? 'této odstávky' : 'to
 <% @update.each_change do |attr, old, new| -%>
 <%= case attr
     when :begins_at
-      "Datum a čas: přesunuto z #{old.localtime.strftime('%Y-%m-%d %H:%M %Z')} na #{new.localtime.strftime('%Y-%m-%d %H:%M %Z')}"
+      "Datum a čas: přesunuto z #{local_time(old, '%Y-%m-%d %H:%M %Z')} na #{local_time(new, '%Y-%m-%d %H:%M %Z')}"
 
     when :finished_at
-      "Vyřešeno v: #{new.localtime.strftime('%Y-%m-%d %H:%M %Z')}"
+      "Vyřešeno v: #{local_time(new, '%Y-%m-%d %H:%M %Z')}"
 
     when :duration
       "Očekávaná délka: #{old} -> #{new} minut"

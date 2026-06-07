@@ -4,10 +4,10 @@ evidujeme následující pokusy o přihlášení do vpsAdminu (https://vpsadmin.
 
 <% @attempt_groups.each do |attempts| -%>
 <% if attempts.length == 1 -%>
-  Datum a čas:         <%= attempts.first.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>
+  Datum a čas:         <%= local_time(attempts.first.created_at, '%Y-%m-%d %H:%M:%S %Z') %>
 <% else -%>
-  První pokus:         <%= attempts.first.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>
-  Poslední pokus:      <%= attempts.last.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>
+  První pokus:         <%= local_time(attempts.first.created_at, '%Y-%m-%d %H:%M:%S %Z') %>
+  Poslední pokus:      <%= local_time(attempts.last.created_at, '%Y-%m-%d %H:%M:%S %Z') %>
 <% end -%>
   Počet pokusů:        <%= attempts.length %>
   Autentizační metoda: <%= attempts.first.auth_type %>

@@ -4,7 +4,7 @@ We noticed a login to your vpsAdmin account (https://vpsadmin.vpsfree.cz)
 from a new device.
 
   Service:        <%= @authorization.oauth2_client.name %>
-  Date and time:  <%= @user_session.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>
+  Date and time:  <%= local_time(@user_session.created_at, '%Y-%m-%d %H:%M:%S %Z') %>
   Device:         <%= @user_device.user_agent.to_user_friendly_s %>
   IP address:     <%= @user_device.client_ip_addr %>
   Reverse record: <%= @user_device.client_ip_ptr %>

@@ -11,7 +11,7 @@ Bylo zaznamenáno <%= @all_oom_count %> případů vyčerpání paměti:
 <% end -%>
 
 <% @selected_oom_reports.each do |r| -%>
-  <%= r.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>  <%= r.killed_name ? "Ukončen #{r.killed_name}" : 'Nic neukončeno' %> <%= r.count %>x
+  <%= local_time(r.created_at, '%Y-%m-%d %H:%M:%S %Z') %>  <%= r.killed_name ? "Ukončen #{r.killed_name}" : 'Nic neukončeno' %> <%= r.count %>x
 <% end -%>
 <% if @all_oom_count != @selected_oom_count -%>
 

@@ -63,7 +63,7 @@
       </tr>
       <% @selected_oom_reports.each do |r| -%>
         <tr>
-          <td><%= r.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %></td>
+          <td><%= local_time(r.created_at, '%Y-%m-%d %H:%M:%S %Z') %></td>
           <td><%= r.killed_name ? "Ukončen #{r.killed_name}" : 'Nic neukončeno' %></td>
           <td><%= r.count %></td>
           <td><a href="<%= @base_url %>?page=oom_reports&action=show&id=<%= r.id %>">Podrobnosti</a></td>

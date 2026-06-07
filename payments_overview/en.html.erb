@@ -60,10 +60,10 @@ end
 <h1>Payments overview</h1>
 <dl>
   <dt>From:</dt>
-  <dd><%= @start.localtime.strftime("%Y-%m-%d %H:%M") %></dd>
+  <dd><%= local_time(@start, "%Y-%m-%d %H:%M") %></dd>
 
   <dt>To:</dt>
-  <dd><%= @end.localtime.strftime("%Y-%m-%d %H:%M") %></dd>
+  <dd><%= local_time(@end, "%Y-%m-%d %H:%M") %></dd>
 </dl>
 
 <h2>Incoming payments</h2>
@@ -104,7 +104,7 @@ end
     </tr>
     <% @unmatched.each do |p| %>
       <tr>
-        <td><%= p.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        <td><%= local_time(p.created_at, '%Y-%m-%d %H:%M:%S') %></td>
         <td><%= p.amount %></td>
         <td><%= p.transaction_type %></td>
         <td><%= p.account_name %></td>
@@ -128,7 +128,7 @@ end
     </tr>
     <% @accepted.each do |p| %>
       <tr>
-        <td><%= p.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        <td><%= local_time(p.created_at, '%Y-%m-%d %H:%M:%S') %></td>
         <td>
           <% if p.user_id %>
             <a href="<%= url("adminm", "action=edit&id=#{p.user_id}") %>"><%= "#{p.user_id} #{p.user.login}" %></a>
@@ -144,8 +144,8 @@ end
           <% end %>
         </td>
         <td><%= p.amount %></td>
-        <td><%= p.from_date.localtime.strftime('%Y-%m-%d') %></td>
-        <td><%= p.to_date.localtime.strftime('%Y-%m-%d') %></td>
+        <td><%= local_date(p.from_date, '%Y-%m-%d') %></td>
+        <td><%= local_date(p.to_date, '%Y-%m-%d') %></td>
       </tr>
     <% end %>
   </table>

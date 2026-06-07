@@ -4,7 +4,7 @@ Pro ověření přihlášení do vpsAdminu (https://vpsadmin.vpsfree.cz) pomocí
 byl právě použit obnovovací kód. Obnovovací kód slouží pro nouzové přihlášení
 do vpsAdminu pokud není dostupné žádné z autentizačních zařízení.
 
-  Datum a čas:           <%= @time.strftime('%Y-%m-%d %H:%M:%S') %>
+  Datum a čas:           <%= local_time(@time, '%Y-%m-%d %H:%M:%S') %>
   Autentizační zařízení: <%= @totp_device.label %>
   IP adresa:             <%= @request.env['HTTP_CLIENT_IP'] || @request.ip %>
   User agent:            <%= @request.user_agent %>

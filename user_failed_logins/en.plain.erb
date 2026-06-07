@@ -4,10 +4,10 @@ We noticed failed login attempts into your vpsAdmin account (https://vpsadmin.vp
 
 <% @attempt_groups.each do |attempts| -%>
 <% if attempts.length == 1 -%>
-  Date and time:         <%= attempts.first.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>
+  Date and time:         <%= local_time(attempts.first.created_at, '%Y-%m-%d %H:%M:%S %Z') %>
 <% else -%>
-  First attempt:         <%= attempts.first.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>
-  Last attempt:          <%= attempts.last.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>
+  First attempt:         <%= local_time(attempts.first.created_at, '%Y-%m-%d %H:%M:%S %Z') %>
+  Last attempt:          <%= local_time(attempts.last.created_at, '%Y-%m-%d %H:%M:%S %Z') %>
 <% end -%>
   Number of attempts:    <%= attempts.length %>
   Authentication method: <%= attempts.first.auth_type %>

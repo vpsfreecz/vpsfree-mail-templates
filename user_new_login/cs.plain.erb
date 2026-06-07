@@ -3,7 +3,7 @@ Ahoj <%= @user.login %>,
 evidujeme přihlášení do vpsAdminu (https://vpsadmin.vpsfree.cz) z nového zařízení.
 
   Služba:          <%= @authorization.oauth2_client.name %>
-  Datum a čas:     <%= @user_session.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S %Z') %>
+  Datum a čas:     <%= local_time(@user_session.created_at, '%Y-%m-%d %H:%M:%S %Z') %>
   Zařízení:        <%= @user_device.user_agent.to_user_friendly_s %>
   IP adresa:       <%= @user_device.client_ip_addr %>
   Reverzní záznam: <%= @user_device.client_ip_ptr %>

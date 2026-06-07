@@ -7,7 +7,7 @@ end
 def time(t)
   return '---' unless t
   t = Time.at(t) unless t.is_a?(::Time)
-  t.strftime("%Y-%m-%d %H:%M:%S")
+  local_time(t, "%Y-%m-%d %H:%M:%S")
 end
 
 def duration(interval)
@@ -85,7 +85,7 @@ END
 	<td><a href="#{url("adminvps", "user=#{u.id}")}">#{u.vpses.count}</a></td>
 	<td>#{u.full_name}</td>
 	<td><a href="mailto:#{u.email}">#{u.email}</a></td>
-	<td>#{u.current_object_state.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')}</td>
+	<td>#{local_time(u.current_object_state.created_at, '%Y-%m-%d %H:%M:%S')}</td>
      </tr>
 END
 
@@ -120,7 +120,7 @@ END
 	<td>#{vps.node_id} #{vps.node.domain_name}</td>
 	<td>#{vps.cpu} cores</td>
 	<td>#{vps.memory / 1024} GiB</td>
-	<td>#{vps.current_object_state.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S')}</td>
+	<td>#{local_time(vps.current_object_state.created_at, '%Y-%m-%d %H:%M:%S')}</td>
       </tr>
 END
    end
@@ -207,10 +207,10 @@ end
 <h1>Daily report</h1>
 <dl>
   <dt>From:</dt>
-  <dd><%= @date[:start].localtime.strftime("%Y-%m-%d %H:%M") %></dd>
+  <dd><%= local_time(@date[:start], "%Y-%m-%d %H:%M") %></dd>
 
   <dt>To:</dt>
-  <dd><%= @date[:end].localtime.strftime("%Y-%m-%d %H:%M") %></dd>
+  <dd><%= local_time(@date[:end], "%Y-%m-%d %H:%M") %></dd>
 </dl>
 
 <h2>Overview</h2>
@@ -432,7 +432,7 @@ END
     <% @chains[:all_failed].includes(:user, :transaction_chain_concerns).each do |c| %>
       <tr class="error">
         <td><a href="<%= url("transactions", "chain=#{c.id}") %>"><%= c.id %></a></td>
-        <td><%= c.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        <td><%= local_time(c.created_at, '%Y-%m-%d %H:%M:%S') %></td>
         <td>
 	  <% if c.user_id %>
 	    <a href="<%= url("adminm", "action=edit&id=#{c.user_id}") %>"><%= "#{c.user_id} #{c.user.login}" %></a>
@@ -590,7 +590,7 @@ END
         <td><%= (exp.dataset.refquota / 1024.0).round(2) %> GiB</td>
         <td><%= (exp.dataset.referenced / 1024.0).round(2) %> GiB</td>
         <td><%= exp.expansion_count %></td>
-        <td><%= exp.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        <td><%= local_time(exp.created_at, '%Y-%m-%d %H:%M:%S') %></td>
       </tr>
     <% end %>
   </table>
@@ -617,7 +617,7 @@ END
         <td><%= exp.vps.dataset.full_name %></td>
         <td><%= (exp.added_space / 1024.0).round(2) %> GiB</td>
         <td><%= exp.expansion_count %></td>
-        <td><%= exp.created_at.localtime.strftime('%Y-%m-%d') %></td>
+        <td><%= local_date(exp.created_at, '%Y-%m-%d') %></td>
         <td><%= (exp.over_refquota_seconds / 60.0 / 60 / 24).round(1) %>/<%= (exp.max_over_refquota_seconds / 60.0 / 60 / 24).round %></td>
       </tr>
     <% end %>
@@ -641,7 +641,7 @@ END
         <td><a href="<%= url("adminm", "action=edit&id=#{inc.user_id}") %>"><%= inc.user_id %> <%= inc.user.login %></a></td>
         <td><a href="<%= url("adminvps", "action=info&veid=#{inc.vps_id}") %>"><%= inc.vps_id %></a></td>
         <td><%= inc.ip_address_assignment ? inc.ip_address_assignment.ip_address : '-' %></td>
-        <td><%= inc.detected_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        <td><%= local_time(inc.detected_at, '%Y-%m-%d %H:%M:%S') %></td>
         <td><%= inc.subject %></td>
       </tr>
     <% end %>
@@ -679,7 +679,7 @@ END
     </tr>
     <% @oom_reports[:preventions].each do |prev| %>
       <tr>
-        <td><%= prev.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        <td><%= local_time(prev.created_at, '%Y-%m-%d %H:%M:%S') %></td>
         <td><a href="<%= url("adminvps", "action=info&veid=#{prev.vps_id}") %>"><%= prev.vps_id %></a></td>
         <td><%= prev.action %></td>
       </tr>
@@ -731,7 +731,7 @@ END
     </tr>
     <% @dns_zones[:new].each do |zone| %>
       <tr>
-        <td><%= zone.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        <td><%= local_time(zone.created_at, '%Y-%m-%d %H:%M:%S') %></td>
         <td>
           <% if zone.user_id %>
             <a href="<%= url("adminm", "action=edit&id=#{zone.user_id}") %>"><%= "#{zone.user_id} #{zone.user.login}" %></a>
@@ -759,7 +759,7 @@ END
     </tr>
     <% @dns_record_logs.each do |log| %>
       <tr>
-        <td><%= log.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        <td><%= local_time(log.created_at, '%Y-%m-%d %H:%M:%S') %></td>
         <td>
           <% if log.user_id %>
             <a href="<%= url("adminm", "action=edit&id=#{log.user_id}") %>"><%= "#{log.user_id} #{log.user.login}" %></a>
@@ -829,7 +829,7 @@ type = <%= log.record_type %>
     </tr>
     <% @payments[:unmatched].each do |p| %>
       <tr>
-        <td><%= p.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        <td><%= local_time(p.created_at, '%Y-%m-%d %H:%M:%S') %></td>
         <td><%= p.amount %></td>
         <td><%= p.transaction_type %></td>
         <td><%= p.account_name %></td>
@@ -853,7 +853,7 @@ type = <%= log.record_type %>
     </tr>
     <% @payments[:accepted].each do |p| %>
       <tr>
-        <td><%= p.created_at.localtime.strftime('%Y-%m-%d %H:%M:%S') %></td>
+        <td><%= local_time(p.created_at, '%Y-%m-%d %H:%M:%S') %></td>
         <td>
           <% if p.user_id %>
             <a href="<%= url("adminm", "action=edit&id=#{p.user_id}") %>"><%= "#{p.user_id} #{p.user.login}" %></a>
@@ -869,8 +869,8 @@ type = <%= log.record_type %>
           <% end %>
         </td>
         <td><%= p.amount %></td>
-        <td><%= p.from_date.localtime.strftime('%Y-%m-%d') %></td>
-        <td><%= p.to_date.localtime.strftime('%Y-%m-%d') %></td>
+        <td><%= local_date(p.from_date, '%Y-%m-%d') %></td>
+        <td><%= local_date(p.to_date, '%Y-%m-%d') %></td>
       </tr>
     <% end %>
   </table>

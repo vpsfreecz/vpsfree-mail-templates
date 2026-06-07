@@ -22,8 +22,8 @@ this e-mail.
 <% end -%>
 
 Environment:     <%= @vps.node.location.environment.label %>
-Creation date:   <%= @vps.created_at.strftime('%Y-%m-%d') %>
-Expiration date: <%= @vps.expiration_date.strftime('%Y-%m-%d') %>
+Creation date:   <%= local_date(@vps.created_at, '%Y-%m-%d') %>
+Expiration date: <%= local_date(@vps.expiration_date, '%Y-%m-%d') %>
 
 Further notifications about the end-of-life of this VPS can be disabled
 on the link below:

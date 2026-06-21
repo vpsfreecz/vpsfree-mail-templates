@@ -22,11 +22,8 @@
         let
           pkgs = import nixpkgs { inherit system; };
           ruby = pkgs.ruby_3_4;
-          vpsadminMailTemplates = pkgs.writeShellScriptBin "vpsadmin-mail-templates" ''
-            exec ${ruby}/bin/ruby -I${vpsadmin.outPath}/mail_templates/lib ${vpsadmin.outPath}/mail_templates/bin/vpsadmin-mail-templates "$@"
-          '';
           vpsadminNotificationTemplates = pkgs.writeShellScriptBin "vpsadmin-notification-templates" ''
-            exec ${ruby}/bin/ruby -I${vpsadmin.outPath}/mail_templates/lib ${vpsadmin.outPath}/mail_templates/bin/vpsadmin-mail-templates "$@"
+            exec ${ruby}/bin/ruby -I${vpsadmin.outPath}/notification_templates/lib ${vpsadmin.outPath}/notification_templates/bin/vpsadmin-notification-templates "$@"
           '';
         in
         {
@@ -36,7 +33,6 @@
             packages = with pkgs; [
               git
               ruby
-              vpsadminMailTemplates
               vpsadminNotificationTemplates
             ];
 
@@ -51,7 +47,6 @@
               gem_bin="$(${ruby}/bin/ruby -e 'puts Gem.bindir')"
               ${ruby}/bin/bundle install
 
-              rm -f "$gem_bin/vpsadmin-mail-templates"
               rm -f "$gem_bin/vpsadmin-notification-templates"
 
               export RUBYOPT=-rbundler/setup

@@ -2,13 +2,14 @@
 
 ## Project Structure & Module Organization
 
-Templates for vpsAdmin live in top-level snake_case directories, such as
-`user_create/`, `vps_network_enabled/`, or
-`alert_user_diskspace_closed_primary/`.
+Templates for vpsAdmin live in `templates/<name>/` snake_case directories, such
+as `templates/user_create/`, `templates/vps_network_enabled/`, or
+`templates/alert_user_diskspace_closed_primary/`.
 
-Each directory contains `meta.rb` for the label, sender addresses, and localized
-subjects. Bodies are localized ERB files such as `en.plain.erb`,
-`cs.plain.erb`, `en.html.erb`, or `cs.html.erb`. There is no `src/`, `test/`,
+Each directory contains `meta.rb` for the template id, label, visibility, and
+protocol defaults. Protocol-specific ERB files live under `email/` and
+`telegram/`, for example `email/en.subject.erb`, `email/en.text.erb`,
+`email/en.html.erb`, and `telegram/en.text.erb`. There is no `src/`, `test/`,
 or asset tree.
 
 ## Build, Test, and Development Commands
@@ -17,8 +18,8 @@ or asset tree.
 - `bundle install`: installs Ruby dependencies.
 - `bundle exec rake test API=https://api.example`: checks API authentication.
 - `bundle exec rake install API=https://api.example`: uploads templates.
-- `bundle exec vpsadmin-mail-templates https://api.example install`: uploads
-  without Rake.
+- `bundle exec vpsadmin-notification-templates https://api.example install`:
+  uploads without Rake.
 
 ## Coding Style & Naming Conventions
 
@@ -26,9 +27,10 @@ Follow `.editorconfig`: UTF-8, LF line endings, trimmed whitespace, and 2-space
 indentation for `.rb` and `.erb` files. Name new template directories in
 snake_case, such as `dataset_migration_finished`.
 
-Keep `meta.rb` consistent with existing `template do` and `lang :en/:cs` blocks.
-In templates, use `<%= ... %>` interpolation and readable plain-text wrapping.
-Update relevant localized files together, especially subjects in `meta.rb`.
+Keep `meta.rb` consistent with existing `template do` and `protocol :email`
+blocks. In templates, use `<%= ... %>` interpolation and readable text wrapping.
+Update relevant localized protocol files together, especially
+`email/*.subject.erb` and `email/*.text.erb`.
 
 ## Language & Communication Style
 

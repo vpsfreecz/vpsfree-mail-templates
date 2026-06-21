@@ -1,5 +1,5 @@
 {
-  description = "vpsFree.cz mail templates for vpsAdmin";
+  description = "vpsFree.cz notification templates for vpsAdmin";
 
   inputs = {
     vpsadmin.url = "github:vpsfreecz/vpsadmin/master";
@@ -25,15 +25,19 @@
           vpsadminMailTemplates = pkgs.writeShellScriptBin "vpsadmin-mail-templates" ''
             exec ${ruby}/bin/ruby -I${vpsadmin.outPath}/mail_templates/lib ${vpsadmin.outPath}/mail_templates/bin/vpsadmin-mail-templates "$@"
           '';
+          vpsadminNotificationTemplates = pkgs.writeShellScriptBin "vpsadmin-notification-templates" ''
+            exec ${ruby}/bin/ruby -I${vpsadmin.outPath}/mail_templates/lib ${vpsadmin.outPath}/mail_templates/bin/vpsadmin-mail-templates "$@"
+          '';
         in
         {
           default = pkgs.mkShell {
-            name = "vpsfree-mail-templates";
+            name = "vpsfree-notification-templates";
 
             packages = with pkgs; [
               git
               ruby
               vpsadminMailTemplates
+              vpsadminNotificationTemplates
             ];
 
             shellHook = ''
@@ -48,12 +52,13 @@
               ${ruby}/bin/bundle install
 
               rm -f "$gem_bin/vpsadmin-mail-templates"
+              rm -f "$gem_bin/vpsadmin-notification-templates"
 
               export RUBYOPT=-rbundler/setup
               export PATH="$PATH:$gem_bin"
 
               if [ -n "''${PS1-}" ]; then
-                export PS1="(dev:mail-templates) $PS1"
+                export PS1="(dev:notification-templates) $PS1"
               fi
             '';
           };

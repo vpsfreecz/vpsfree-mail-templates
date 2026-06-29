@@ -15,5 +15,5 @@
          end -%>
 <% if url.present? -%>
 
-Link: <a href="<%= ERB::Util.html_escape(url.to_s) %>">open in vpsAdmin</a>
+Link: <a href="<%= ERB::Util.html_escape(url.to_s) %>"><%= @event.vps ? 'VPS details' : 'security advisory' %></a>
 <% end -%>

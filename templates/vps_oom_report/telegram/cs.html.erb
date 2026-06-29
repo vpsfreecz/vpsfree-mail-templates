@@ -1,4 +1,4 @@
-<% oom_link = webui_link('otevřít ve vpsAdminu', "?page=oom_reports&vps=#{@vps.id}&list=1") -%>
+<% oom_link = webui_link('hlášení OOM', "?page=oom_reports&vps=#{@vps.id}&list=1") -%>
 <b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): hlášení o nedostatku paměti</b>
 
 Zjištěné OOM: <code><%= @all_oom_count %></code>

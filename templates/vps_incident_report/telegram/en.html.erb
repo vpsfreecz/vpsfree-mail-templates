@@ -1,4 +1,4 @@
-<% vps_link = webui_link('open in vpsAdmin', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<% vps_link = webui_link('VPS details', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
 <b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): incident report #<%= @incident.id %></b>
 
 Subject: <%= h(@incident.subject) %>

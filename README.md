@@ -4,8 +4,9 @@ This repository contains notification templates for vpsAdmin used at
 [vpsFree.cz](http://www.vpsfree.cz). It contains protocol-specific templates
 for e-mail and Telegram notification delivery.
 
-After editing, the templates must be installed (sent to the API) using the
-vpsAdmin notification template uploader.
+The flake package exposes the `templates/` tree for managed vpsAdmin
+deployments. vpsAdmin installs managed templates with its API rake task and a
+source id, so unchanged redeploys do not rewrite database templates.
 
 ## Layout
 
@@ -31,28 +32,16 @@ parse mode when supported.
 
 ## Checks
 
-Run the local syntax and Telegram HTML check before uploading:
+Run the local syntax and Telegram HTML check before committing:
 
     $ bundle exec rake check
 
 ## Installation
 
-Templates can be installed by invoking `vpsadmin-notification-templates`
-directly, or by using `rake`.
+Managed deployments should consume this repository as a flake input and pass
+the package to vpsAdmin. For a manual install from a checked-out tree, run the
+API task from a vpsAdmin API environment:
 
-The user name and password is prompted on stdin if it is not set.
-
-For example:
-
-    $ vpsadmin-notification-templates https://api.vpsfree.cz install
-
-or
-
-    $ rake API=https://api.vpsfree.cz
-
-Rake task accepts several variables:
-
- - `API` - the URL of the API to upload templates to
- - `INSTALLER` - uploader command, defaults to `vpsadmin-notification-templates`
- - `USERNAME`
- - `PASSWORD`
+    $ TEMPLATE_PATH=/path/to/vpsfree-notification-templates \
+      SOURCE_ID=manual-$(git rev-parse --short HEAD) \
+      bundle exec rake vpsadmin:notification_templates:install_managed

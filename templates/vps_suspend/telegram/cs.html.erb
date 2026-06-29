@@ -1,8 +1,8 @@
-<% vps_link = webui_link('otevřít ve vpsAdminu', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<% vps_link = webui_link('podrobnosti VPS', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
 <b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): pozastaveno</b>
 
 Stav: <code>pozastaveno</code>
-Důvod: <%= h(@state.reason) %>
+Důvod: <%= markdown_telegram_html(@state.reason) %>
 <% if @state.user -%>
 Pozastavil: <%= h(@state.user.full_name) %>
 <% end -%>

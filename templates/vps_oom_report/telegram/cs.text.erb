@@ -1,14 +1,15 @@
-<%= @event.subject %>
-<% if @event.summary.present? -%>
+VPS <%= @vps.hostname %> (#<%= @vps.id %>): hlášení o nedostatku paměti
 
-<%= @event.summary %>
+Zjištěné OOM: <%= @all_oom_count %>
+Zobrazené OOM: <%= @selected_oom_count %>
+<% @selected_oom_reports.each do |r| -%>
+- <%= local_time(r.created_at, '%Y-%m-%d %H:%M:%S %Z') %>: <%= r.killed_name ? "Ukončen #{r.killed_name}" : 'Nic neukončeno' %>, <%= r.count %>x
 <% end -%>
-<% if @event.vps -%>
-
-VPS: #<%= @event.vps.id %> <%= @event.vps.hostname %>
+<% if @all_oom_count != @selected_oom_count -%>
+Další OOM: <%= @all_oom_count - @selected_oom_count %>
 <% end -%>
-<% url = webui_url("?page=notifications&action=event_show&id=#{@event.id}") -%>
-<% if url.present? -%>
+<% oom_url = webui_url("?page=oom_reports&vps=#{@vps.id}&list=1") -%>
+<% if oom_url.present? -%>
 
-Otevrit: <%= url %>
+Odkaz: <%= oom_url %>
 <% end -%>

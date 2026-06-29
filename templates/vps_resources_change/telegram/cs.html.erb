@@ -1,17 +1,16 @@
-<% subject = ERB::Util.html_escape(@event.subject.to_s) -%>
-<b><%= subject %></b>
-<% if @event.summary.present? -%>
+<% vps_link = webui_link('otevřít ve vpsAdminu', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): změna parametrů</b>
 
-<%= ERB::Util.html_escape(@event.summary.to_s) %>
+Aktuální limity:
+CPU: <code><%= @vps.cpu %> jader, limit <%= @vps.cpu_limit || (@vps.cpu * 100) %> %</code>
+Paměť: <code><%= @vps.memory %> MB</code>
+Swap: <code><%= @vps.swap %> MB</code>
+
+Důvod: <%= h(@reason) %>
+<% if @admin -%>
+Změnil: <%= h(@admin.full_name) %>
 <% end -%>
-<% if @event.vps -%>
-<% vps_label = "##{@event.vps.id} #{@event.vps.hostname}" -%>
-<% vps_url = webui_url("?page=adminvps&action=info&veid=#{@event.vps.id}") -%>
+<% if vps_link.present? -%>
 
-VPS: <% if vps_url.present? -%><a href="<%= ERB::Util.html_escape(vps_url.to_s) %>"><%= ERB::Util.html_escape(vps_label) %></a><% else -%><%= ERB::Util.html_escape(vps_label) %><% end -%>
-<% end -%>
-<% url = webui_url("?page=notifications&action=event_show&id=#{@event.id}") -%>
-<% if url.present? -%>
-
-Otevrit: <a href="<%= ERB::Util.html_escape(url.to_s) %>">detail udalosti</a>
+Odkaz: <%= vps_link %>
 <% end -%>

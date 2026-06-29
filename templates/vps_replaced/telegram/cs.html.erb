@@ -1,17 +1,15 @@
-<% subject = ERB::Util.html_escape(@event.subject.to_s) -%>
-<b><%= subject %></b>
-<% if @event.summary.present? -%>
+<% link_vps = @new_vps || @original_vps -%>
+<% vps_link = link_vps && webui_link('otevřít ve vpsAdminu', "?page=adminvps&action=info&veid=#{link_vps.id}") -%>
+<b>VPS <%= h(@original_vps.hostname) %> (#<%= @original_vps.id %>): nahrazeno</b>
 
-<%= ERB::Util.html_escape(@event.summary.to_s) %>
+Původní VPS: <code>#<%= @original_vps.id %> <%= h(@original_vps.hostname) %></code>
+<% if @new_vps -%>
+Nové VPS: <code>#<%= @new_vps.id %> <%= h(@new_vps.hostname) %></code>
 <% end -%>
-<% if @event.vps -%>
-<% vps_label = "##{@event.vps.id} #{@event.vps.hostname}" -%>
-<% vps_url = webui_url("?page=adminvps&action=info&veid=#{@event.vps.id}") -%>
-
-VPS: <% if vps_url.present? -%><a href="<%= ERB::Util.html_escape(vps_url.to_s) %>"><%= ERB::Util.html_escape(vps_label) %></a><% else -%><%= ERB::Util.html_escape(vps_label) %><% end -%>
+<% if @reason.present? -%>
+Důvod: <%= h(@reason) %>
 <% end -%>
-<% url = webui_url("?page=notifications&action=event_show&id=#{@event.id}") -%>
-<% if url.present? -%>
+<% if vps_link.present? -%>
 
-Otevrit: <a href="<%= ERB::Util.html_escape(url.to_s) %>">detail udalosti</a>
+Odkaz: <%= vps_link %>
 <% end -%>

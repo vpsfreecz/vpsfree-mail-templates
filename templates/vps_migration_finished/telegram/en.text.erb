@@ -1,14 +1,10 @@
-<%= @event.subject %>
-<% if @event.summary.present? -%>
+VPS <%= @vps.hostname %> (#<%= @vps.id %>): migration finished
 
-<%= @event.summary %>
-<% end -%>
-<% if @event.vps -%>
+From: <%= @src_node.domain_name %>
+To: <%= @dst_node.domain_name %>
+State: finished
+<% vps_url = webui_url("?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<% if vps_url.present? -%>
 
-VPS: #<%= @event.vps.id %> <%= @event.vps.hostname %>
-<% end -%>
-<% url = webui_url("?page=notifications&action=event_show&id=#{@event.id}") -%>
-<% if url.present? -%>
-
-Open: <%= url %>
+Link: <%= vps_url %>
 <% end -%>

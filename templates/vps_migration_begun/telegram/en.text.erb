@@ -1,14 +1,18 @@
-<%= @event.subject %>
-<% if @event.summary.present? -%>
+VPS <%= @vps.hostname %> (#<%= @vps.id %>): migration started
 
-<%= @event.summary %>
+From: <%= @src_node.domain_name %>
+To: <%= @dst_node.domain_name %>
+<% if @maintenance_window -%>
+Window: maintenance window
+<% elsif @custom_window -%>
+<% days = %w[Sunday Monday Tuesday Wednesday Thursday Friday Saturday] -%>
+Window: custom, finishes <%= days[@finish_weekday.to_i] %> from <%= sprintf('%02d:%02d', @finish_minutes.to_i / 60, @finish_minutes.to_i % 60) %>
 <% end -%>
-<% if @event.vps -%>
-
-VPS: #<%= @event.vps.id %> <%= @event.vps.hostname %>
+<% if @reason.present? -%>
+Reason: <%= @reason %>
 <% end -%>
-<% url = webui_url("?page=notifications&action=event_show&id=#{@event.id}") -%>
-<% if url.present? -%>
+<% vps_url = webui_url("?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<% if vps_url.present? -%>
 
-Open: <%= url %>
+Link: <%= vps_url %>
 <% end -%>

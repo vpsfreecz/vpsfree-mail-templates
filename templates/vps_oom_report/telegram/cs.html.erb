@@ -1,17 +1,15 @@
-<% subject = ERB::Util.html_escape(@event.subject.to_s) -%>
-<b><%= subject %></b>
-<% if @event.summary.present? -%>
+<% oom_link = webui_link('otevřít ve vpsAdminu', "?page=oom_reports&vps=#{@vps.id}&list=1") -%>
+<b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): hlášení o nedostatku paměti</b>
 
-<%= ERB::Util.html_escape(@event.summary.to_s) %>
+Zjištěné OOM: <code><%= @all_oom_count %></code>
+Zobrazené OOM: <code><%= @selected_oom_count %></code>
+<% @selected_oom_reports.each do |r| -%>
+- <%= h(local_time(r.created_at, '%Y-%m-%d %H:%M:%S %Z')) %>: <%= h(r.killed_name ? "Ukončen #{r.killed_name}" : 'Nic neukončeno') %>, <%= r.count %>x
 <% end -%>
-<% if @event.vps -%>
-<% vps_label = "##{@event.vps.id} #{@event.vps.hostname}" -%>
-<% vps_url = webui_url("?page=adminvps&action=info&veid=#{@event.vps.id}") -%>
-
-VPS: <% if vps_url.present? -%><a href="<%= ERB::Util.html_escape(vps_url.to_s) %>"><%= ERB::Util.html_escape(vps_label) %></a><% else -%><%= ERB::Util.html_escape(vps_label) %><% end -%>
+<% if @all_oom_count != @selected_oom_count -%>
+Další OOM: <code><%= @all_oom_count - @selected_oom_count %></code>
 <% end -%>
-<% url = webui_url("?page=notifications&action=event_show&id=#{@event.id}") -%>
-<% if url.present? -%>
+<% if oom_link.present? -%>
 
-Otevrit: <a href="<%= ERB::Util.html_escape(url.to_s) %>">detail udalosti</a>
+Odkaz: <%= oom_link %>
 <% end -%>

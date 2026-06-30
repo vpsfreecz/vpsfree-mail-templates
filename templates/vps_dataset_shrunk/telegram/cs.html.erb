@@ -1,4 +1,4 @@
-<% vps_link = webui_link('otevřít ve vpsAdminu', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<% vps_link = webui_link('podrobnosti VPS', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
 <b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): dataset zmenšen</b>
 
 Dataset: <code><%= h(@dataset.full_name) %></code>

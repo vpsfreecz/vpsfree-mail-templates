@@ -1,4 +1,4 @@
-<% vps_link = webui_link('open in vpsAdmin', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<% vps_link = webui_link('VPS details', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
 <% reason = @reason || (@m.respond_to?(:migration_plan) && @m.migration_plan&.reason) -%>
 <b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): migration planned</b>
 
@@ -6,7 +6,7 @@ From: <code><%= h(@src_node.domain_name) %></code>
 To: <code><%= h(@dst_node.domain_name) %></code>
 Window: <%= @m.maintenance_window ? 'maintenance window' : 'scheduled by administrators' %>
 <% if reason.present? -%>
-Reason: <%= h(reason) %>
+Reason: <%= markdown_telegram_html(reason) %>
 <% end -%>
 <% if vps_link.present? -%>
 

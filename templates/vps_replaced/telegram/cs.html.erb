@@ -1,5 +1,5 @@
 <% link_vps = @new_vps || @original_vps -%>
-<% vps_link = link_vps && webui_link('otevřít ve vpsAdminu', "?page=adminvps&action=info&veid=#{link_vps.id}") -%>
+<% vps_link = link_vps && webui_link('podrobnosti VPS', "?page=adminvps&action=info&veid=#{link_vps.id}") -%>
 <b>VPS <%= h(@original_vps.hostname) %> (#<%= @original_vps.id %>): nahrazeno</b>
 
 Původní VPS: <code>#<%= @original_vps.id %> <%= h(@original_vps.hostname) %></code>
@@ -7,7 +7,7 @@ Původní VPS: <code>#<%= @original_vps.id %> <%= h(@original_vps.hostname) %></
 Nové VPS: <code>#<%= @new_vps.id %> <%= h(@new_vps.hostname) %></code>
 <% end -%>
 <% if @reason.present? -%>
-Důvod: <%= h(@reason) %>
+Důvod: <%= markdown_telegram_html(@reason) %>
 <% end -%>
 <% if vps_link.present? -%>
 

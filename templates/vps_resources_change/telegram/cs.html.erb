@@ -2,7 +2,7 @@
 <% vps_path = "?page=adminvps&action=info&veid=#{@vps.id}" -%>
 <% vps_link = webui_link(vps_label, vps_path) -%>
 <% details_link = webui_link('podrobnosti VPS', vps_path) -%>
-<% cpu_limit = @vps.cpu_limit.to_i > 0 ? "#{@vps.cpu_limit} %" : 'bez limitu' -%>
+<% cpu_limit = @vps.cpu_limit || (@vps.cpu * 100) -%>
 <% changed_by = if @admin
                   if @admin.respond_to?(:full_name) && @admin.full_name.present?
                     @admin.full_name
@@ -13,7 +13,7 @@
 <b>Změna parametrů VPS: <%= vps_link || h(vps_label) %></b>
 
 <b>Aktuální limity:</b>
-CPU: <code><%= @vps.cpu %> jader, limit <%= h(cpu_limit) %></code>
+CPU: <code><%= @vps.cpu %> jader, limit <%= h(cpu_limit) %> %</code>
 Paměť: <code><%= @vps.memory %> MB</code>
 Swap: <code><%= @vps.swap %> MB</code>
 

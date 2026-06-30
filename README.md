@@ -22,7 +22,18 @@ templates/user_create/
     en.html.erb
   telegram/
     en.text.erb
+    en.html.erb
 ```
+
+Telegram `*.text.erb` files are required as the fallback body. Telegram
+`*.html.erb` files are optional rich bodies sent by vpsAdmin with Telegram HTML
+parse mode when supported.
+
+## Checks
+
+Run the local syntax and Telegram HTML check before uploading:
+
+    $ bundle exec rake check
 
 ## Installation
 

@@ -18,10 +18,10 @@ the HTML body. There is no `src/`, `test/`, or asset tree.
 - `nix develop`: enters the Ruby 3.4 shell and installs dependencies in `.gems`.
 - `bundle install`: installs Ruby dependencies.
 - `bundle exec rake check`: checks ERB syntax and literal Telegram HTML tags.
-- `bundle exec rake test API=https://api.example`: checks API authentication.
-- `bundle exec rake install API=https://api.example`: uploads templates.
-- `bundle exec vpsadmin-notification-templates https://api.example install`:
-  uploads without Rake.
+- The flake package exposes the `templates/` tree. Install managed templates
+  from a vpsAdmin API environment with
+  `bundle exec rake vpsadmin:notification_templates:install_managed`, setting
+  `TEMPLATE_PATH` or `TEMPLATE_PATHS` and `SOURCE_ID`.
 
 ## Coding Style & Naming Conventions
 
@@ -48,10 +48,9 @@ tables, lists, and direct action links.
 
 ## Testing Guidelines
 
-There is no standalone unit test suite. Run `bundle exec rake check`, inspect
-rendered ERB syntax visually when content changes, then run
-`bundle exec rake test API=...` before uploading. For changed templates, prefer
-staging with `bundle exec rake install API=...` before production.
+There is no standalone unit test suite. Run `bundle exec rake check` and inspect
+rendered ERB syntax visually when content changes. Managed installation is
+validated from vpsAdmin's API task and deployment checks.
 
 ## Commit & Pull Request Guidelines
 
@@ -62,11 +61,11 @@ multi-line messages, write the message in a temporary file and commit with
 `git commit -F /tmp/message-file`; avoid interactive editor cleanup.
 
 Pull requests should name affected directories, explain user-visible changes,
-and note upload or authentication testing. Include rendered previews for
-`.html.erb` changes.
+and note managed-install or deployment validation. Include rendered previews
+for `.html.erb` changes.
 
 ## Security & Configuration Tips
 
 Do not commit API credentials, rendered mails containing personal data, or local
-`.gems` content. Use explicit `API=...` values so uploads go to the intended
-environment.
+`.gems` content. For manual managed installs, use an explicit `SOURCE_ID` that
+identifies the template source revision.

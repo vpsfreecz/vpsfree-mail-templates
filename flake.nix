@@ -2,29 +2,44 @@
   description = "vpsFree.cz notification templates for vpsAdmin";
 
   inputs = {
-    vpsadmin.url = "github:vpsfreecz/vpsadmin/master";
-    nixpkgs.follows = "vpsadmin/nixpkgs";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
   };
 
   outputs =
     {
       self,
       nixpkgs,
-      vpsadmin,
     }:
     let
       supportedSystems = [ "x86_64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+      revision = nixpkgs.lib.removeSuffix "-dirty" (self.rev or self.dirtyRev or "dev");
     in
     {
+      packages = forAllSystems (
+        system:
+        let
+          pkgs = import nixpkgs { inherit system; };
+        in
+        {
+          default = pkgs.stdenvNoCC.mkDerivation {
+            pname = "vpsfree-notification-templates";
+            version = nixpkgs.lib.strings.sanitizeDerivationName revision;
+            src = ./.;
+
+            installPhase = ''
+              mkdir -p "$out"
+              cp -a templates "$out/templates"
+            '';
+          };
+        }
+      );
+
       devShells = forAllSystems (
         system:
         let
           pkgs = import nixpkgs { inherit system; };
           ruby = pkgs.ruby_3_4;
-          vpsadminNotificationTemplates = pkgs.writeShellScriptBin "vpsadmin-notification-templates" ''
-            exec ${ruby}/bin/ruby -I${vpsadmin.outPath}/notification_templates/lib ${vpsadmin.outPath}/notification_templates/bin/vpsadmin-notification-templates "$@"
-          '';
         in
         {
           default = pkgs.mkShell {
@@ -33,7 +48,6 @@
             packages = with pkgs; [
               git
               ruby
-              vpsadminNotificationTemplates
             ];
 
             shellHook = ''
@@ -46,8 +60,6 @@
 
               gem_bin="$(${ruby}/bin/ruby -e 'puts Gem.bindir')"
               ${ruby}/bin/bundle install
-
-              rm -f "$gem_bin/vpsadmin-notification-templates"
 
               export RUBYOPT=-rbundler/setup
               export PATH="$PATH:$gem_bin"

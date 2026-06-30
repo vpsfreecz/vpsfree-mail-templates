@@ -1,14 +1,18 @@
-<%= @event.subject %>
-<% if @event.summary.present? -%>
+VPS <%= @vps.hostname %> (#<%= @vps.id %>): vypnuto kvůli diskové kvótě
 
-<%= @event.summary %>
+Stav: vypnuto
+Dataset: <%= @dataset.full_name %>
+Původní velikost: <%= (@expansion.original_refquota / 1024.0).round %> GiB
+Aktuální velikost: <%= (@dataset.refquota / 1024.0).round %> GiB
+Zabrané místo: <%= (@dataset.referenced / 1024.0).round(2) %> GiB
+<% stop_vps = @expansion.respond_to?(:stop_vps) && @expansion.stop_vps -%>
+Počet rozšíření: <%= @expansion.expansion_count %><% if stop_vps -%>/3<% end -%>
+Doba překročení: <%= (@expansion.over_refquota_seconds / 60.0 / 60 / 24).round(1) %>/<%= (@expansion.max_over_refquota_seconds / 60.0 / 60 / 24).round(0) %> dní
+<% if @expansion.enable_shrink -%>
+Zmenšení: dostupné ve vpsAdminu po poklesu využití pod <%= ((@expansion.original_refquota / 1024.0 / 100) * 95).round(2) %> GiB
 <% end -%>
-<% if @event.vps -%>
+<% vps_url = webui_url("?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<% if vps_url.present? -%>
 
-VPS: #<%= @event.vps.id %> <%= @event.vps.hostname %>
-<% end -%>
-<% url = webui_url("?page=notifications&action=event_show&id=#{@event.id}") -%>
-<% if url.present? -%>
-
-Otevrit: <%= url %>
+Odkaz: <%= vps_url %>
 <% end -%>

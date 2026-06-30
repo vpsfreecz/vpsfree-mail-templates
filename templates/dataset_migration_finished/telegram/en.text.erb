@@ -1,14 +1,18 @@
+<% if @event.vps -%>
+VPS <%= @event.vps.hostname %> (#<%= @event.vps.id %>): <%= @event.subject %>
+<% else -%>
 <%= @event.subject %>
+<% end -%>
 <% if @event.summary.present? -%>
 
 <%= @event.summary %>
 <% end -%>
-<% if @event.vps -%>
-
-VPS: #<%= @event.vps.id %> <%= @event.vps.hostname %>
-<% end -%>
-<% url = webui_url("?page=notifications&action=event_show&id=#{@event.id}") -%>
+<% url = if @event.vps
+           webui_url("?page=adminvps&action=info&veid=#{@event.vps.id}")
+         else
+           webui_url("?page=notifications&action=event_show&id=#{@event.id}")
+         end -%>
 <% if url.present? -%>
 
-Open: <%= url %>
+Link: <%= url %>
 <% end -%>

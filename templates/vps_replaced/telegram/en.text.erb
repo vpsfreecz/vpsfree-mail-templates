@@ -1,14 +1,15 @@
-<%= @event.subject %>
-<% if @event.summary.present? -%>
+VPS <%= @original_vps.hostname %> (#<%= @original_vps.id %>): replaced
 
-<%= @event.summary %>
+Original VPS: #<%= @original_vps.id %> <%= @original_vps.hostname %>
+<% if @new_vps -%>
+New VPS: #<%= @new_vps.id %> <%= @new_vps.hostname %>
 <% end -%>
-<% if @event.vps -%>
-
-VPS: #<%= @event.vps.id %> <%= @event.vps.hostname %>
+<% if @reason.present? -%>
+Reason: <%= @reason %>
 <% end -%>
-<% url = webui_url("?page=notifications&action=event_show&id=#{@event.id}") -%>
-<% if url.present? -%>
+<% link_vps = @new_vps || @original_vps -%>
+<% vps_url = link_vps && webui_url("?page=adminvps&action=info&veid=#{link_vps.id}") -%>
+<% if vps_url.present? -%>
 
-Open: <%= url %>
+Link: <%= vps_url %>
 <% end -%>

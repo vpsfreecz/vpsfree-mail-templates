@@ -1,14 +1,14 @@
-<%= @event.subject %>
-<% if @event.summary.present? -%>
+VPS <%= @vps.hostname %> (#<%= @vps.id %>): migration planned
 
-<%= @event.summary %>
+From: <%= @src_node.domain_name %>
+To: <%= @dst_node.domain_name %>
+Window: <%= @m.maintenance_window ? 'maintenance window' : 'scheduled by administrators' %>
+<% reason = @reason || (@m.respond_to?(:migration_plan) && @m.migration_plan&.reason) -%>
+<% if reason.present? -%>
+Reason: <%= reason %>
 <% end -%>
-<% if @event.vps -%>
+<% vps_url = webui_url("?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<% if vps_url.present? -%>
 
-VPS: #<%= @event.vps.id %> <%= @event.vps.hostname %>
-<% end -%>
-<% url = webui_url("?page=notifications&action=event_show&id=#{@event.id}") -%>
-<% if url.present? -%>
-
-Open: <%= url %>
+Link: <%= vps_url %>
 <% end -%>

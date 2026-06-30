@@ -1,17 +1,17 @@
-<% subject = ERB::Util.html_escape(@event.subject.to_s) -%>
-<b><%= subject %></b>
-<% if @event.summary.present? -%>
+<% vps_link = webui_link('otevřít ve vpsAdminu', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<% stop_vps = @expansion.respond_to?(:stop_vps) && @expansion.stop_vps -%>
+<b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): dataset rozšířen</b>
 
-<%= ERB::Util.html_escape(@event.summary.to_s) %>
+Přidáno: <code><%= (@expansion.added_space / 1024.0).round %> GiB</code>
+Dataset: <code><%= h(@dataset.full_name) %></code>
+Původní velikost: <code><%= (@expansion.original_refquota / 1024.0).round %> GiB</code>
+Nová velikost: <code><%= (@dataset.refquota / 1024.0).round %> GiB</code>
+Zabrané místo: <code><%= (@dataset.referenced / 1024.0).round(2) %> GiB</code>
+Počet rozšíření: <code><%= @expansion.expansion_count %><% if stop_vps -%>/3<% end -%></code>
+<% if @expansion.enable_shrink -%>
+Zmenšení: dostupné ve vpsAdminu po poklesu využití pod <code><%= ((@expansion.original_refquota / 1024.0 / 100) * 95).round(2) %> GiB</code>
 <% end -%>
-<% if @event.vps -%>
-<% vps_label = "##{@event.vps.id} #{@event.vps.hostname}" -%>
-<% vps_url = webui_url("?page=adminvps&action=info&veid=#{@event.vps.id}") -%>
+<% if vps_link.present? -%>
 
-VPS: <% if vps_url.present? -%><a href="<%= ERB::Util.html_escape(vps_url.to_s) %>"><%= ERB::Util.html_escape(vps_label) %></a><% else -%><%= ERB::Util.html_escape(vps_label) %><% end -%>
-<% end -%>
-<% url = webui_url("?page=notifications&action=event_show&id=#{@event.id}") -%>
-<% if url.present? -%>
-
-Otevrit: <a href="<%= ERB::Util.html_escape(url.to_s) %>">detail udalosti</a>
+Odkaz: <%= vps_link %>
 <% end -%>

@@ -9,13 +9,15 @@ as `templates/user_create/`, `templates/vps_network_enabled/`, or
 Each directory contains `meta.rb` for the template id, label, visibility, and
 protocol defaults. Protocol-specific ERB files live under `email/` and
 `telegram/`, for example `email/en.subject.erb`, `email/en.text.erb`,
-`email/en.html.erb`, and `telegram/en.text.erb`. There is no `src/`, `test/`,
-or asset tree.
+`email/en.html.erb`, `telegram/en.text.erb`, and optional
+`telegram/en.html.erb`. Telegram text templates are required as fallbacks for
+the HTML body. There is no `src/`, `test/`, or asset tree.
 
 ## Build, Test, and Development Commands
 
 - `nix develop`: enters the Ruby 3.4 shell and installs dependencies in `.gems`.
 - `bundle install`: installs Ruby dependencies.
+- `bundle exec rake check`: checks ERB syntax and literal Telegram HTML tags.
 - `bundle exec rake test API=https://api.example`: checks API authentication.
 - `bundle exec rake install API=https://api.example`: uploads templates.
 - `bundle exec vpsadmin-notification-templates https://api.example install`:
@@ -46,9 +48,10 @@ tables, lists, and direct action links.
 
 ## Testing Guidelines
 
-There is no standalone unit test suite. Check rendered ERB syntax visually, then
-run `bundle exec rake test API=...` before uploading. For changed templates,
-prefer staging with `bundle exec rake install API=...` before production.
+There is no standalone unit test suite. Run `bundle exec rake check`, inspect
+rendered ERB syntax visually when content changes, then run
+`bundle exec rake test API=...` before uploading. For changed templates, prefer
+staging with `bundle exec rake install API=...` before production.
 
 ## Commit & Pull Request Guidelines
 

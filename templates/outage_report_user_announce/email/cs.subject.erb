@@ -1,0 +1,1 @@
+[vpsFree.cz] <%= @o.planned_outage? ? 'Odstávka' : 'Výpadek' %> - <%= @o.outage_entities.map { |e| e.real_name }.join(', ') %> - <%= local_time(@o.begins_at, '%Y-%m-%d %H:%M %Z') %>

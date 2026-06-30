@@ -1,9 +1,9 @@
-<% vps_link = webui_link('open in vpsAdmin', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<% vps_link = webui_link('VPS details', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
 <b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): network disabled</b>
 
 Network: <code>disabled</code>
 <% if @reason.present? -%>
-Reason: <%= h(@reason) %>
+Reason: <%= markdown_telegram_html(@reason) %>
 <% end -%>
 Access: remote console in vpsAdmin
 <% if vps_link.present? -%>

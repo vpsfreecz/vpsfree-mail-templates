@@ -15,5 +15,5 @@
          end -%>
 <% if url.present? -%>
 
-Odkaz: <a href="<%= ERB::Util.html_escape(url.to_s) %>">otevřít ve vpsAdminu</a>
+Odkaz: <a href="<%= ERB::Util.html_escape(url.to_s) %>"><%= @event.vps ? 'podrobnosti VPS' : 'bezpečnostní upozornění' %></a>
 <% end -%>

@@ -1,4 +1,4 @@
-<% vps_link = webui_link('open in vpsAdmin', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<% vps_link = webui_link('VPS details', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
 <% stop_vps = @expansion.respond_to?(:stop_vps) && @expansion.stop_vps -%>
 <b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): dataset expanded</b>
 

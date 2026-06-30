@@ -1,7 +1,7 @@
 def run(action)
   fail 'API must be set' unless ENV['API']
 
-  cmd = ['vpsadmin-mail-templates', ENV['API'], action]
+  cmd = [ENV.fetch('INSTALLER', 'vpsadmin-notification-templates'), ENV['API'], action]
 
   cmd << "--user #{ENV['USERNAME']}" if ENV['USERNAME']
   cmd << "--password #{ENV['PASSWORD']}" if ENV['PASSWORD']
@@ -15,7 +15,7 @@ task :test do
   run(:auth)
 end
 
-desc 'Install mail templates'
+desc 'Install notification templates'
 task :install do
   run(:install)
 end

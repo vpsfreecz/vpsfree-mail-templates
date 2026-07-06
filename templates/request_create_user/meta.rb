@@ -1,4 +1,4 @@
-template :request_action_role do
+template :request_create_user do
   label 'Request create (user)'
 
   protocol :email do

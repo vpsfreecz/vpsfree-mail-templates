@@ -1,4 +1,4 @@
-template :request_resolve_role_type_state do
+template :request_resolve_user_registration_denied do
   label 'Request registration denied (user)'
 
   protocol :email do

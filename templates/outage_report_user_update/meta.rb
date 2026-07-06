@@ -1,4 +1,4 @@
-template :outage_report_role_event do
+template :outage_report_user_update do
   label 'User outage report update'
 
   protocol :email do

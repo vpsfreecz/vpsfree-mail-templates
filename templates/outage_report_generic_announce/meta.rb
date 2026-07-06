@@ -1,4 +1,4 @@
-template :outage_report_role_event do
+template :outage_report_generic_announce do
   label 'Generic outage report announcement'
   user_visibility false
 

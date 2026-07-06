@@ -1,4 +1,4 @@
-template :request_action_role do
+template :request_resolve_admin do
   label 'Request resolve (admin)'
 
   protocol :email do

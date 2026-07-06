@@ -1,4 +1,4 @@
-template :request_action_role_type do
+template :request_create_user_registration do
   label 'Request registration (user)'
 
   protocol :email do

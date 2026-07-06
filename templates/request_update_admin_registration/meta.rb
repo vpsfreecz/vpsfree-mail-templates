@@ -1,4 +1,4 @@
-template :request_action_role_type do
+template :request_update_admin_registration do
   label 'Registration request update (admin)'
 
   protocol :email do

@@ -4,7 +4,7 @@
 
 Templates for vpsAdmin live in `templates/<name>/` snake_case directories, such
 as `templates/user_create/`, `templates/vps_network_enabled/`, or
-`templates/alert_user_diskspace_closed_primary/`.
+`templates/alert_diskspace_closed_primary/`.
 
 Each directory contains `meta.rb` for the template id, label, visibility, and
 protocol defaults. Protocol-specific ERB files live under `email/` and

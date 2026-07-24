@@ -1,0 +1,11 @@
+<%= @group_event_count %> seskupených událostí vpsAdminu
+<% @group_events.each do |event| -%>
+- [<%= event.severity %>] <%= event.subject %> (<%= event.event_type %>)
+<% end -%>
+<% if @group_truncated_count > 0 -%>
+… a dalších <%= @group_truncated_count %>
+<% end -%>
+<% if @base_url.present? -%>
+
+Odkaz: <%= @base_url %>?page=notifications&action=events
+<% end -%>

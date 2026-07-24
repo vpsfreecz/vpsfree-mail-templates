@@ -1,0 +1,28 @@
+Hi <%= @user.login %>,
+
+vpsAdmin grouped <%= @group_event_count %> related events:
+
+<% @group_events.each do |event| -%>
+  <%= local_time(event.created_at, '%Y-%m-%d %H:%M:%S %Z') %>  [<%= event.severity %>] <%= event.subject %>
+  Type: <%= event.event_type %>
+<% if event.vps -%>
+  VPS: #<%= event.vps.id %> <%= event.vps.hostname %>
+<% end -%>
+<% if event.summary.present? -%>
+  <%= event.summary %>
+<% end -%>
+
+<% end -%>
+<% if @group_truncated_count > 0 -%>
+<%= @group_truncated_count %> more events are not shown in this message.
+
+<% end -%>
+You can view the events in vpsAdmin:
+
+  <%= @base_url %>?page=notifications&action=events
+
+Best regards,
+
+vpsFree.cz team
+
+(This is an automated mail from vpsAdmin, your reply will be sent to our support)

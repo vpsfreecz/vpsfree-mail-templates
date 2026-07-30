@@ -1,0 +1,24 @@
+<% vps_link = webui_link('VPS details', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): incident report #<%= @incident.id %></b>
+
+Subject: <%= h(@incident.subject) %>
+<% if @incident.ip_address -%>
+IP address: <code><%= h(@incident.ip_address.to_s) %></code>
+<% end -%>
+<% if @incident.cpu_limit -%>
+CPU limit: <code><%= @incident.cpu_limit %> %</code>
+<% end -%>
+<% if @incident.vps_action.present? -%>
+Action: <code><%= h(@incident.vps_action) %></code>
+<% end -%>
+<% if @incident.text.present? -%>
+Message:
+<%= h(@incident.text) %>
+<% end -%>
+<% if @incident.codename -%>
+KB: https://kb.vpsfree.org/manuals/vps/incidents#<%= h(@incident.codename) %>
+<% end -%>
+<% if vps_link.present? -%>
+
+Link: <%= vps_link %>
+<% end -%>

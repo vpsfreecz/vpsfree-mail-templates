@@ -1,0 +1,15 @@
+<% oom_link = webui_link('OOM reports', "?page=oom_reports&vps=#{@vps.id}&list=1") -%>
+<b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): out of memory reports</b>
+
+Detected OOMs: <code><%= @all_oom_count %></code>
+Shown OOMs: <code><%= @selected_oom_count %></code>
+<% @selected_oom_reports.each do |r| -%>
+- <%= h(local_time(r.created_at, '%Y-%m-%d %H:%M:%S %Z')) %>: <%= h(r.killed_name ? "Killed #{r.killed_name}" : 'Nothing killed') %>, <%= r.count %>x
+<% end -%>
+<% if @all_oom_count != @selected_oom_count -%>
+More OOMs: <code><%= @all_oom_count - @selected_oom_count %></code>
+<% end -%>
+<% if oom_link.present? -%>
+
+Link: <%= oom_link %>
+<% end -%>

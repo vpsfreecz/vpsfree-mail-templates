@@ -1,14 +1,8 @@
-<%= @event.subject %>
-<% if @event.summary.present? -%>
+VPS <%= @vps.hostname %> (#<%= @vps.id %>): připojeno k síti
 
-<%= @event.summary %>
-<% end -%>
-<% if @event.vps -%>
+Síť: připojena
+<% vps_url = webui_url("?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<% if vps_url.present? -%>
 
-VPS: #<%= @event.vps.id %> <%= @event.vps.hostname %>
-<% end -%>
-<% url = webui_url("?page=notifications&action=event_show&id=#{@event.id}") -%>
-<% if url.present? -%>
-
-Otevrit: <%= url %>
+Odkaz: <%= vps_url %>
 <% end -%>

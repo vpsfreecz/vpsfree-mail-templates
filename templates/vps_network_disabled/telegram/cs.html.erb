@@ -1,0 +1,12 @@
+<% vps_link = webui_link('podrobnosti VPS', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): odpojeno od sítě</b>
+
+Síť: <code>odpojena</code>
+<% if @reason.present? -%>
+Důvod: <%= markdown_telegram_html(@reason) %>
+<% end -%>
+Přístup: vzdálená konzole ve vpsAdminu
+<% if vps_link.present? -%>
+
+Odkaz: <%= vps_link %>
+<% end -%>

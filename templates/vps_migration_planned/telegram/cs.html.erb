@@ -1,0 +1,14 @@
+<% vps_link = webui_link('podrobnosti VPS', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<% reason = @reason || (@m.respond_to?(:migration_plan) && @m.migration_plan&.reason) -%>
+<b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): přesun naplánován</b>
+
+Z: <code><%= h(@src_node.domain_name) %></code>
+Na: <code><%= h(@dst_node.domain_name) %></code>
+Okno: <%= @m.maintenance_window ? 'servisní okno' : 'naplánováno administrátory' %>
+<% if reason.present? -%>
+Důvod: <%= markdown_telegram_html(reason) %>
+<% end -%>
+<% if vps_link.present? -%>
+
+Odkaz: <%= vps_link %>
+<% end -%>

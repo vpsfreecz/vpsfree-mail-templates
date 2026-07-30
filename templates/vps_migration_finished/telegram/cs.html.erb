@@ -1,0 +1,10 @@
+<% vps_link = webui_link('podrobnosti VPS', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): přesun dokončen</b>
+
+Z: <code><%= h(@src_node.domain_name) %></code>
+Na: <code><%= h(@dst_node.domain_name) %></code>
+Stav: <code>dokončeno</code>
+<% if vps_link.present? -%>
+
+Odkaz: <%= vps_link %>
+<% end -%>

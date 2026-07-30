@@ -1,0 +1,18 @@
+<% vps_link = webui_link('VPS details', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<% same_resolver = @old_dns_resolver.id == @new_dns_resolver.id -%>
+<b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): DNS resolver changed</b>
+
+<% if same_resolver -%>
+Resolver: <%= h(@new_dns_resolver.label) %>
+<% else -%>
+Old resolver: <%= h(@old_dns_resolver.label) %>
+New resolver: <%= h(@new_dns_resolver.label) %>
+<% end -%>
+New addresses:
+<% @new_dns_resolver.addrs.to_s.split(',').each do |addr| -%>
+- <code><%= h(addr.strip) %></code>
+<% end -%>
+<% if vps_link.present? -%>
+
+Link: <%= vps_link %>
+<% end -%>

@@ -1,0 +1,24 @@
+<% vps_link = webui_link('podrobnosti VPS', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): upozornění #<%= @incident.id %></b>
+
+Předmět: <%= h(@incident.subject) %>
+<% if @incident.ip_address -%>
+IP adresa: <code><%= h(@incident.ip_address.to_s) %></code>
+<% end -%>
+<% if @incident.cpu_limit -%>
+CPU limit: <code><%= @incident.cpu_limit %> %</code>
+<% end -%>
+<% if @incident.vps_action.present? -%>
+Akce: <code><%= h(@incident.vps_action) %></code>
+<% end -%>
+<% if @incident.text.present? -%>
+Zpráva:
+<%= h(@incident.text) %>
+<% end -%>
+<% if @incident.codename -%>
+KB: https://kb.vpsfree.cz/navody/vps/incidenty#<%= h(@incident.codename) %>
+<% end -%>
+<% if vps_link.present? -%>
+
+Odkaz: <%= vps_link %>
+<% end -%>

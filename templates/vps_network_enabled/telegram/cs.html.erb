@@ -1,0 +1,8 @@
+<% vps_link = webui_link('podrobnosti VPS', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): připojeno k síti</b>
+
+Síť: <code>připojena</code>
+<% if vps_link.present? -%>
+
+Odkaz: <%= vps_link %>
+<% end -%>

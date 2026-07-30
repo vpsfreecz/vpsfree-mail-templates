@@ -1,0 +1,9 @@
+<% vps_link = webui_link('podrobnosti VPS', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): nouzový režim</b>
+
+Stav: <code>běží v nouzovém režimu</code>
+Po dokončení prací vrať VPS prosím do běžného režimu.
+<% if vps_link.present? -%>
+
+Odkaz: <%= vps_link %>
+<% end -%>

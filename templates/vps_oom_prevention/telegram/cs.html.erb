@@ -1,0 +1,10 @@
+<% vps_link = webui_link('podrobnosti VPS', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): prevence OOM</b>
+
+OOM: <code><%= @ooms_in_period %></code> za posledních <code><%= @period_seconds.to_i / 60 %> minut</code>
+Akce: <code><%= @action == :restart ? 'restartováno' : 'vypnuto' %></code>
+Zkontroluj prosím využití paměti ve VPS.
+<% if vps_link.present? -%>
+
+Odkaz: <%= vps_link %>
+<% end -%>

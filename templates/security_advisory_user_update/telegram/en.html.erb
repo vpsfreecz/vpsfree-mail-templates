@@ -1,0 +1,19 @@
+<% subject = if @event.vps
+               "VPS #{@event.vps.hostname} (##{@event.vps.id}): #{@event.subject}"
+             else
+               @event.subject.to_s
+             end -%>
+<b><%= ERB::Util.html_escape(subject) %></b>
+<% if @event.summary.present? -%>
+
+<%= ERB::Util.html_escape(@event.summary.to_s) %>
+<% end -%>
+<% url = if @event.vps
+           webui_url("?page=adminvps&action=info&veid=#{@event.vps.id}")
+         else
+           webui_url("?page=notifications&action=event_show&id=#{@event.id}")
+         end -%>
+<% if url.present? -%>
+
+Link: <a href="<%= ERB::Util.html_escape(url.to_s) %>"><%= @event.vps ? 'VPS details' : 'security advisory' %></a>
+<% end -%>

@@ -1,0 +1,15 @@
+<% oom_link = webui_link('hlášení OOM', "?page=oom_reports&vps=#{@vps.id}&list=1") -%>
+<b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): hlášení o nedostatku paměti</b>
+
+Zjištěné OOM: <code><%= @all_oom_count %></code>
+Zobrazené OOM: <code><%= @selected_oom_count %></code>
+<% @selected_oom_reports.each do |r| -%>
+- <%= h(local_time(r.created_at, '%Y-%m-%d %H:%M:%S %Z')) %>: <%= h(r.killed_name ? "Ukončen #{r.killed_name}" : 'Nic neukončeno') %>, <%= r.count %>x
+<% end -%>
+<% if @all_oom_count != @selected_oom_count -%>
+Další OOM: <code><%= @all_oom_count - @selected_oom_count %></code>
+<% end -%>
+<% if oom_link.present? -%>
+
+Odkaz: <%= oom_link %>
+<% end -%>

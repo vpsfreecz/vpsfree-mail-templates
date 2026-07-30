@@ -1,0 +1,10 @@
+<% vps_link = webui_link('VPS details', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): dataset shrunk</b>
+
+Dataset: <code><%= h(@dataset.full_name) %></code>
+Size: <code><%= (@expansion.original_refquota / 1024.0).round %> GiB</code>
+State: returned to original size
+<% if vps_link.present? -%>
+
+Link: <%= vps_link %>
+<% end -%>

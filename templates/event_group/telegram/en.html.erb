@@ -1,0 +1,11 @@
+<b><%= @group_event_count %> grouped vpsAdmin events</b>
+<% @group_events.each do |event| -%>
+- [<code><%= h(event.severity) %></code>] <%= h(event.subject) %> (<code><%= h(event.event_type) %></code>)
+<% end -%>
+<% if @group_truncated_count > 0 -%>
+… and <%= @group_truncated_count %> more
+<% end -%>
+<% if @base_url.present? -%>
+
+Link: <a href="<%= h("#{@base_url}?page=notifications&action=events") %>">events in vpsAdmin</a>
+<% end -%>

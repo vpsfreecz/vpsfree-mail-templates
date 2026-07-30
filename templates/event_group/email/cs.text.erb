@@ -1,0 +1,28 @@
+Ahoj <%= @user.login %>,
+
+vpsAdmin seskupil <%= @group_event_count %> souvisejících událostí:
+
+<% @group_events.each do |event| -%>
+  <%= local_time(event.created_at, '%Y-%m-%d %H:%M:%S %Z') %>  [<%= event.severity %>] <%= event.subject %>
+  Typ: <%= event.event_type %>
+<% if event.vps -%>
+  VPS: #<%= event.vps.id %> <%= event.vps.hostname %>
+<% end -%>
+<% if event.summary.present? -%>
+  <%= event.summary %>
+<% end -%>
+
+<% end -%>
+<% if @group_truncated_count > 0 -%>
+Dalších <%= @group_truncated_count %> událostí není v této zprávě zobrazeno.
+
+<% end -%>
+Události můžeš zobrazit ve vpsAdminu:
+
+  <%= @base_url %>?page=notifications&action=events
+
+S pozdravem
+
+tým vpsFree.cz
+
+(Tento mail automaticky rozesílá vpsAdmin, Tvoje odpověď se zašle na naši podporu)

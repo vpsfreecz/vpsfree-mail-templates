@@ -21,28 +21,6 @@ def check_telegram_html_tags(path)
   fail "unsupported Telegram HTML tag(s): #{unsupported.join(', ')}"
 end
 
-def run(action)
-  fail 'API must be set' unless ENV['API']
-
-  cmd = [ENV.fetch('INSTALLER', 'vpsadmin-notification-templates'), ENV['API'], action]
-
-  cmd << "--user #{ENV['USERNAME']}" if ENV['USERNAME']
-  cmd << "--password #{ENV['PASSWORD']}" if ENV['PASSWORD']
-
-  pid = Process.fork { Process.exec(cmd.join(' ')) }
-  Process.wait(pid)
-end
-
-desc 'Test authentication'
-task :test do
-  run(:auth)
-end
-
-desc 'Install notification templates'
-task :install do
-  run(:install)
-end
-
 desc 'Check ERB syntax and Telegram HTML tags'
 task :check do
   failures = []
@@ -63,4 +41,4 @@ task :check do
   puts "Checked #{files.length} template files"
 end
 
-task default: [:install]
+task default: [:check]

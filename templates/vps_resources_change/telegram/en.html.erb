@@ -1,0 +1,27 @@
+<% vps_label = "#{@vps.hostname} (##{@vps.id})" -%>
+<% vps_path = "?page=adminvps&action=info&veid=#{@vps.id}" -%>
+<% vps_link = webui_link(vps_label, vps_path) -%>
+<% details_link = webui_link('VPS details', vps_path) -%>
+<% cpu_limit = @vps.cpu_limit || (@vps.cpu * 100) -%>
+<% changed_by = if @admin
+                  if @admin.respond_to?(:full_name) && @admin.full_name.present?
+                    @admin.full_name
+                  elsif @admin.respond_to?(:login)
+                    @admin.login
+                  end
+                end -%>
+<b>VPS resources changed: <%= vps_link || h(vps_label) %></b>
+
+<b>Current limits:</b>
+CPU: <code><%= @vps.cpu %> cores, limit <%= h(cpu_limit) %> %</code>
+Memory: <code><%= @vps.memory %> MB</code>
+Swap: <code><%= @vps.swap %> MB</code>
+
+Reason: <%= markdown_telegram_html(@reason) %>
+<% if changed_by.present? -%>
+Changed by: <%= h(changed_by) %>
+<% end -%>
+<% if details_link.present? -%>
+
+Link: <%= details_link %>
+<% end -%>

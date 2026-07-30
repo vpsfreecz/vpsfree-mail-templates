@@ -1,14 +1,24 @@
-<%= @event.subject %>
-<% if @event.summary.present? -%>
+VPS <%= @vps.hostname %> (#<%= @vps.id %>): incident report #<%= @incident.id %>
 
-<%= @event.summary %>
+Subject: <%= @incident.subject %>
+<% if @incident.ip_address -%>
+IP address: <%= @incident.ip_address.to_s %>
 <% end -%>
-<% if @event.vps -%>
-
-VPS: #<%= @event.vps.id %> <%= @event.vps.hostname %>
+<% if @incident.cpu_limit -%>
+CPU limit: <%= @incident.cpu_limit %> %
 <% end -%>
-<% url = webui_url("?page=notifications&action=event_show&id=#{@event.id}") -%>
-<% if url.present? -%>
+<% if @incident.vps_action.present? -%>
+Action: <%= @incident.vps_action %>
+<% end -%>
+<% if @incident.text.present? -%>
+Message:
+<%= @incident.text %>
+<% end -%>
+<% if @incident.codename -%>
+KB: https://kb.vpsfree.org/manuals/vps/incidents#<%= @incident.codename %>
+<% end -%>
+<% vps_url = webui_url("?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<% if vps_url.present? -%>
 
-Open: <%= url %>
+Link: <%= vps_url %>
 <% end -%>

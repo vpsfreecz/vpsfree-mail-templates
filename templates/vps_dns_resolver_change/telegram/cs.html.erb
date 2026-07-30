@@ -1,0 +1,18 @@
+<% vps_link = webui_link('podrobnosti VPS', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<% same_resolver = @old_dns_resolver.id == @new_dns_resolver.id -%>
+<b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): změna DNS resolveru</b>
+
+<% if same_resolver -%>
+Resolver: <%= h(@new_dns_resolver.label) %>
+<% else -%>
+Původní resolver: <%= h(@old_dns_resolver.label) %>
+Nový resolver: <%= h(@new_dns_resolver.label) %>
+<% end -%>
+Nové adresy:
+<% @new_dns_resolver.addrs.to_s.split(',').each do |addr| -%>
+- <code><%= h(addr.strip) %></code>
+<% end -%>
+<% if vps_link.present? -%>
+
+Odkaz: <%= vps_link %>
+<% end -%>

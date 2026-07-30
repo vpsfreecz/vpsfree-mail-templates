@@ -1,0 +1,15 @@
+<% link_vps = @new_vps || @original_vps -%>
+<% vps_link = link_vps && webui_link('VPS details', "?page=adminvps&action=info&veid=#{link_vps.id}") -%>
+<b>VPS <%= h(@original_vps.hostname) %> (#<%= @original_vps.id %>): replaced</b>
+
+Original VPS: <code>#<%= @original_vps.id %> <%= h(@original_vps.hostname) %></code>
+<% if @new_vps -%>
+New VPS: <code>#<%= @new_vps.id %> <%= h(@new_vps.hostname) %></code>
+<% end -%>
+<% if @reason.present? -%>
+Reason: <%= markdown_telegram_html(@reason) %>
+<% end -%>
+<% if vps_link.present? -%>
+
+Link: <%= vps_link %>
+<% end -%>

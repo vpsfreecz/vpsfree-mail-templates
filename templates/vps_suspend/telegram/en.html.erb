@@ -1,0 +1,12 @@
+<% vps_link = webui_link('VPS details', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): suspended</b>
+
+State: <code>suspended</code>
+Reason: <%= markdown_telegram_html(@state.reason) %>
+<% if @state.user -%>
+Suspended by: <%= h(@state.user.full_name) %>
+<% end -%>
+<% if vps_link.present? -%>
+
+Link: <%= vps_link %>
+<% end -%>

@@ -1,14 +1,16 @@
-<%= @event.subject %>
-<% if @event.summary.present? -%>
+VPS <%= @vps.hostname %> (#<%= @vps.id %>): resources changed
 
-<%= @event.summary %>
+Current limits:
+CPU: <%= @vps.cpu %> cores, limit <%= @vps.cpu_limit || (@vps.cpu * 100) %> %
+Memory: <%= @vps.memory %> MB
+Swap: <%= @vps.swap %> MB
+
+Reason: <%= @reason %>
+<% if @admin -%>
+Changed by: <%= @admin.full_name %>
 <% end -%>
-<% if @event.vps -%>
+<% vps_url = webui_url("?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<% if vps_url.present? -%>
 
-VPS: #<%= @event.vps.id %> <%= @event.vps.hostname %>
-<% end -%>
-<% url = webui_url("?page=notifications&action=event_show&id=#{@event.id}") -%>
-<% if url.present? -%>
-
-Open: <%= url %>
+Link: <%= vps_url %>
 <% end -%>

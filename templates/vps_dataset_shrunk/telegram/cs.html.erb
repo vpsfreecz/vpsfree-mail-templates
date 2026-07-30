@@ -1,0 +1,10 @@
+<% vps_link = webui_link('podrobnosti VPS', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): dataset zmenšen</b>
+
+Dataset: <code><%= h(@dataset.full_name) %></code>
+Velikost: <code><%= (@expansion.original_refquota / 1024.0).round %> GiB</code>
+Stav: vráceno na původní velikost
+<% if vps_link.present? -%>
+
+Odkaz: <%= vps_link %>
+<% end -%>

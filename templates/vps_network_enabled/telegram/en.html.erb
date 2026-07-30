@@ -1,0 +1,8 @@
+<% vps_link = webui_link('VPS details', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): network enabled</b>
+
+Network: <code>enabled</code>
+<% if vps_link.present? -%>
+
+Link: <%= vps_link %>
+<% end -%>

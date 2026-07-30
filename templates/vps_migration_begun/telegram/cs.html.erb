@@ -1,0 +1,18 @@
+<% vps_link = webui_link('podrobnosti VPS', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): přesun začal</b>
+
+Z: <code><%= h(@src_node.domain_name) %></code>
+Na: <code><%= h(@dst_node.domain_name) %></code>
+<% if @maintenance_window -%>
+Okno: servisní okno
+<% elsif @custom_window -%>
+<% days = %w[neděli pondělí úterý středu čtvrtek pátek sobotu] -%>
+Okno: vlastní, dokončení v <%= days[@finish_weekday.to_i] %> od <%= sprintf('%02d:%02d', @finish_minutes.to_i / 60, @finish_minutes.to_i % 60) %>
+<% end -%>
+<% if @reason.present? -%>
+Důvod: <%= markdown_telegram_html(@reason) %>
+<% end -%>
+<% if vps_link.present? -%>
+
+Odkaz: <%= vps_link %>
+<% end -%>

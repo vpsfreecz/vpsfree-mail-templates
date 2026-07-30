@@ -1,0 +1,9 @@
+<% vps_link = webui_link('VPS details', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): rescue mode</b>
+
+State: <code>running in rescue mode</code>
+Please return the VPS to normal boot when you are done.
+<% if vps_link.present? -%>
+
+Link: <%= vps_link %>
+<% end -%>

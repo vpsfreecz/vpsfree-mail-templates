@@ -1,0 +1,10 @@
+<% vps_link = webui_link('VPS details', "?page=adminvps&action=info&veid=#{@vps.id}") -%>
+<b>VPS <%= h(@vps.hostname) %> (#<%= @vps.id %>): migration finished</b>
+
+From: <code><%= h(@src_node.domain_name) %></code>
+To: <code><%= h(@dst_node.domain_name) %></code>
+State: <code>finished</code>
+<% if vps_link.present? -%>
+
+Link: <%= vps_link %>
+<% end -%>

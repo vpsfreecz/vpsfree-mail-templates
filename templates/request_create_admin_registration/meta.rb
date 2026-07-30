@@ -1,4 +1,4 @@
-template :request_action_role_type do
+template :request_create_admin_registration do
   label 'Request registration (admin)'
 
   protocol :email do

@@ -1,4 +1,4 @@
-template :request_resolve_role_type_state do
+template :request_resolve_user_registration_pending_correction do
   label 'Request registration needs correction (user)'
 
   protocol :email do

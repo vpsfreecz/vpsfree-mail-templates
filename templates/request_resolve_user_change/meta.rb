@@ -1,4 +1,4 @@
-template :request_action_role_type do
+template :request_resolve_user_change do
   label 'Request change resolve (user)'
 
   protocol :email do

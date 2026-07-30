@@ -1,4 +1,4 @@
-template :request_action_role_type do
+template :request_create_admin_change do
   label 'Request change (admin)'
 
   protocol :email do

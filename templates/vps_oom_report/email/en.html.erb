@@ -75,6 +75,9 @@
       </a>.
     </p>
 <% end -%>
+<% if defined?(@mute_url) && @mute_url.present? -%>
+    <p><%= html_link('Mute similar OOM reports', @mute_url) %></p>
+<% end -%>
     <p>
       Best regards,<br>
 

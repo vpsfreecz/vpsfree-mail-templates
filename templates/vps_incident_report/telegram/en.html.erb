@@ -22,3 +22,7 @@ KB: https://kb.vpsfree.org/manuals/vps/incidents#<%= h(@incident.codename) %>
 
 Link: <%= vps_link %>
 <% end -%>
+<% if defined?(@mute_url) && @mute_url.present? -%>
+
+Mute similar incident reports: <%= html_link('open settings', @mute_url) %>
+<% end -%>

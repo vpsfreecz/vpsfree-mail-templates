@@ -13,3 +13,7 @@ Další OOM: <code><%= @all_oom_count - @selected_oom_count %></code>
 
 Odkaz: <%= oom_link %>
 <% end -%>
+<% if defined?(@mute_url) && @mute_url.present? -%>
+
+Ztlumit podobná hlášení OOM: <%= html_link('otevřít nastavení', @mute_url) %>
+<% end -%>

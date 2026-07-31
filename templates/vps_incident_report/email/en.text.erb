@@ -42,6 +42,12 @@ in place until then.
 <% else -%>
 Please check and resolve the issue if appropriate.
 <% end -%>
+<% if defined?(@mute_url) && @mute_url.present? -%>
+
+Mute similar incident reports:
+
+  <%= @mute_url %>
+<% end -%>
 
 Best regards,
 

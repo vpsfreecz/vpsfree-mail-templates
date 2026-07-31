@@ -42,6 +42,12 @@ nastavený CPU limit.
 <% else -%>
 Prosíme o kontrolu a případné řešení.
 <% end -%>
+<% if defined?(@mute_url) && @mute_url.present? -%>
+
+Ztlumit podobná hlášení incidentů:
+
+  <%= @mute_url %>
+<% end -%>
 
 S pozdravem
 

@@ -13,3 +13,7 @@ More OOMs: <%= @all_oom_count - @selected_oom_count %>
 
 Link: <%= oom_url %>
 <% end -%>
+<% if defined?(@mute_url) && @mute_url.present? -%>
+
+Mute similar OOM reports: <%= @mute_url %>
+<% end -%>

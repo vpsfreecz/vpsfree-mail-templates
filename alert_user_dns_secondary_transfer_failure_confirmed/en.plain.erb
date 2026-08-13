@@ -13,26 +13,36 @@ def value(v)
   v.nil? || v.to_s.empty? ? '---' : v
 end
 
-zone = @object.dns_zone
-server = @object.dns_server
+zone = @object
+states_by_primary = zone.alert_eligible_primary_transfer_states.group_by(&:dns_zone_transfer)
 -%>
 Hi <%= @user.login %>,
 
-secondary DNS server <%= server.name %> cannot transfer zone <%= zone.name %>
-from your primary DNS server.
+transfer-readiness checks and BIND transfer diagnostics show that one or more
+of our secondary DNS servers cannot obtain and validate DNS zone
+<%= zone.name %> directly from your configured primary DNS servers.
 
-Primary server: <%= value(@object.last_transfer_primary_addr) %>
-Last attempt: <%= time(@object.last_transfer_at) %>
-Error code: <%= value(@object.last_transfer_reason_code) %>
-Reason: <%= value(@object.last_transfer_reason) %>
+Affected direct synchronization paths:
+<% states_by_primary.each do |transfer, states| -%>
 
-Until the transfer succeeds, our DNS servers will keep serving the last
-successfully loaded version of the zone. Please fix the zone contents or allow
-AXFR from the primary server to our secondary server.
+Primary server: <%= transfer.ip_addr %>
+<% states.each do |state| -%>
+- Secondary server: <%= state.dns_server_zone.dns_server.name %> (<%= state.secondary_source_addr %>)
+  Failure detected: <%= time(state.failed_since) %>
+  Error code: <%= value(state.reason_code) %>
+  Reason: <%= value(state.reason) %>
+<% end -%>
+  Transfer logs:
+  <%= url('dns', "action=transfer_log&dns_zone=#{zone.id}&dns_zone_transfer=#{transfer.id}") %>
+<% end -%>
 
-You can view zone transfer logs in vpsAdmin:
+This does not necessarily mean that the zone is unavailable. Another secondary
+server may have supplied a current copy. The failed readiness paths can,
+however, prevent future updates from reaching all secondary servers reliably.
 
-  <%= url('dns', "action=transfer_log&dns_server_zone=#{@object.id}") %>
+Please check that the primary servers are reachable, serve a valid zone, use
+the configured TSIG authentication, and allow AXFR/IXFR transfers from the
+affected secondary server addresses.
 
 If you acknowledge this issue, you will not receive more alerts until it is
 detected again after being resolved:

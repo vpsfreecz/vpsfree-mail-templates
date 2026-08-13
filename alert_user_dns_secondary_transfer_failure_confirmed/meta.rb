@@ -6,13 +6,13 @@ template :alert_role_event_state do
     from        'podpora@vpsfree.cz'
     reply_to    'podpora@vpsfree.cz'
     return_path 'podpora@vpsfree.cz'
-    subject     '[vpsFree.cz] DNS zóna <%= @object.dns_zone.name %>: selhal sekundární přenos'
+    subject     '[vpsFree.cz] DNS zóna <%= @object.name %>: problém s přímou synchronizací'
   end
 
   lang :en do
     from        'support@vpsfree.org'
     reply_to    'support@vpsfree.org'
     return_path 'support@vpsfree.org'
-    subject     '[vpsFree.cz] DNS zone <%= @object.dns_zone.name %>: secondary transfer failed'
+    subject     '[vpsFree.cz] DNS zone <%= @object.name %>: direct synchronization problem'
   end
 end

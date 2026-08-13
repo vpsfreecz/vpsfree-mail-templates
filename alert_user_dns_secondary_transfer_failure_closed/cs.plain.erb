@@ -3,17 +3,17 @@ def url(page, params = nil)
   @base_url + "?page=" + page + (params ? "&#{params}" : "")
 end
 
-zone = @object.dns_zone
-server = @object.dns_server
+zone = @object
 -%>
 Ahoj <%= @user.login %>,
 
-sekundární přenos DNS zóny <%= zone.name %> na server <%= server.name %> je
-opět funkční.
+nahlášený problém s připraveností přímého přenosu DNS zóny <%= zone.name %>
+z tvých nakonfigurovaných primárních DNS serverů na naše sekundární DNS servery
+je vyřešený.
 
 Záznamy přenosů zóny najdeš ve vpsAdminu:
 
-  <%= url('dns', "action=transfer_log&dns_server_zone=#{@object.id}") %>
+  <%= url('dns', "action=transfer_log&dns_zone=#{zone.id}") %>
 
 Díky.
 

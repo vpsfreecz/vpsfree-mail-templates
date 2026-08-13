@@ -3,17 +3,17 @@ def url(page, params = nil)
   @base_url + "?page=" + page + (params ? "&#{params}" : "")
 end
 
-zone = @object.dns_zone
-server = @object.dns_server
+zone = @object
 -%>
 Hi <%= @user.login %>,
 
-secondary transfer of DNS zone <%= zone.name %> to server <%= server.name %>
-is working again.
+the reported problem with direct transfer readiness for DNS zone
+<%= zone.name %> from your configured primary DNS servers to our secondary DNS
+servers has been resolved.
 
 You can view zone transfer logs in vpsAdmin:
 
-  <%= url('dns', "action=transfer_log&dns_server_zone=#{@object.id}") %>
+  <%= url('dns', "action=transfer_log&dns_zone=#{zone.id}") %>
 
 Thank you.
 

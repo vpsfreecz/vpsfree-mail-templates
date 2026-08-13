@@ -13,26 +13,36 @@ def value(v)
   v.nil? || v.to_s.empty? ? '---' : v
 end
 
-zone = @object.dns_zone
-server = @object.dns_server
+zone = @object
+states_by_primary = zone.alert_eligible_primary_transfer_states.group_by(&:dns_zone_transfer)
 -%>
 Ahoj <%= @user.login %>,
 
-sekundární DNS server <%= server.name %> nemůže přenést zónu <%= zone.name %>
-z tvého primárního DNS serveru.
+Kontroly připravenosti přenosu a diagnostika přenosů z BINDu ukazují, že jeden
+nebo více našich sekundárních DNS serverů nedokáže přímo získat a ověřit DNS
+zónu <%= zone.name %> z tvých nakonfigurovaných primárních DNS serverů.
 
-Primární server: <%= value(@object.last_transfer_primary_addr) %>
-Čas posledního pokusu: <%= time(@object.last_transfer_at) %>
-Kód chyby: <%= value(@object.last_transfer_reason_code) %>
-Důvod: <%= value(@object.last_transfer_reason) %>
+Dotčené cesty přímé synchronizace:
+<% states_by_primary.each do |transfer, states| -%>
 
-Dokud se přenos nezdaří, naše DNS servery budou poskytovat poslední úspěšně
-načtenou verzi zóny. Oprav prosím konfiguraci zóny nebo povol AXFR z
-primárního serveru na náš sekundární server.
+Primární server: <%= transfer.ip_addr %>
+<% states.each do |state| -%>
+- Sekundární server: <%= state.dns_server_zone.dns_server.name %> (<%= state.secondary_source_addr %>)
+  Chyba zjištěna: <%= time(state.failed_since) %>
+  Kód chyby: <%= value(state.reason_code) %>
+  Důvod: <%= value(state.reason) %>
+<% end -%>
+  Záznamy přenosů:
+  <%= url('dns', "action=transfer_log&dns_zone=#{zone.id}&dns_zone_transfer=#{transfer.id}") %>
+<% end -%>
 
-Záznamy přenosů zóny najdeš ve vpsAdminu:
+To nutně neznamená, že je zóna nedostupná. Aktuální kopii mohl dodat jiný
+sekundární server. Nefunkční přímé přenosy ale mohou zabránit spolehlivému
+rozšíření budoucích změn na všechny sekundární servery.
 
-  <%= url('dns', "action=transfer_log&dns_server_zone=#{@object.id}") %>
+Zkontroluj prosím, jestli jsou primární servery dostupné, poskytují platnou
+zónu, používají nakonfigurované ověření TSIG a povolují přenosy AXFR/IXFR
+z adres dotčených sekundárních serverů.
 
 Pokud tento problém potvrdíš, nebudeš dostávat další upozornění, dokud
 nebude po vyřešení znovu detekován:

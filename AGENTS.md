@@ -35,9 +35,15 @@ starts with `Ahoj <login>,`, uses informal singular address, and closes with
 `S pozdravem`, then `tým vpsFree.cz`.
 
 State the event or problem first, then give details, action links, and KB
-references. Use `please` or `prosím` for requests, avoid marketing language,
-and preserve the automated-mail footer wording. Admin templates can be terse,
-using tables, lists, and direct action links.
+references. Use `please` or `prosím` for requests, avoid marketing language, and
+keep the standard automated-mail notice uniform in member-facing templates.
+When the notice is present, use these exact visible lines in plain and HTML
+variants; do not paraphrase either language in an individual template:
+
+- English: `(This is an automated mail from vpsAdmin, your reply will be sent to our support)`
+- Czech: `(Tento mail automaticky rozesílá vpsAdmin, Tvoje odpověď se zašle na naši podporu)`
+
+Admin templates can be terse, using tables, lists, and direct action links.
 
 ## Commit and Pull Request Guidelines
 

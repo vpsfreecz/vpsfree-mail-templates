@@ -6,9 +6,10 @@ Templates for vpsAdmin live under `templates/` in snake_case directories, such
 as `templates/user_create/` or `templates/vps_network_enabled/`.
 
 Each directory contains `meta.rb` for the template type, label, visibility, and
-sender addresses. Email variants live in `email/` and use names such as
-`en.subject.erb`, `cs.text.erb`, or `en.html.erb`. There is no repository-local
-Ruby library or checker.
+protocol defaults. Protocol variants live in `email/`, `telegram/`, and `sms/`.
+They use names such as `en.subject.erb`, `cs.text.erb`, or `en.html.erb`.
+Telegram text variants are fallbacks for optional HTML bodies. SMS variants
+contain text bodies only. There is no repository-local Ruby library or checker.
 
 ## Build and Test Commands
 
@@ -23,16 +24,17 @@ Follow `.editorconfig`: UTF-8, LF line endings, trimmed whitespace, and 2-space
 indentation for Ruby and ERB files. Name new template directories in
 snake_case, such as `dataset_migration_finished`.
 
-Keep `meta.rb` consistent with the existing `template` and `lang` blocks. Put
-localized subjects and bodies in `email/`. Use `<%= ... %>` interpolation and
-readable text wrapping. Update the relevant language variants together.
+Keep `meta.rb` consistent with the existing `template`, `protocol`, and `lang`
+blocks. Put localized subjects and bodies in the matching protocol directory.
+Use `<%= ... %>` interpolation and readable text wrapping. Update the relevant
+language and protocol variants together.
 
 ## Language and Communication Style
 
-User-facing emails are factual, calm, and action-oriented. English starts with
-`Hi <login>,` and closes with `Best regards,` then `vpsFree.cz team`. Czech
-starts with `Ahoj <login>,`, uses informal singular address, and closes with
-`S pozdravem`, then `tým vpsFree.cz`.
+User-facing notifications are factual, calm, and action-oriented. English email
+starts with `Hi <login>,` and closes with `Best regards,` then `vpsFree.cz
+team`. Czech email starts with `Ahoj <login>,`, uses informal singular address,
+and closes with `S pozdravem`, then `tým vpsFree.cz`.
 
 State the event or problem first, then give details, action links, and KB
 references. Use `please` or `prosím` for requests, avoid marketing language,
@@ -46,8 +48,9 @@ Use short imperative subjects, often scoped by template name, for example
 changes separate. Limit every commit message line to 80 characters or fewer.
 Write multi-line messages to a temporary file and commit with `git commit -F`.
 
-Pull requests should name affected directories, explain user-visible changes,
-and note the flake checks. Include rendered previews for HTML changes.
+Pull requests should name affected directories and protocols, explain
+user-visible changes, and note the flake checks. Include rendered previews for
+HTML changes.
 
 ## Security
 

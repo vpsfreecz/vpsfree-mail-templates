@@ -1,44 +1,56 @@
 # vpsFree.cz notification templates for vpsAdmin
 
-This repository contains the notification templates used by vpsFree.cz. The
-current templates are for email delivery by vpsAdmin.
+This repository contains the notification templates used by vpsFree.cz for
+email, Telegram, and SMS delivery through vpsAdmin.
 
 ## Template structure
 
-Each template has one metadata file and an `email/` directory:
+Each template has one metadata file and protocol-specific directories:
 
 ```text
 templates/user_create/
 ├── meta.rb
-└── email/
-    ├── cs.subject.erb
+├── email/
+│   ├── cs.subject.erb
+│   ├── cs.text.erb
+│   ├── en.subject.erb
+│   └── en.text.erb
+├── sms/
+│   ├── cs.text.erb
+│   └── en.text.erb
+└── telegram/
     ├── cs.text.erb
-    ├── en.subject.erb
-    └── en.text.erb
+    ├── cs.html.erb
+    ├── en.text.erb
+    └── en.html.erb
 ```
 
 `meta.rb` selects the vpsAdmin template type and sets properties shared by the
-email variants. It can also set sender addresses per language:
+variants. Protocol blocks can set properties such as email sender addresses:
 
 ```ruby
 template do
   label 'User created'
 
-  lang :en do
-    from 'support@example.com'
-    reply_to 'support@example.com'
-    return_path 'bounces@example.com'
+  protocol :email do
+    lang :en do
+      from 'support@example.com'
+      reply_to 'support@example.com'
+      return_path 'bounces@example.com'
+    end
   end
 end
 ```
 
 The metadata file uses a small literal DSL. It is not general Ruby: keep values
-as strings, symbols, or booleans and use only the documented `template`, `lang`,
-and property declarations. Language codes are normalized two-letter codes.
+as strings, symbols, or booleans and use only the documented `template`,
+`protocol`, `lang`, and property declarations. Language codes are normalized
+two-letter codes.
 
 Name the variant files `<language>.subject.erb`, `<language>.text.erb`, and
-`<language>.html.erb`. Each language needs a text or HTML body. A subject file
-is optional when `meta.rb` provides the subject.
+`<language>.html.erb`. Each language needs a text or HTML body. Email variants
+normally include a subject. Telegram text files provide a fallback for the
+optional HTML body, while SMS variants use text bodies only.
 
 ## Checks
 

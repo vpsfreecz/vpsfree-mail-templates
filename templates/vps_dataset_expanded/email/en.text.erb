@@ -1,12 +1,12 @@
 Hi <%= @vps.user.login %>,
 
 VPS <%= @vps.id %> <%= @vps.hostname %> is running out of disk space. We have
-expanded your dataset by <%= (@expansion.added_space / 1024).round %> GiB to keep the VPS functional.
+expanded your dataset by <%= (@added_space / 1024).round %> GiB to keep the VPS functional.
 
 Dataset:         <%= @dataset.full_name %>
-Original size:   <%= (@expansion.original_refquota / 1024.0).round %> GiB
-New size:        <%= (@dataset.refquota / 1024.0).round %> GiB
-Used space:      <%= (@dataset.referenced / 1024.0).round(2) %> GiB
+Original size:   <%= (@original_refquota / 1024.0).round %> GiB
+New size:        <%= (@new_refquota / 1024.0).round %> GiB
+Used space:      <%= (@referenced / 1024.0).round(2) %> GiB
 <% if @expansion.active? -%>
 Expansion count: <%= @expansion.expansion_count %><% if @expansion.stop_vps -%>/3<% end %>
 
@@ -25,7 +25,7 @@ the issue is resolved.
 
 vpsAdmin will automatically return the dataset to its original size when there
 is at least 5 % of free space with respect to the original size. That is when
-there will be at most <%= ((@expansion.original_refquota / 1024.0 / 100) * 95).round(2) %> GiB of used space. You can also shrink the dataset
+there will be at most <%= ((@original_refquota / 1024.0 / 100) * 95).round(2) %> GiB of used space. You can also shrink the dataset
 yourself in vpsAdmin.
 <% end -%>
 <% else -%>

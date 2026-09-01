@@ -1,12 +1,12 @@
 Ahoj <%= @vps.user.login %>,
 
 ve VPS <%= @vps.id %> <%= @vps.hostname %> dochází místo na disku. Pro zachování
-funkčnosti VPS jsme disk rozšířili o <%= (@expansion.added_space / 1024).round %> GiB.
+funkčnosti VPS jsme disk rozšířili o <%= (@added_space / 1024).round %> GiB.
 
 Dataset:          <%= @dataset.full_name %>
-Původní velikost: <%= (@expansion.original_refquota / 1024.0).round %> GiB
-Nová velikost:    <%= (@dataset.refquota / 1024.0).round %> GiB
-Zabrané místo:    <%= (@dataset.referenced / 1024.0).round(2) %> GiB
+Původní velikost: <%= (@original_refquota / 1024.0).round %> GiB
+Nová velikost:    <%= (@new_refquota / 1024.0).round %> GiB
+Zabrané místo:    <%= (@referenced / 1024.0).round(2) %> GiB
 <% if @expansion.active? -%>
 Počet rozšíření:  <%= @expansion.expansion_count %><% if @expansion.stop_vps -%>/3<% end %>
 
@@ -25,7 +25,7 @@ VPS z provozních důvodů vypnuto.
 
 vpsAdmin se automaticky pokusí dataset vrátit na původní velikost, když bude
 k dispozici alespoň 5 % volného místa vzhledem k původní velikosti. Tedy když
-bude využito maximálně <%= ((@expansion.original_refquota / 1024.0 / 100) * 95).round(2) %> GiB. Dataset můžeš taky ve vpsAdminu zmenšit i sám.
+bude využito maximálně <%= ((@original_refquota / 1024.0 / 100) * 95).round(2) %> GiB. Dataset můžeš taky ve vpsAdminu zmenšit i sám.
 <% end -%>
 <% else -%>
 
